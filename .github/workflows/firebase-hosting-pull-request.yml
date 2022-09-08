@@ -13,5 +13,5 @@ jobs:
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_PHANTOM_332ED }}'
-          projectId: phantom-332ed
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_CAPSTONE_79884 }}'
+          projectId: capstone-79884
