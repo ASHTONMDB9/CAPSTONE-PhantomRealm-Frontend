@@ -1,5 +1,6 @@
 <template>
-<div class="container-fluid">
+    <div v-if="user_type === 'Admin'">
+        <div class="container-fluid">
             <div class="container-fluid pt-4 px-4">
                 <div class="row g-4">
                     <div class="col-sm-6 col-xl-3">
@@ -70,27 +71,27 @@
                         <h6 class="mb-0">Products</h6>
                         <a href="">Show All</a>
                     </div>
-
-          <form @submit.prevent="addProduct()">
+                    
+                    <form @submit.prevent="addProduct()">
           <input type="text" v-model="title" class="email" placeholder="title" required>
           <div>
           <input type="text" v-model="description" placeholder="description" required>
           </div>
           <div>
           <input type="text" v-model="category" placeholder="category" required>
-          </div>
+        </div>
           <div>
           <input type="text" v-model="image" placeholder="image" required>
-          </div>
-          <div>
+        </div>
+        <div>
           <input type="text" v-model="price" placeholder="price" required>
+        </div>
+        <div>
           </div>
-          <div>
-          </div>
-<button id="addProduct" type="submit" class="btn btn-primary">Add Product</button>
+          <button id="addProduct" type="submit" class="btn btn-primary">Add Product</button>
         </form>
-
-                    <div class="table-responsive">
+        
+        <div class="table-responsive">
                         <table class="table text-start align-middle table-bordered table-hover mb-0">
                             <thead>
                                 <tr class="text-white">
@@ -112,6 +113,8 @@
                                     <td>{{product.category}}</td>
                                     <td>{{product.price}}</td>
                                     <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
+                                    <td><button @click="deleteProduct(product.id)" class="btn btn-sm btn-danger" href="">Delete</button></td>
+                                    
                                 </tr>
                             </tbody>
                         </table>
@@ -119,7 +122,11 @@
                 </div>
             </div>
         </div>
-</template>
+    </div>
+    <div v-else>
+        <h1>Access Denied</h1>
+    </div>
+    </template>
 <script>
 export default {
     props: ["product"],
@@ -134,6 +141,7 @@ export default {
     };
   },
   mounted() {
+    this.declareAdmin();
     fetch("https://phantomrealm-api.herokuapp.com/products", {
     })
       .then((res) => res.json())
@@ -142,6 +150,15 @@ export default {
   computed: {
     product() {
       return this.$store.state.product;
+    },
+    user() {
+      return this.$store.state.user.user;
+    },
+    user_type() {
+      return this.$store.state.user.user.user_type;
+    },
+    token() {
+      return this.$store.state.Token;
     },
   },
   methods: {
@@ -154,6 +171,17 @@ export default {
         price: this.price,
       });
     },
+    declareAdmin() {
+        if  (this.user.user) {
+            this.$store.state.user.user_type = this.user.user.user_type;
+        }
+    },
+    deleteProduct(id){
+        this.$store.dispatch("deleteProduct",{
+            id:id,
+            token:this.token
+        })
+    }
   },
 }
 </script>

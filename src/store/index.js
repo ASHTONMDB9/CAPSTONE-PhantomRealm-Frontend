@@ -17,7 +17,7 @@ export default createStore({
       state.Token = token  ;
     },
     setProduct: (state, product) => {
-      state.activeProduct = product
+      state.Product = product
     },
     setCart: (state, cart) => {
       state.cart = cart;
@@ -47,7 +47,10 @@ export default createStore({
             },
           })
             .then((response) => response.json())
-            .then(() => context.dispatch("getProduct"));
+            .then(() => {
+              context.dispatch("getProduct")
+            });
+            
         },
         // new order
         addOrder: async (context, order) => {
@@ -107,7 +110,6 @@ export default createStore({
             email: payload.email,
             password: payload.password,
             phone_number: payload.phone_number,
-            join_date: "2023-06-03",
             user_type: "User",
         }),
       headers: {
@@ -125,6 +127,19 @@ export default createStore({
           const newCart = context.state.cart.filter((product) => product.id != id);
           context.commit("removeFromCart", newCart);
         },
+    deleteProduct: async (context, payload) => {
+          const res  = await fetch("https://phantomrealm-api.herokuapp.com/products/delete_product/" + payload.id,{
+          method:"DELETE",
+          headers:{
+            "Content-type": "application/json",
+            "x-auth-token": payload.token,
+          },
+        })
+        .then(res => res.json())
+        .then(del =>{
+          console.log(del);
+        })          
+        }
   },
   modules: {},
   plugins: [createPersistedState()],
