@@ -72,7 +72,16 @@
                         <a href="">Show All</a>
                     </div>
                     
-                    <form @submit.prevent="addProduct()">
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form @submit.prevent="addProduct()">
           <input type="text" v-model="title" class="email" placeholder="title" required>
           <div>
           <input type="text" v-model="description" placeholder="description" required>
@@ -88,8 +97,15 @@
         </div>
         <div>
           </div>
-          <button id="addProduct" type="submit" class="btn btn-primary">Add Product</button>
         </form>
+    </div>
+    <div class="modal-footer">
+          <button id="addProduct" type="submit" class="btn btn-primary">Add Product</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
         
         <div class="table-responsive">
                         <table class="table text-start align-middle table-bordered table-hover mb-0">
@@ -101,7 +117,8 @@
                                     <th scope="col">Title</th>
                                     <th scope="col">Category</th>
                                     <th scope="col">Price</th>
-                                    <th scope="col">Action</th>
+                                    <th colspan= "2">Action</th>
+                                    <th col="col"><button id="addProduct" type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Add Product</button></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -112,9 +129,42 @@
                                     <td>{{product.title}}</td>
                                     <td>{{product.category}}</td>
                                     <td>{{product.price}}</td>
-                                    <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
+                                    <td><button class="btn btn-primary" data-bs-toggle="modal" :data-bs-target="`#exampleModal${product.id}`">Update</button></td>
                                     <td><button @click="deleteProduct(product.id)" class="btn btn-sm btn-danger" href="">Delete</button></td>
-                                    
+
+
+<div class="modal fade" :id="`exampleModal${product.id}`" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+       <form @submit.prevent="UpdateProduct(product.id)">
+    
+        <input type="text" v-model="title" class="email" placeholder="title" required>
+          <div>
+          <input type="text" v-model="description" placeholder="description" required>
+          </div>
+          <div>
+          <input type="text" v-model="category" placeholder="category" required>
+        </div>
+          <div>
+          <input type="text" v-model="image" placeholder="image" required>
+        </div>
+        <div>
+          <input type="text" v-model="price" placeholder="price" required>
+        </div>
+        <div>
+          </div>
+          <button id="UpdateProduct" type="submit" class="btn btn-primary">Update Product</button>
+    </form>
+      </div>
+    </div>
+  </div>
+</div>
+
                                 </tr>
                             </tbody>
                         </table>
@@ -122,6 +172,9 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div v-else-if= "user === null">
+        <h1>Access Denied</h1>
     </div>
     <div v-else>
         <h1>Access Denied</h1>
@@ -152,7 +205,7 @@ export default {
       return this.$store.state.product;
     },
     user() {
-      return this.$store.state.user.user;
+      return this.$store.state.user;
     },
     user_type() {
       return this.$store.state.user.user.user_type;
@@ -180,6 +233,17 @@ export default {
         this.$store.dispatch("deleteProduct",{
             id:id,
             token:this.token
+        })
+    },
+    UpdateProduct(id){
+        this.$store.dispatch("UpdateProduct",{
+           id:id,
+           token:this.token,
+        title: this.title,
+        description: this.description,
+        category: this.category,
+        image: this.image,
+        price: this.price  
         })
     }
   },

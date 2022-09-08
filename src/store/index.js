@@ -5,6 +5,7 @@ export default createStore({
   state: {
     user: null,
     Token: null,
+    user_type: null,
     Product: null,
     cart: [],
     order: null,
@@ -139,6 +140,26 @@ export default createStore({
         .then(del =>{
           console.log(del);
         })          
+        },
+        UpdateProduct: async (context, payload) => {
+         const res = await fetch("https://phantomrealm-api.herokuapp.com/products/update_product/" + payload.id,{
+          method:"PATCH",
+          body:JSON.stringify({
+            title:payload.title,
+            description:payload.description,
+            category:payload.category,
+            image:payload.image,
+            price:payload.price,
+          }),
+          headers:{
+            "Content-type": "application/json",
+            "x-auth-token": payload.token,
+          },
+         })
+         .then(res => res.json())
+         .then(product =>{
+          console.log(product);
+         })
         }
   },
   modules: {},
