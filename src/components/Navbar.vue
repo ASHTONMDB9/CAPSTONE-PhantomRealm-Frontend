@@ -60,7 +60,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 /*Navbar*/
 .navbar {
   height: 95px;
