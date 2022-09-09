@@ -4,10 +4,9 @@
 
     <h1 id="name" class="d-flex justify-content-center">The PhantomRealm</h1>
 
-    <div class="scroll">
-    <i class="fa-solid fa-skull d-flex justify-content-center"></i>
-    <i id="arrow" class="fa-solid fa-chevron-down d-flex justify-content-center"></i>
-    </div>
+
+    <img src="../assets/Images/enter.png" style="height: 60px; width: 60px; display: block; margin-left: auto; margin-right: auto;">
+    <img id="arrow" src="../assets/Images/scroll.png" style="height: 100000px; width: 500px; display: block; margin-left: auto; margin-right: auto; filter: drop-shadow(0 0 2.3rem white);">
 
     <h5 id="scrollmsg" class="d-flex justify-content-center">Enter if you dare</h5>
   </section>
@@ -22,9 +21,7 @@
   <div class="card-img-overlay">
     <h5 class="card-title d-flex justify-content-center">Bargin Prices</h5>
     <p class="card-text d-flex justify-content-center">When shopping with us you are guarenteed a good deal on all our products. We always save you money.</p>
-    <div class="icons">
-    <img src="../assets/Images/">
-    </div>
+    <img src="../assets/Images/save-money.png" style="height: 60px; width: 60px; display: block; margin-left: auto; margin-right: auto; filter: drop-shadow(0 0 2.3rem white);">
   </div>
 </div>
       </div>
@@ -35,9 +32,7 @@
   <div class="card-img-overlay">
     <h5 class="card-title d-flex justify-content-center">Free Delivery</h5>
     <p class="card-text">We offer all our customers free delivery on all products in our store.</p>
-    <div class="icons">
-    <i class="fa-solid fa-truck d-flex justify-content-center"></i>
-    </div>
+    <img src="../assets/Images/truck.png" style="height: 79px; width: 103px; display: block; margin-left: auto; margin-right: auto; filter: drop-shadow(0 0 2.3rem white);">
   </div>
 </div>
       </div>
@@ -48,9 +43,7 @@
   <div class="card-img-overlay">
     <h5 class="card-title d-flex justify-content-center">Exceptional Quality</h5>
     <p class="card-text">All our products are tested for quality before they are added. We give you only the best in gaming.</p>
-    <div class="icons">
-    <i class="fa-solid fa-clipboard-check d-flex justify-content-center"></i>
-    </div>
+    <img src="../assets/Images/clipboard.png" style="height: 61px; width: 78px; display: block; margin-left: auto; margin-right: auto; filter: drop-shadow(0 0 2.3rem white);">
   </div>
 </div>
       </div>
@@ -280,11 +273,6 @@ export default {
     color: black;
     text-shadow: 0 0 4px red, 0 0 4px red, 0 0 4px red, 10px 0px 10px rgb(36, 36, 36);
     font-family: phantom;
-  }
-  .scroll {
-    padding-top: 100px;
-    font-size: xx-large;
-    color: white;
   }
   #arrow {
     animation: scroll-anim 2s infinite;

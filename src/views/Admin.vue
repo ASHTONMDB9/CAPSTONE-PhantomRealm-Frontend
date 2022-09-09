@@ -83,7 +83,7 @@
                     
 <!-- Modal -->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-fullscreen">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
@@ -91,18 +91,18 @@
       </div>
       <div class="modal-body">
         <form @submit.prevent="addProduct()">
-          <input type="text" v-model="title" class="email" placeholder="title" required>
+          <textarea type="text" v-model="title" class="email" placeholder="title" required></textarea>
           <div>
-          <input type="text" v-model="description" placeholder="description" required>
+          <textarea type="text" v-model="description" placeholder="description" required></textarea>
           </div>
           <div>
-          <input type="text" v-model="category" placeholder="category" required>
+          <textarea type="text" v-model="category" placeholder="category" required></textarea>
         </div>
           <div>
-          <input type="text" v-model="image" placeholder="image" required>
+          <textarea type="text" v-model="image" placeholder="image" required></textarea>
         </div>
         <div>
-          <input type="text" v-model="price" placeholder="price" required>
+          <textarea type="text" v-model="price" placeholder="price" required></textarea>
         </div>
         <div>
           </div>
@@ -143,7 +143,7 @@
 
 
 <div class="modal fade" :id="`exampleModal${product.id}`" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-fullscreen">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
@@ -152,18 +152,18 @@
       <div class="modal-body">
        <form @submit.prevent="UpdateProduct(product.id)">
     
-        <input type="text" v-model="title" class="email" placeholder="title" required>
+        <textarea type="text" v-model="product.title" placeholder="title" style="height: 100px; width: 680px;" required></textarea>
           <div>
-          <input type="text" v-model="description" placeholder="description" required>
-          </div>
-          <div>
-          <input type="text" v-model="category" placeholder="category" required>
+          <textarea type="text" v-model="product.description" placeholder="description" style="height: 330px; width: 680px;" required></textarea>
         </div>
           <div>
-          <input type="text" v-model="image" placeholder="image" required>
+          <textarea type="text" v-model="product.category" placeholder="category" style="height: 100px; width: 680px;" required></textarea>
+        </div>
+          <div>
+          <textarea type="text" v-model="product.image" placeholder="image" style="height: 100px; width: 680px;" required></textarea>
         </div>
         <div>
-          <input type="text" v-model="price" placeholder="price" required>
+          <textarea type="text" v-model="product.price" placeholder="price" style="height: 100px; width: 680px;" required></textarea>
         </div>
         <div>
           </div>

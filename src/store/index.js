@@ -145,7 +145,7 @@ export default createStore({
         },
         UpdateProduct: async (context, payload) => {
          const res = await fetch("https://phantomrealm-api.herokuapp.com/products/update_product/" + payload.id,{
-          method:"PATCH",
+          method:"PUT",
           body:JSON.stringify({
             title:payload.title,
             description:payload.description,
