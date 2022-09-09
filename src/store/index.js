@@ -115,10 +115,10 @@ export default createStore({
             phone_number: payload.phone_number,
             user_type: "User",
         }),
-      headers: {
-        "Content-type": "application/json",
-      },
-    })
+        headers: {
+          "Content-type": "application/json",
+        },
+      })
       .then((response) => response.json())
       .then((data) => console.log(data));
         },

@@ -4,38 +4,38 @@
             <div class="container-fluid pt-4 px-4">
                 <div class="row g-4">
                     <div class="col-sm-6 col-xl-3">
-                        <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
-                            <i class="fa fa-chart-line fa-3x text-primary"></i>
+                        <div class="bg-dark text-light rounded d-flex align-items-center justify-content-between p-4">
+                            <i class="fa fa-chart-line fa-3x" style="color: red;"></i>
                             <div class="ms-3">
                                 <p class="mb-2">Today Sale</p>
-                                <h6 class="mb-0">$1234</h6>
+                                <h6 class="mb-0">R 11,639.76</h6>
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-6 col-xl-3">
-                        <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
-                            <i class="fa fa-chart-bar fa-3x text-primary"></i>
+                        <div class="bg-dark text-light rounded d-flex align-items-center justify-content-between p-4">
+                            <i class="fa fa-chart-bar fa-3x" style="color: red;"></i>
                             <div class="ms-3">
                                 <p class="mb-2">Total Sale</p>
-                                <h6 class="mb-0">$1234</h6>
+                                <h6 class="mb-0">R 18,924,327.84</h6>
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-6 col-xl-3">
-                        <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
-                            <i class="fa fa-chart-area fa-3x text-primary"></i>
+                        <div class="bg-dark text-light rounded d-flex align-items-center justify-content-between p-4">
+                            <i class="fa fa-chart-area fa-3x" style="color: red;"></i>
                             <div class="ms-3">
                                 <p class="mb-2">Today Revenue</p>
-                                <h6 class="mb-0">$1234</h6>
+                                <h6 class="mb-0">R 76,324.24</h6>
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-6 col-xl-3">
-                        <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
-                            <i class="fa fa-chart-pie fa-3x text-primary"></i>
+                        <div class="bg-dark text-light rounded d-flex align-items-center justify-content-between p-4">
+                            <i class="fa fa-chart-pie fa-3x" style="color: red;"></i>
                             <div class="ms-3">
                                 <p class="mb-2">Total Revenue</p>
-                                <h6 class="mb-0">$1234</h6>
+                                <h6 class="mb-0">R 2,543,472.56</h6>
                             </div>
                         </div>
                     </div>
@@ -44,29 +44,38 @@
 
             <div class="container-fluid pt-4 px-4">
                 <div class="row g-4">
-                    <div class="col-sm-12 col-xl-6">
-                        <div class="bg-secondary text-center rounded p-4">
+                    <div class="col-sm-12 col-xl-4">
+                        <div class="bg-dark text-light text-center rounded p-4">
                             <div class="d-flex align-items-center justify-content-between mb-4">
                                 <h6 class="mb-0">Worldwide Sales</h6>
                                 <a href="">Show All</a>
                             </div>
-                            <canvas id="worldwide-sales"></canvas>
+                            <img src="../assets/Images/bar-graph.png" style="height: 400px; width: 500px;">
                         </div>
                     </div>
-                    <div class="col-sm-12 col-xl-6">
-                        <div class="bg-secondary text-center rounded p-4">
+                    <div class="col-sm-12 col-xl-4">
+                        <div class="bg-dark text-light text-center rounded p-4">
+                            <div class="d-flex align-items-center justify-content-between mb-4">
+                                <h6 class="mb-0">Local Sales</h6>
+                                <a href="">Show All</a>
+                            </div>
+                            <img src="../assets/Images/wave-graph.png" style="height: 400px; width: 500px;">
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-xl-4">
+                        <div class="bg-dark text-light text-center rounded p-4">
                             <div class="d-flex align-items-center justify-content-between mb-4">
                                 <h6 class="mb-0">Salse &amp; Revenue</h6>
                                 <a href="">Show All</a>
                             </div>
-                            <canvas id="salse-revenue"><i class="fa-solid fa-chart-simple"></i></canvas>
+                            <img src="../assets/Images/growth.png" style="height: 400px; width: 500px;">
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="container-fluid pt-4 px-4">
-                <div class="bg-secondary text-center rounded p-4">
+                <div class="bg-dark text-light text-center rounded p-4">
                     <div class="d-flex align-items-center justify-content-between mb-4">
                         <h6 class="mb-0">Products</h6>
                         <a href="">Show All</a>
@@ -124,11 +133,11 @@
                             <tbody>
                                 <tr v-for="product in products" v-bind:key="product.id">
                                     <td><input class="form-check-input" type="checkbox"></td>
-                                    <td>{{product.id}}</td>
+                                    <td class="text-light">{{product.id}}</td>
                                     <td><img v-bind:src="product.image" style="width: 5rem; height: 5rem;"></td>
-                                    <td>{{product.title}}</td>
-                                    <td>{{product.category}}</td>
-                                    <td>{{product.price}}</td>
+                                    <td class="text-light">{{product.title}}</td>
+                                    <td class="text-light">{{product.category}}</td>
+                                    <td class="text-light">{{product.price}}</td>
                                     <td><button class="btn btn-primary" data-bs-toggle="modal" :data-bs-target="`#exampleModal${product.id}`">Update</button></td>
                                     <td><button @click="deleteProduct(product.id)" class="btn btn-sm btn-danger" href="">Delete</button></td>
 
@@ -173,11 +182,9 @@
             </div>
         </div>
     </div>
-    <div v-else-if= "user === null">
-        <h1>Access Denied</h1>
-    </div>
     <div v-else>
-        <h1>Access Denied</h1>
+        <h1 class="text-center text-light">Access Denied</h1>
+        <h3 class="text-center text-light">You found an Easter Egg you can't open ☹</h3>
     </div>
     </template>
 <script>
@@ -251,7 +258,6 @@ export default {
 </script>
 <style scoped>
 .container-fluid {
-    padding-top: 180px;
     background-color: black;
 } 
 </style>
