@@ -1,6 +1,7 @@
 import { createStore } from 'vuex'
 import router from '../router/index'
 import createPersistedState from "vuex-persistedstate";
+import swal from 'sweetalert';
 export default createStore({
   state: {
     user: null,
@@ -82,9 +83,12 @@ export default createStore({
       );
       let data = await res.json();
       console.log(data);
-      if (data.token) {
         context.commit("setToken", data.token);
-
+        if(data.msg === "Password incorrect"){
+          swal("Error","Incorrect Password"); 
+      } else if(data.msg === "Email not found please register") {
+          swal("Error", "Email not found please register");
+      } else{
         // Verify token
         //
         fetch("https://phantomrealm-api.herokuapp.com/users/users/verify", {
@@ -99,9 +103,7 @@ export default createStore({
 
             router.push("/Store");
           });
-      } else {
-        alert("User not found");
-      }
+        }
     },
     signUp: async (context, payload) => {
       fetch("https://phantomrealm-api.herokuapp.com/users/register", {
