@@ -23,7 +23,7 @@
     <h5 class="card-title d-flex justify-content-center">Bargin Prices</h5>
     <p class="card-text d-flex justify-content-center">When shopping with us you are guarenteed a good deal on all our products. We always save you money.</p>
     <div class="icons">
-    <i class="fa-solid fa-piggy-bank d-flex justify-content-center"></i>
+    <img src="../assets/Images/">
     </div>
   </div>
 </div>
