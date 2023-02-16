@@ -51,7 +51,7 @@ export default {
     },
   },
   mounted() {
-    fetch("https://outstanding-gown-eel.cyclic.app/products/" + this.$route.params.id)
+    fetch("https://outst/products/" + this.$route.params.id)
       .then((res) => res.json())
       .then((data) => (this.product = data));
 
