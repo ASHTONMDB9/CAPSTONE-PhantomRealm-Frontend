@@ -38,7 +38,7 @@ export default {
     };
   },
   mounted() {
-    fetch("https://phantomrealm-api.herokuapp.com/products", {
+    fetch("https://outstanding-gown-eel.cyclic.app/products", {
     })
       .then((res) => res.json())
       .then((productdata) => (this.products = productdata), console.log(this.products));

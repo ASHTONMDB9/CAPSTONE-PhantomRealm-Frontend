@@ -254,6 +254,7 @@ export default {
   src: url(../assets/Fonts/SundayRomantic/Sundayromanticdemo-Wy7a9.otf);
 }
   #landing {
+    margin-top: 100px;
     background-image: url(../assets/Images/cutter-man-4660655_1920.jpg);
     background-size: cover;
     background-position: top;

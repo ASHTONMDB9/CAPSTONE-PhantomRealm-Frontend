@@ -41,7 +41,7 @@ export default createStore({
   actions: {
         // Add new product
         addProduct: async (context, product) => {
-          fetch("https://phantomrealm-api.herokuapp.com/products/add_product", {
+          fetch("https://outstanding-gown-eel.cyclic.app/products/add_product", {
             method: "POST",
             body: JSON.stringify(product),
             headers: {
@@ -56,7 +56,7 @@ export default createStore({
         },
         // new order
         addOrder: async (context, order) => {
-          fetch("https://phantomrealm-api.herokuapp.com/orders/add_order", {
+          fetch("https://outstanding-gown-eel.cyclic.app/orders/add_order", {
             method: "POST",
             body: JSON.stringify(order),
             headers: {
@@ -69,7 +69,7 @@ export default createStore({
      // Login
      login: async (context, payload) => {
       let res = await fetch(
-        "https://phantomrealm-api.herokuapp.com/users/login",
+        "https://outstanding-gown-eel.cyclic.app/users/login",
         {
           method: "POST",
           headers: {
@@ -91,7 +91,7 @@ export default createStore({
       } else{
         // Verify token
         //
-        fetch("https://phantomrealm-api.herokuapp.com/users/users/verify", {
+        fetch("https://outstanding-gown-eel.cyclic.app/users/users/verify", {
           headers: {
             "Content-Type": "application/json",
             "x-auth-token": data.token,
@@ -106,7 +106,7 @@ export default createStore({
         }
     },
     signUp: async (context, payload) => {
-      fetch("https://phantomrealm-api.herokuapp.com/users/register", {
+      fetch("https://outstanding-gown-eel.cyclic.app/users/register", {
         method: 'POST',
         body: JSON.stringify({
             full_name: payload.full_name,
@@ -131,7 +131,7 @@ export default createStore({
           context.commit("removeFromCart", newCart);
         },
     deleteProduct: async (context, payload) => {
-          const res  = await fetch("https://phantomrealm-api.herokuapp.com/products/delete_product/" + payload.id,{
+          const res  = await fetch("https://outstanding-gown-eel.cyclic.app/products/delete_product/" + payload.id,{
           method:"DELETE",
           headers:{
             "Content-type": "application/json",
@@ -144,7 +144,7 @@ export default createStore({
         })          
         },
         UpdateProduct: async (context, payload) => {
-         const res = await fetch("https://phantomrealm-api.herokuapp.com/products/update_product/" + payload.id,{
+         const res = await fetch("https://outstanding-gown-eel.cyclic.app/products/update_product/" + payload.id,{
           method:"PUT",
           body:JSON.stringify({
             title:payload.title,

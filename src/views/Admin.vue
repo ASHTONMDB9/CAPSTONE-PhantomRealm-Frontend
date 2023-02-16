@@ -183,7 +183,7 @@
         </div>
     </div>
     <div v-else>
-        <h1 class="text-center text-light">Access Denied</h1>
+        <h1 class="text-center text-light" style="margin-top: 100px;">Access Denied</h1>
         <h3 class="text-center text-light">You found an Easter Egg you can't open ☹</h3>
     </div>
     </template>
@@ -202,7 +202,7 @@ export default {
   },
   mounted() {
     this.declareAdmin();
-    fetch("https://phantomrealm-api.herokuapp.com/products", {
+    fetch("https://outstanding-gown-eel.cyclic.app/products", {
     })
       .then((res) => res.json())
       .then((data) => (this.products = data), console.log(this.products));
@@ -258,6 +258,7 @@ export default {
 </script>
 <style scoped>
 .container-fluid {
-    background-color: black;
+  margin-top: 100px;
+  background-color: black;
 } 
 </style>
