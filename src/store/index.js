@@ -145,7 +145,7 @@ export default createStore({
         },
         UpdateProduct: async (context, payload) => {
          const res = await fetch("https://outstanding-gown-eel.cyclic.app/products/update_product/" + payload.id,{
-          method:"PUT",
+          method:"PATCH",
           body:JSON.stringify({
             title:payload.title,
             description:payload.description,
