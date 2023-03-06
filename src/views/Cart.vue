@@ -5,7 +5,7 @@
             <div class="card mb-3 ms-4 me-4">
                 <div class="row g-0">
                     <div class="col-md-4">
-                        <img v-bind:src="product.image" class="img-fluid">
+                        <img v-bind:src="product.image" class="img-fluid"> 
                     </div>
                     <div class="col-md-8">
                     <button id="delete" @click="deleteFromCart(product.id)" class="btn"><i class="fa-solid fa-trash"></i></button>

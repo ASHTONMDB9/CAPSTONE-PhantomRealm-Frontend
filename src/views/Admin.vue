@@ -1,9 +1,9 @@
 <template>
     <div v-if="user_type === 'Admin'">
         <div class="container-fluid">
-            <div class="container-fluid pt-4 px-4">
-                <div class="row g-4">
-                    <div class="col-sm-6 col-xl-3">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-3">
                         <div class="bg-dark text-light rounded d-flex align-items-center justify-content-between p-4">
                             <i class="fa fa-chart-line fa-3x" style="color: red;"></i>
                             <div class="ms-3">
@@ -12,7 +12,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-6 col-xl-3">
+                    <div class="col-md-3">
                         <div class="bg-dark text-light rounded d-flex align-items-center justify-content-between p-4">
                             <i class="fa fa-chart-bar fa-3x" style="color: red;"></i>
                             <div class="ms-3">
@@ -21,7 +21,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-6 col-xl-3">
+                    <div class="col-md-3">
                         <div class="bg-dark text-light rounded d-flex align-items-center justify-content-between p-4">
                             <i class="fa fa-chart-area fa-3x" style="color: red;"></i>
                             <div class="ms-3">
@@ -30,7 +30,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-6 col-xl-3">
+                    <div class="col-md-3">
                         <div class="bg-dark text-light rounded d-flex align-items-center justify-content-between p-4">
                             <i class="fa fa-chart-pie fa-3x" style="color: red;"></i>
                             <div class="ms-3">
@@ -42,29 +42,29 @@
                 </div>
             </div>
 
-            <div class="container-fluid pt-4 px-4">
-                <div class="row g-4">
-                    <div class="col-sm-12 col-xl-4">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-4">
                         <div class="bg-dark text-light text-center rounded p-4">
-                            <div class="d-flex align-items-center justify-content-between mb-4">
+                            <div class="d-flex align-items-center justify-content-between mb-2">
                                 <h6 class="mb-0">Worldwide Sales</h6>
                                 <a href="">Show All</a>
                             </div>
                             <img src="../assets/Images/bar-graph.png" style="height: 400px; width: 500px;">
                         </div>
                     </div>
-                    <div class="col-sm-12 col-xl-4">
-                        <div class="bg-dark text-light text-center rounded p-4">
-                            <div class="d-flex align-items-center justify-content-between mb-4">
+                    <div class="col-md-4">
+                        <div class="bg-dark text-light text-center rounded p-3">
+                            <div class="d-flex align-items-center justify-content-between mb-2">
                                 <h6 class="mb-0">Local Sales</h6>
                                 <a href="">Show All</a>
                             </div>
                             <img src="../assets/Images/wave-graph.png" style="height: 400px; width: 500px;">
                         </div>
                     </div>
-                    <div class="col-sm-12 col-xl-4">
+                    <div class="col-md-4">
                         <div class="bg-dark text-light text-center rounded p-4">
-                            <div class="d-flex align-items-center justify-content-between mb-4">
+                            <div class="d-flex align-items-center justify-content-between mb-2">
                                 <h6 class="mb-0">Salse &amp; Revenue</h6>
                                 <a href="">Show All</a>
                             </div>
@@ -76,7 +76,7 @@
 
             <div class="container-fluid pt-4 px-4">
                 <div class="bg-dark text-light text-center rounded p-4">
-                    <div class="d-flex align-items-center justify-content-between mb-4">
+                    <div class="d-flex align-items-center justify-content-between mb-2">
                         <h6 class="mb-0">Products</h6>
                         <a href="">Show All</a>
                     </div>
@@ -202,7 +202,7 @@ export default {
   },
   mounted() {
     this.declareAdmin();
-    fetch("https://outstanding-gown-eel.cyclic.app/products", {
+    fetch("https://capstone-phantomrealm-backend.onrender.com/products", {
     })
       .then((res) => res.json())
       .then((data) => (this.products = data), console.log(this.products));

@@ -55,7 +55,7 @@
           </div>
             </div>
             <div v-else>
-              <h1>Log in to continue</h1>
+              <h1 class="text-center text-light">Log in to continue</h1>
             </div>
         </section>
             </template>

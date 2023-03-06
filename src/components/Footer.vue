@@ -109,7 +109,7 @@ export default {
 </script>
 <style scoped>
 footer {
-  margin-top: 100px;
+  margin-top: 20px;
 }
 ul {
     margin: 0px;

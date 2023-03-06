@@ -3,8 +3,8 @@
     <div v-if="products" class="container-fluid">
         <div v-for="product in products" v-bind:key="product.id">
           <router-link :to="{ name: 'ProductView', params: { id: product.id }}">
-            <div class="card ms-3 me-3 mt-4 mb-4" style="width: 18rem;">
-              <img v-bind:src="product.image" class="card-img">
+            <div class="card ms-3 me-3 mt-4 mb-4" style="width: 18rem; ">
+              <img v-bind:src="product.image" class="card-img" style="height: 22rem;">
               <div class="card-img-overlay">
                 <div class="rating">
                 <i class="fa-solid fa-star"></i>
@@ -38,7 +38,7 @@ export default {
     };
   },
   mounted() {
-    fetch("https://outstanding-gown-eel.cyclic.app/products", {
+    fetch("https://capstone-phantomrealm-backend.onrender.com/products", {
     })
       .then((res) => res.json())
       .then((productdata) => (this.products = productdata), console.log(this.products));
@@ -64,7 +64,7 @@ export default {
   margin-right: auto;
 }
   #store {
-    background-image: url(../assets/Images/Evil-Game-_L_B-_-M.gif);
+    background-image: url(../assets/Images/RETRO\ IS\ THE\ FUTURE.gif);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;

@@ -4,7 +4,7 @@
             <div class="card mb-3 ms-4 me-4">
   <div class="row g-0">
     <div class="col-md-4">
-      <img v-bind:src="product.image" class="img-fluid">
+      <img v-bind:src="product.image" class="img-fluid" style="height: auto;">
     </div>
     <div class="col-md-8">
         <button class="btn ms-3 mt-3" @click="addToCart(product)">Add to Cart</button>
@@ -51,7 +51,7 @@ export default {
     },
   },
   mounted() {
-    fetch("https://outstanding-gown-eel.cyclic.app/products/" + this.$route.params.id)
+    fetch("https://capstone-phantomrealm-backend.onrender.com/products/" + this.$route.params.id)
       .then((res) => res.json())
       .then((data) => (this.product = data));
 
