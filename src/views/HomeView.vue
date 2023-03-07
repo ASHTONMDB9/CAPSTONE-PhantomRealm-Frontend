@@ -5,8 +5,8 @@
     <h1 id="name" class="d-flex justify-content-center">The PhantomRealm</h1>
 
 
-    <img src="../assets/Images/enter.png" style="height: 60px; width: 60px; display: block; margin-left: auto; margin-right: auto;">
-    <img id="arrow" src="../assets/Images/scroll.png" style="height: 100000px; width: 500px; display: block; margin-left: auto; margin-right: auto; filter: drop-shadow(0 0 2.3rem white);">
+    <img src="../assets/Images/enter.png" style="height: 80px; width: 80px; display: block; margin-left: auto; margin-right: auto; filter: invert(1);">
+    <a href="#home"><i id="arrow" class="fa-solid fa-chevron-down d-flex justify-content-center" style="font-size: 40px; color: white;"></i></a>
 
     <h5 id="scrollmsg" class="d-flex justify-content-center">Enter if you dare</h5>
   </section>
@@ -21,7 +21,7 @@
   <div class="card-img-overlay">
     <h5 class="card-title d-flex justify-content-center">Bargin Prices</h5>
     <p class="card-text d-flex justify-content-center">When shopping with us you are guarenteed a good deal on all our products. We always save you money.</p>
-    <img src="../assets/Images/save-money.png" style="height: 60px; width: 60px; display: block; margin-left: auto; margin-right: auto; filter: drop-shadow(0 0 2.3rem white);">
+    <img src="../assets/Images/save-money.png" style="height: 60px; width: 60px; display: block; margin-left: auto; margin-right: auto; filter: invert(1);">
   </div>
 </div>
       </div>
@@ -32,7 +32,7 @@
   <div class="card-img-overlay">
     <h5 class="card-title d-flex justify-content-center">Free Delivery</h5>
     <p class="card-text">We offer all our customers free delivery on all products in our store.</p>
-    <img src="../assets/Images/truck.png" style="height: 79px; width: 103px; display: block; margin-left: auto; margin-right: auto; filter: drop-shadow(0 0 2.3rem white);">
+    <img src="../assets/Images/truck.png" style="height: 79px; width: 103px; display: block; margin-left: auto; margin-right: auto; filter: invert(1);">
   </div>
 </div>
       </div>
@@ -43,7 +43,7 @@
   <div class="card-img-overlay">
     <h5 class="card-title d-flex justify-content-center">Exceptional Quality</h5>
     <p class="card-text">All our products are tested for quality before they are added. We give you only the best in gaming.</p>
-    <img src="../assets/Images/clipboard.png" style="height: 61px; width: 78px; display: block; margin-left: auto; margin-right: auto; filter: drop-shadow(0 0 2.3rem white);">
+    <img src="../assets/Images/clipboard.png" style="height: 61px; width: 78px; display: block; margin-left: auto; margin-right: auto; filter: invert(1);">
   </div>
 </div>
       </div>
@@ -53,8 +53,8 @@
   </section>
 
   <section id="about">
-    <h1 class="about d-flex justify-content-center">About Us</h1>
-    <div class="container-fluid">
+    <h1 class="about d-flex justify-content-center pb-5">About Us</h1>
+    <div class="container-fluid pt-5">
       <div class="row">
         <div id="description" class="col-md-6 text-light">
           <h4>Torture and Torment await all that oppose!</h4>
@@ -187,7 +187,7 @@
           <div class="card bg-black">
   <img src="../assets/Images/beanie-2562646_1920.jpg" class="card-img-top" style="border-radius: 100%; object-fit: cover; width: 15rem; display: block; margin-left: auto; margin-right: auto;" alt="...">
   <div class="card-body">
-    <p class="card-text text-light d-flex justify-content-center">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <p class="card-text text-light d-flex justify-content-center">Excellent service. Definitely one of the best online game stores I've visited. Exceptional</p>
     <div class="rating">
       <i class="fa-solid fa-star"></i>
       <i class="fa-solid fa-star"></i>
@@ -202,7 +202,7 @@
           <div class="card bg-black">
   <img src="../assets/Images/man-792821_1920.jpg" class="card-img-top" style="border-radius: 100%; object-fit: cover; width: 15rem; display: block; margin-left: auto; margin-right: auto;" alt="...">
   <div class="card-body">
-    <p class="card-text text-light d-flex justify-content-center">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <p class="card-text text-light d-flex justify-content-center">Very good service delivery and good quality products. A great store for your gaming needs.</p>
     <div class="rating">
       <i class="fa-solid fa-star"></i>
       <i class="fa-solid fa-star"></i>
@@ -217,7 +217,7 @@
           <div class="card bg-black">
   <img src="../assets/Images/woman-1063100_1920.jpg" class="card-img-top" style="border-radius: 100%; object-fit: cover; width: 15rem; display: block; margin-left: auto; margin-right: auto;" alt="...">
   <div class="card-body">
-    <p class="card-text text-light d-flex justify-content-center">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <p class="card-text text-light d-flex justify-content-center">The PhantomRealm is the best place to get your gaming equipment and merch. I love this website.</p>
     <div class="rating">
       <i class="fa-solid fa-star"></i>
       <i class="fa-solid fa-star"></i>
@@ -274,6 +274,9 @@ export default {
     color: black;
     text-shadow: 0 0 4px red, 0 0 4px red, 0 0 4px red, 10px 0px 10px rgb(36, 36, 36);
     font-family: phantom;
+  }
+  a, i {
+    text-decoration: none;
   }
   #arrow {
     animation: scroll-anim 2s infinite;
@@ -438,6 +441,6 @@ export default {
   color: yellow;
 }
 #tests {
-  padding-top: 130px;
+  padding-top: 50px;
 }
 </style>

@@ -1,7 +1,6 @@
 <template>
     <div v-if="user_type === 'Admin'">
-        <div class="container-fluid">
-            <div class="container-fluid">
+        <div id="profit" class="container-fluid">
                 <div class="row">
                     <div class="col-md-3">
                         <div class="bg-dark text-light rounded d-flex align-items-center justify-content-between p-4">
@@ -39,27 +38,26 @@
                             </div>
                         </div>
                     </div>
-                </div>
             </div>
 
-            <div class="container-fluid">
+            <div id="charts" class="container-fluid">
                 <div class="row">
                     <div class="col-md-4">
                         <div class="bg-dark text-light text-center rounded p-4">
-                            <div class="d-flex align-items-center justify-content-between mb-2">
+                            <div class="d-flex align-items-center justify-content-around mb-2">
                                 <h6 class="mb-0">Worldwide Sales</h6>
                                 <a href="">Show All</a>
                             </div>
-                            <img src="../assets/Images/bar-graph.png" style="height: 400px; width: 500px;">
+                            <img src="../assets/Images/bar-graph.png" style="height: 300px; width: 300px;">
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <div class="bg-dark text-light text-center rounded p-3">
+                        <div class="bg-dark text-light text-center rounded p-4">
                             <div class="d-flex align-items-center justify-content-between mb-2">
                                 <h6 class="mb-0">Local Sales</h6>
                                 <a href="">Show All</a>
                             </div>
-                            <img src="../assets/Images/wave-graph.png" style="height: 400px; width: 500px;">
+                            <img src="../assets/Images/wave-graph.png" style="height: 300px; width: 300px;">
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -68,7 +66,7 @@
                                 <h6 class="mb-0">Salse &amp; Revenue</h6>
                                 <a href="">Show All</a>
                             </div>
-                            <img src="../assets/Images/growth.png" style="height: 400px; width: 500px;">
+                            <img src="../assets/Images/growth.png" style="height: 300px; width: 300px;">
                         </div>
                     </div>
                 </div>
@@ -77,8 +75,7 @@
             <div class="container-fluid pt-4 px-4">
                 <div class="bg-dark text-light text-center rounded p-4">
                     <div class="d-flex align-items-center justify-content-between mb-2">
-                        <h6 class="mb-0">Products</h6>
-                        <a href="">Show All</a>
+                        <h4 class="mb-0">Products</h4>
                     </div>
                     
 <!-- Modal -->
@@ -257,8 +254,13 @@ export default {
 }
 </script>
 <style scoped>
-.container-fluid {
-  margin-top: 100px;
+#profit {
+  margin-top: 150px;
   background-color: black;
-} 
+}
+#charts {
+  margin-top: 20px;
+  background-color: black;
+}
+
 </style>

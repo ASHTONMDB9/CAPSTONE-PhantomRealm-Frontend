@@ -22,5 +22,6 @@ export default {
 #app {
   overflow-x: hidden;
   background-color: black;
+  scroll-behavior: smooth;
 }
 </style>

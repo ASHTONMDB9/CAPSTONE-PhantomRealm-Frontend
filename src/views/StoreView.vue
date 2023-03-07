@@ -64,10 +64,11 @@ export default {
   margin-right: auto;
 }
   #store {
-    background-image: url(../assets/Images/RETRO\ IS\ THE\ FUTURE.gif);
+    background-image: url(../assets/Images/download.gif);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
+    background-blend-mode: darken;
   }
   .container-fluid {
 	  overflow: hidden;

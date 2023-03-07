@@ -27,7 +27,7 @@
                             <i class="far fa-envelope-open"></i>
                             <div class="cta-text">
                                 <h4>Mail us</h4>
-                                <span>email123@gmailcom</span>
+                                <span>Phantomslaye4427@gmail.com</span>
                             </div>
                         </div>
                     </div>
@@ -129,7 +129,7 @@ ul {
   font-size: 30px;
   float: left;
   margin-top: 8px;
-  filter: drop-shadow(0px 0px 0.2rem white);
+  filter: drop-shadow(0px 0px 0.2rem red);
 }
 .cta-text {
   padding-left: 15px;
@@ -233,6 +233,13 @@ ul {
   background: black;
   border: 1px solid black;
   color: white;
+}
+.subscribe-form input:focus {
+  width: 100%;
+  padding: 14px 28px;
+  background: white;
+  border: 1px solid black;
+  color: black;
 }
 .subscribe-form button {
     position: absolute;

@@ -44,7 +44,7 @@ export default {
 #contact {
     height: 75vh;
     background-image: url(../assets/Images/reaper.png);
-    background-size: auto;
+    background-size: cover;
     background-attachment: fixed;
     padding-top: 120px;
     display: flex;
@@ -78,6 +78,16 @@ button {
     margin-top: 10px;
     height: 50px;
     background-color: transparent;
+    border: 3px solid red;
+    color: white;
+    border-radius: 5px;
+    text-shadow: 0 0 4px white, 0 0 4px white, 0 0 4px white, 10px 0px 10px rgb(36, 36, 36);
+}
+button:hover {
+    width: 100%;
+    margin-top: 10px;
+    height: 50px;
+    background-color: black;
     border: 3px solid red;
     color: white;
     border-radius: 5px;
