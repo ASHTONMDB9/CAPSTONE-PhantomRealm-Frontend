@@ -236,7 +236,6 @@
 <script>
 export default {
   mounted(){
-    console.log('component mounted')
         window.scrollTo(0,0)
     },
 }
