@@ -33,9 +33,9 @@
                     </div>
                 </div>
             </div>
-            <div class="footer-content pt-5 pb-5">
+            <div class="footer-content pt-5">
                 <div class="row">
-                    <div class="col-xl-4 col-lg-4 mb-50">
+                    <div class="col-xl-4 col-lg-4">
                         <div class="footer-widget">
                             <div class="footer-logo">
                                 <a href="index.html"></a>

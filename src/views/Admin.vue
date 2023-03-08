@@ -1,5 +1,30 @@
 <template>
     <div v-if="user_type === 'Admin'">
+
+      <button id="off" class="btn btn-danger-outline" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling"><i class="fa-solid fa-bars"></i></button>
+
+<div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+  <div class="offcanvas-header">
+    <h3 class="offcanvas-title" id="offcanvasScrollingLabel">PhantomRealm</h3>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="d-flex align-items-center ms-4 mb-4">
+      <div class="position-relative">
+          <img class="rounded-circle" src="../assets/Images/possible/cf468dcf-8938-4f68-a0d4-272d2091af53.jpeg" alt="" style="width: 50px; height: 50px;">
+          <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
+      </div>
+      <div class="ms-3">
+          <h6 class="mb-0">Ashton Abrahams</h6>
+          <span>Admin</span>
+      </div>
+  </div>
+
+  <div class="offcanvas-body">
+    <div class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</div>
+    
+  </div>
+</div>
+      
         <div id="profit" class="container-fluid">
                 <div class="row">
                     <div class="col-md-3">
@@ -40,33 +65,30 @@
                     </div>
             </div>
 
-            <div id="charts" class="container-fluid">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="bg-dark text-light text-center rounded p-4">
-                            <div class="d-flex align-items-center justify-content-around mb-2">
-                                <h6 class="mb-0">Worldwide Sales</h6>
-                                <a href="">Show All</a>
-                            </div>
-                            <img src="../assets/Images/bar-graph.png" style="height: 300px; width: 300px;">
+            <div id="charts" class="container-fluid pt-4">
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="bg-dark rounded h-100 p-4">
+                            <h6 class="mb-4 text-light">Local Sales</h6>
+                            <img src="../assets/Images/singleline.png" id="line-chart" style="display: block; margin-left: auto; margin-right: auto;">
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="bg-dark text-light text-center rounded p-4">
-                            <div class="d-flex align-items-center justify-content-between mb-2">
-                                <h6 class="mb-0">Local Sales</h6>
-                                <a href="">Show All</a>
-                            </div>
-                            <img src="../assets/Images/wave-graph.png" style="height: 300px; width: 300px;">
+                    <div class="col-md-6">
+                        <div class="bg-dark rounded h-100 p-4">
+                            <h6 class="mb-4 text-light">International Sales</h6>
+                            <img src="../assets/Images/multibar.png" id="salse-revenue" style="display: block; margin-left: auto; margin-right: auto;">
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="bg-dark text-light text-center rounded p-4">
-                            <div class="d-flex align-items-center justify-content-between mb-2">
-                                <h6 class="mb-0">Salse &amp; Revenue</h6>
-                                <a href="">Show All</a>
-                            </div>
-                            <img src="../assets/Images/growth.png" style="height: 300px; width: 300px;">
+                    <div class="col-md-6">
+                        <div class="bg-dark rounded h-100 p-4">
+                            <h6 class="mb-4 text-light">Popularity</h6>
+                            <img src="../assets/Images/singlebar.png" id="bar-chart" style="display: block; margin-left: auto; margin-right: auto;">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="bg-dark rounded h-100 p-4">
+                            <h6 class="mb-4 text-light">Actual/Expected Performance</h6>
+                            <img src="../assets/Images/multiline.png" id="worldwide-sales" style="display: block; margin-left: auto; margin-right: auto;">
                         </div>
                     </div>
                 </div>
@@ -88,7 +110,7 @@
       </div>
       <div class="modal-body">
         <form @submit.prevent="addProduct()">
-          <textarea type="text" v-model="title" class="email" placeholder="title" required></textarea>
+          <textarea type="text" v-model="title" placeholder="title" required></textarea>
           <div>
           <textarea type="text" v-model="description" placeholder="description" required></textarea>
           </div>
@@ -182,11 +204,13 @@
     <div v-else>
         <h1 class="text-center text-light" style="margin-top: 100px;">Access Denied</h1>
         <h3 class="text-center text-light">You found an Easter Egg you can't open ☹</h3>
+        <img class="box" src="../assets/Images/easteregg.gif">
+
     </div>
     </template>
 <script>
 export default {
-    props: ["product"],
+    // props: ["product"],
     data() {
     return {
       products: null,
@@ -259,8 +283,14 @@ export default {
   background-color: black;
 }
 #charts {
-  margin-top: 20px;
+  margin-top: 5px;
   background-color: black;
 }
-
+.box {
+  padding-top: 10px;
+	display: block;
+	height: auto;
+	margin-left: auto;
+  margin-right: auto;
+}
 </style>

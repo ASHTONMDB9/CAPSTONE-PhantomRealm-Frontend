@@ -20,10 +20,10 @@
         <li class="nav-item">
           <router-link class="nav-link" to="/Contact">Contact</router-link>
         </li>
+        <ul v-if="user" class="navbar-nav mb-1 mb-lg-0 bg-black">
         <li class="nav-item">
           <router-link class="nav-link" to="/Admin">Admin</router-link>
         </li>
-        <ul v-if="user" class="navbar-nav mb-1 mb-lg-0 bg-black">
           <li class="nav-item">
           <a  @click="Logout" class="btn" id="signup">Logout</a>
           </li>

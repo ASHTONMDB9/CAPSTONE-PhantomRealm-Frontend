@@ -96,8 +96,8 @@ export default {
 	background-color: rgba(0, 0, 0, 0.709);
 	-webkit-transform-origin:  0% 100%;
 			transform-origin:  0% 100% ;
-	-webkit-animation: loader2 1.5s linear;
-			animation: loader2 1.5s linear;
+	-webkit-animation: loader2 1.5s linear infinite;
+			animation: loader2 1.5s linear infinite;
 }
 .loader:after{
 	content: "";
@@ -112,8 +112,8 @@ export default {
 	background-color: rgba(0, 0, 0, 0.709);
 	-webkit-transform-origin:  100% 0%;
 			transform-origin:  100% 0% ;
-	-webkit-animation: loader2 1.5s linear;
-			animation: loader2 1.5s linear;
+	-webkit-animation: loader2 1.5s linear infinite;
+			animation: loader2 1.5s linear infinite;
 }
 @-webkit-keyframes loader2{
     0%{-webkit-transform:rotate(0deg);}

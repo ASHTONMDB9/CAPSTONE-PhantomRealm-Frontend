@@ -24,4 +24,21 @@ export default {
   background-color: black;
   scroll-behavior: smooth;
 }
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  border-radius: 50px;
+  background: black;
+  border: 1px solid red;
+}
+::-webkit-scrollbar-thumb {
+  background: red; 
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: red; 
+  border: 1px solid black;
+}
+
 </style>

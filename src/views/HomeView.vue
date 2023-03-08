@@ -71,10 +71,10 @@
   </section>
   <section id="showcase">
     <h1 class="about d-flex justify-content-center">Some of our products</h1>
-    <div class="gallery">
-  <span style="--i:1">
-    <img src="../assets/Games/bloodbornei.png" alt="" />
-  </span>
+    <router-link to="/Store"><div class="gallery">
+     <span style="--i:1">
+      <img src="../assets/Games/bloodbornei.png" alt="" />
+    </span>
   <span style="--i:2">
     <img src="../assets/Games/darksiders.png" alt="" />
   </span>
@@ -97,6 +97,7 @@
     <img src="../assets/Games/uncharted.png" alt="" />
   </span>
 </div>
+</router-link>
   </section>
   <section id="banner">
 
@@ -257,7 +258,6 @@ export default {
     margin-top: 100px;
     background-image: url(../assets/Images/cutter-man-4660655_1920.jpg);
     background-size: cover;
-    background-position: top;
     background-repeat: no-repeat;
     background-attachment: fixed;
     height: 100vh;

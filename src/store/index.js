@@ -50,7 +50,8 @@ export default createStore({
           })
             .then((response) => response.json())
             .then(() => {
-              context.dispatch("getProduct")
+              console.log(data);
+              context.dispatch("getProduct");
             });
             
         },
@@ -65,6 +66,8 @@ export default createStore({
           })
             .then((response) => response.json())
             .then(() => context.dispatch("getOrder"));
+
+            router.push("/Store");
         },
      // Login
      login: async (context, payload) => {
