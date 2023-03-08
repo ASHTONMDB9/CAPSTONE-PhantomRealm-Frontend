@@ -1,26 +1,28 @@
 <template>
     <div v-if="user_type === 'Admin'">
 
+      <h1 class="about d-flex justify-content-center">Admin</h1>
+
       <button id="off" class="btn btn-danger-outline" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling"><i class="fa-solid fa-bars"></i></button>
 
-<div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+<div class="offcanvas offcanvas-end bg-dark" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
   <div class="offcanvas-header">
-    <h3 class="offcanvas-title" id="offcanvasScrollingLabel">PhantomRealm</h3>
+    <h3 class="offcanvas-title text-danger" id="offcanvasScrollingLabel">PhantomRealm</h3>
     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   <div class="d-flex align-items-center ms-4 mb-4">
       <div class="position-relative">
-          <img class="rounded-circle" src="../assets/Images/possible/cf468dcf-8938-4f68-a0d4-272d2091af53.jpeg" alt="" style="width: 50px; height: 50px;">
-          <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
+          <img class="rounded-circle" src="../assets/Images/possible/cf468dcf-8938-4f68-a0d4-272d2091af53.jpeg" alt="" style="width: 60px; height: 60px;">
+          <div class="bg-success rounded-circle border border-4 border-success position-absolute end-0 bottom-0 p-1"></div>
       </div>
       <div class="ms-3">
-          <h6 class="mb-0">Ashton Abrahams</h6>
-          <span>Admin</span>
+          <h6 class="mb-0 text-light">Ashton Abrahams</h6>
+          <span class="text-success">Admin</span>
       </div>
   </div>
 
   <div class="offcanvas-body">
-    <div class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</div>
+    <div class="nav-item nav-link text-danger"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</div>
     
   </div>
 </div>
@@ -278,6 +280,13 @@ export default {
 }
 </script>
 <style scoped>
+ .about {
+  color: black;
+  text-shadow: 0 0 4px red, 0 0 4px red, 0 0 4px red, 10px 0px 10px rgb(36, 36, 36);
+  font-family: phantom;
+  font-size: 100px;
+  margin-top: 150px;
+}
 #profit {
   margin-top: 150px;
   background-color: black;
@@ -292,5 +301,13 @@ export default {
 	height: auto;
 	margin-left: auto;
   margin-right: auto;
+}
+#off {
+  margin-top: -100px;
+  display: block;
+  margin-left: auto;
+  margin-right: 20px;
+  height: 60px;
+  width: 80px
 }
 </style>
