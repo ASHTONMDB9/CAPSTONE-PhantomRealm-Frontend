@@ -5,7 +5,7 @@
     <h1 id="name" class="d-flex justify-content-center">The PhantomRealm</h1>
 
 
-    <img src="../assets/Images/enter.png" style="height: 80px; width: 80px; display: block; margin-left: auto; margin-right: auto; filter: invert(1);">
+    <img src="../assets/Images/enter.png" loading="lazy" style="height: 80px; width: 80px; display: block; margin-left: auto; margin-right: auto; filter: invert(1);">
     <a href="#home"><i id="arrow" class="fa-solid fa-chevron-down d-flex justify-content-center" style="font-size: 40px; color: white;"></i></a>
 
     <h5 id="scrollmsg" class="d-flex justify-content-center">Enter if you dare</h5>
@@ -21,7 +21,7 @@
   <div class="card-img-overlay">
     <h5 class="card-title d-flex justify-content-center">Bargin Prices</h5>
     <p class="card-text d-flex justify-content-center">When shopping with us you are guarenteed a good deal on all our products. We always save you money.</p>
-    <img src="../assets/Images/save-money.png" style="height: 60px; width: 60px; display: block; margin-left: auto; margin-right: auto; filter: invert(1);">
+    <img src="../assets/Images/save-money.png" loading="lazy" style="height: 60px; width: 60px; display: block; margin-left: auto; margin-right: auto; filter: invert(1);">
   </div>
 </div>
       </div>
@@ -32,7 +32,7 @@
   <div class="card-img-overlay">
     <h5 class="card-title d-flex justify-content-center">Free Delivery</h5>
     <p class="card-text">We offer all our customers free delivery on all products in our store.</p>
-    <img src="../assets/Images/truck.png" style="height: 79px; width: 103px; display: block; margin-left: auto; margin-right: auto; filter: invert(1);">
+    <img src="../assets/Images/truck.png" loading="lazy" style="height: 79px; width: 103px; display: block; margin-left: auto; margin-right: auto; filter: invert(1);">
   </div>
 </div>
       </div>
@@ -43,7 +43,7 @@
   <div class="card-img-overlay">
     <h5 class="card-title d-flex justify-content-center">Exceptional Quality</h5>
     <p class="card-text">All our products are tested for quality before they are added. We give you only the best in gaming.</p>
-    <img src="../assets/Images/clipboard.png" style="height: 61px; width: 78px; display: block; margin-left: auto; margin-right: auto; filter: invert(1);">
+    <img src="../assets/Images/clipboard.png" loading="lazy" style="height: 61px; width: 78px; display: block; margin-left: auto; margin-right: auto; filter: invert(1);">
   </div>
 </div>
       </div>
@@ -62,9 +62,9 @@
           <p>Join our community today and become part of the Phantom Forces. <br>Recieve 1,000,000 in-store credits for if you are a first time member,<br> which can be used to get discounts and deals on products.</p>
         </div>
         <div class="col-md-6">
-          <img class="emblem" src="../assets/Images/shield.png"><h4 class="emblemtext">We need your help. Work together to slay all in your way. Become an honoury memeber of the<br> Phantom Force and unlock legendary rewards and prizes. Sign up and join the Phantom Force <br>and play any of the selected games in our store to earn.</h4><br>
-          <img class="emblem2" src="../assets/Images/dragon.png"><h4 class="emblemtext">Defeat the boss and become a boss with our monthly raid of the giants. Be the first to beat the<br> boss at the end of the month and make a purchase for free. Limited time only.</h4>
-          <img class="emblem2" src="../assets/Images/castle.png"><h4 class="emblemtext">Kings and Warriors of Legend, none can stop me. They dare try, but I slay all in my way. For I am<br> The Phantomslaye. Torture and torment await all that oppose. Get your hands on the new and<br> exclusive PhantomRealm Legendary Warriors extension pack.</h4>
+          <img class="emblem" src="../assets/Images/shield.png" loading="lazy"><h4 class="emblemtext">We need your help. Work together to slay all in your way. Become an honoury memeber of the<br> Phantom Force and unlock legendary rewards and prizes. Sign up and join the Phantom Force <br>and play any of the selected games in our store to earn.</h4><br>
+          <img class="emblem2" src="../assets/Images/dragon.png" loading="lazy"><h4 class="emblemtext">Defeat the boss and become a boss with our monthly raid of the giants. Be the first to beat the<br> boss at the end of the month and make a purchase for free. Limited time only.</h4>
+          <img class="emblem2" src="../assets/Images/castle.png" loading="lazy"><h4 class="emblemtext">Kings and Warriors of Legend, none can stop me. They dare try, but I slay all in my way. For I am<br> The Phantomslaye. Torture and torment await all that oppose. Get your hands on the new and<br> exclusive PhantomRealm Legendary Warriors extension pack.</h4>
         </div>
       </div>
     </div>
@@ -73,28 +73,28 @@
     <h1 class="about d-flex justify-content-center">Some of our products</h1>
     <router-link to="/Store"><div class="gallery">
      <span style="--i:1">
-      <img src="../assets/Games/bloodbornei.png" alt="" />
+      <img src="../assets/Games/bloodbornei.png" alt="" loading="lazy" />
     </span>
   <span style="--i:2">
-    <img src="../assets/Games/darksiders.png" alt="" />
+    <img src="../assets/Games/darksiders.png" alt="" loading="lazy" />
   </span>
   <span style="--i:3">
-    <img src="../assets/Games/darksouls.png" alt="" />
+    <img src="../assets/Games/darksouls.png" alt="" loading="lazy" />
   </span>
   <span style="--i:4">
-    <img src="../assets/Games/godofwar.png" alt="" />
+    <img src="../assets/Games/godofwar.png" alt="" loading="lazy" />
   </span>
   <span style="--i:5">
-    <img src="../assets/Games/nfsheat.png" alt="" />
+    <img src="../assets/Games/nfsheat.png" alt="" loading="lazy" />
   </span>
   <span style="--i:6">
-    <img src="../assets/Games/grandtheftautov.png" alt="" />
+    <img src="../assets/Games/grandtheftautov.png" alt="" loading="lazy" />
   </span>
   <span style="--i:7">
-    <img src="../assets/Games/skyrim.png" alt="" />
+    <img src="../assets/Games/skyrim.png" alt="" loading="lazy" />
   </span>
   <span style="--i:8">
-    <img src="../assets/Games/uncharted.png" alt="" />
+    <img src="../assets/Games/uncharted.png" alt="" loading="lazy" />
   </span>
 </div>
 </router-link>
@@ -106,73 +106,73 @@
 
 <div class="col-md-3">
   <div class="sponser">
-    <img src="https://i.postimg.cc/Fs4sZtnF/a6eeb1c4-a129-47d1-b055-dcb0a371b3ff-removebg-preview.png" alt="">
+    <img src="https://i.postimg.cc/Fs4sZtnF/a6eeb1c4-a129-47d1-b055-dcb0a371b3ff-removebg-preview.png" alt="" loading="lazy">
   </div>
 </div>
 
 <div class="col-md-3">
   <div class="sponser">
-    <img src="https://i.postimg.cc/N05gMQLD/Bandai-namco-removebg-preview.png" alt="">
+    <img src="https://i.postimg.cc/N05gMQLD/Bandai-namco-removebg-preview.png" alt="" loading="lazy">
   </div>
 </div>
 
 <div class="col-md-3">
   <div class="sponser">
-    <img src="https://i.postimg.cc/13RmkGQL/Blizzard-Entertainment-Logo-Vector-PNG-SVG-Free-Download-Logowik-com-removebg-preview.png" alt="">
+    <img src="https://i.postimg.cc/13RmkGQL/Blizzard-Entertainment-Logo-Vector-PNG-SVG-Free-Download-Logowik-com-removebg-preview.png" alt="" loading="lazy">
   </div>
 </div>
 
   <div class="col-md-3">
     <div class="sponser">
-    <img src="https://i.postimg.cc/yW4pfs0X/square.png" alt="">
+    <img src="https://i.postimg.cc/yW4pfs0X/square.png" alt="" loading="lazy">
     </div>
   </div>
 
 <div class="col-md-3">
   <div class="sponser">
-  <img src="https://i.postimg.cc/8c8k9xpH/eaa2e1bb-f722-4fd3-80bb-27170a8f8747-removebg-preview.png" alt="">
+  <img src="https://i.postimg.cc/8c8k9xpH/eaa2e1bb-f722-4fd3-80bb-27170a8f8747-removebg-preview.png" alt="" loading="lazy">
   </div>
 </div>
 
   <div class="col-md-3">
     <div class="sponser">
-  <img src="https://i.postimg.cc/3NgrT9WH/Entertainment-Logo-Ideas-Make-Your-Own-Entertainment-Logo-Looka-removebg-preview.png" alt="">
+  <img src="https://i.postimg.cc/3NgrT9WH/Entertainment-Logo-Ideas-Make-Your-Own-Entertainment-Logo-Looka-removebg-preview.png" alt="" loading="lazy">
   </div>
   </div>
 
   <div class="col-md-3">
   <div class="sponser">
-    <img src="https://i.postimg.cc/SNfQ1Zw6/Naughty-Dog-Logo-Vector-SVG-PDF-Ai-EPS-PNG-CDR-Free-Download-Logowik-com-removebg-preview.png" alt="">
+    <img src="https://i.postimg.cc/SNfQ1Zw6/Naughty-Dog-Logo-Vector-SVG-PDF-Ai-EPS-PNG-CDR-Free-Download-Logowik-com-removebg-preview.png" alt="" loading="lazy">
   </div>
 </div>
 
 <div class="col-md-3">
   <div class="sponser">
-    <img src="https://i.postimg.cc/bYbwkYgF/October-1-1979-Ex-Atari-Employees-Started-Activision-Day-in-Tech-History-removebg-preview.png" alt="">
+    <img src="https://i.postimg.cc/bYbwkYgF/October-1-1979-Ex-Atari-Employees-Started-Activision-Day-in-Tech-History-removebg-preview.png" alt="" loading="lazy">
   </div>
 </div>
 
 <div class="col-md-3">
   <div class="sponser">
-    <img src="https://i.postimg.cc/9Q1M0xbm/Pin-by-Ivica-Prelesnik-on-Gamer-Playstation-removebg-preview.png" alt="">
+    <img src="https://i.postimg.cc/9Q1M0xbm/Pin-by-Ivica-Prelesnik-on-Gamer-Playstation-removebg-preview.png" alt="" loading="lazy">
   </div>
 </div>
 
 <div class="col-md-3">
   <div class="sponser">
-    <img src="https://i.postimg.cc/MGTGQy3y/Sony-Font-and-Sony-Logo-removebg-preview.png" alt="">
+    <img src="https://i.postimg.cc/MGTGQy3y/Sony-Font-and-Sony-Logo-removebg-preview.png" alt="" loading="lazy">
   </div>
 </div>
 
 <div class="col-md-3">
   <div class="sponser">
-    <img src="https://i.postimg.cc/mgdLBPZh/ubisoft-est-n-a-renne-France-en-1986-ubisoft-removebg-preview.png" alt="">
+    <img src="https://i.postimg.cc/mgdLBPZh/ubisoft-est-n-a-renne-France-en-1986-ubisoft-removebg-preview.png" alt="" loading="lazy">
   </div>
 </div>
 
 <div class="col-md-3">
   <div class="sponser">
-    <img src="https://i.postimg.cc/V60L7z8v/Xbox-logo-removebg-preview.png" alt="">
+    <img src="https://i.postimg.cc/V60L7z8v/Xbox-logo-removebg-preview.png" alt="" loading="lazy">
   </div>
 </div>
 
@@ -186,7 +186,7 @@
       <div class="row">
         <div class="col-md-4">
           <div class="card bg-black">
-  <img src="../assets/Images/beanie-2562646_1920.jpg" class="card-img-top" style="border-radius: 100%; object-fit: cover; width: 15rem; display: block; margin-left: auto; margin-right: auto;" alt="...">
+  <img src="../assets/Images/beanie-2562646_1920.jpg" loading="lazy" class="card-img-top" style="border-radius: 100%; object-fit: cover; width: 15rem; display: block; margin-left: auto; margin-right: auto;" alt="...">
   <div class="card-body">
     <p class="card-text text-light d-flex justify-content-center">Excellent service. Definitely one of the best online game stores I've visited. Exceptional</p>
     <div class="rating">
@@ -201,7 +201,7 @@
         </div>
         <div class="col-md-4">
           <div class="card bg-black">
-  <img src="../assets/Images/man-792821_1920.jpg" class="card-img-top" style="border-radius: 100%; object-fit: cover; width: 15rem; display: block; margin-left: auto; margin-right: auto;" alt="...">
+  <img src="../assets/Images/man-792821_1920.jpg" loading="lazy" class="card-img-top" style="border-radius: 100%; object-fit: cover; width: 15rem; display: block; margin-left: auto; margin-right: auto;" alt="...">
   <div class="card-body">
     <p class="card-text text-light d-flex justify-content-center">Very good service delivery and good quality products. A great store for your gaming needs.</p>
     <div class="rating">
@@ -216,7 +216,7 @@
         </div>
         <div class="col-md-4">
           <div class="card bg-black">
-  <img src="../assets/Images/woman-1063100_1920.jpg" class="card-img-top" style="border-radius: 100%; object-fit: cover; width: 15rem; display: block; margin-left: auto; margin-right: auto;" alt="...">
+  <img src="../assets/Images/woman-1063100_1920.jpg" loading="lazy" class="card-img-top" style="border-radius: 100%; object-fit: cover; width: 15rem; display: block; margin-left: auto; margin-right: auto;" alt="...">
   <div class="card-body">
     <p class="card-text text-light d-flex justify-content-center">The PhantomRealm is the best place to get your gaming equipment and merch. I love this website.</p>
     <div class="rating">
@@ -236,8 +236,9 @@
 <script>
 export default {
   mounted(){
+    console.log('component mounted')
         window.scrollTo(0,0)
-    }
+    },
 }
 </script>
 <style scoped>
@@ -255,7 +256,6 @@ export default {
   src: url(../assets/Fonts/SundayRomantic/Sundayromanticdemo-Wy7a9.otf);
 }
   #landing {
-    margin-top: 100px;
     background-image: url(../assets/Images/cutter-man-4660655_1920.jpg);
     background-size: cover;
     background-repeat: no-repeat;
@@ -263,7 +263,7 @@ export default {
     height: 100vh;
   }
   #greeting {
-    padding-top: 420px;
+    padding-top: 400px;
     font-size: 50px;
     color: black;
     text-shadow: 0 0 4px red, 0 0 4px red, 0 0 4px red, 9px 3px 7px rgb(36, 36, 36);

@@ -1,5 +1,5 @@
 <template>
-    <nav id="nav" class="navbar navbar-dark navbar-expand-lg bg-black">
+    <nav id="nav" class="navbar navbar-dark navbar-expand-lg">
   <div class="container-fluid">
     <a class="navbar-brand"><img src="../assets/Images/nav.png">
     </a>
@@ -7,7 +7,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="Toggler">
-      <ul class="navbar-nav mb-1 mb-lg-0 bg-black">
+      <ul class="navbar-nav mb-1 mb-lg-0">
         <li class="nav-item">
           <router-link class="nav-link" to="/">Home</router-link>
         </li>
@@ -20,7 +20,7 @@
         <li class="nav-item">
           <router-link class="nav-link" to="/Contact">Contact</router-link>
         </li>
-        <ul v-if="user" class="navbar-nav mb-1 mb-lg-0 bg-black">
+        <ul v-if="user" class="navbar-nav mb-1 mb-lg-0">
         <li class="nav-item">
           <router-link class="nav-link" to="/Admin">Admin</router-link>
         </li>
@@ -28,7 +28,7 @@
           <a  @click="Logout" class="btn" id="signup">Logout</a>
           </li>
         </ul>
-        <ul v-else class="navbar-nav mb-1 mb-lg-0 bg-black">
+        <ul v-else class="navbar-nav mb-1 mb-lg-0">
          <li class="nav-item">
            <router-link to="/SignUp" class="btn" id="signup">Sign Up</router-link>
          </li>
@@ -45,6 +45,22 @@
 
 <script>
 export default {
+  mounted() {
+    window.addEventListener('scroll',changeBackground);
+
+function changeBackground(){
+  let navbar = document.getElementById("nav");
+  let scrollValue = window.scrollY;
+  if(scrollValue <50){
+    navbar.style.background = "transparent";
+    navbar.style.transition = "all 0.5s linear"
+
+    
+}else{
+    navbar.style.background = "black";
+}
+}
+  },
   computed:{
     user() {
       // console.log(this.$store.state.user)

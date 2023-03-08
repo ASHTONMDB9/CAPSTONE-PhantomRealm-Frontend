@@ -13,16 +13,16 @@
   <div class="d-flex align-items-center ms-4 mb-4">
       <div class="position-relative">
           <img class="rounded-circle" src="../assets/Images/possible/cf468dcf-8938-4f68-a0d4-272d2091af53.jpeg" alt="" style="width: 60px; height: 60px;">
-          <div class="bg-success rounded-circle border border-4 border-success position-absolute end-0 bottom-0 p-1"></div>
+          <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-2"></div>
       </div>
       <div class="ms-3">
-          <h6 class="mb-0 text-light">Ashton Abrahams</h6>
-          <span class="text-success">Admin</span>
+          <h6 class="mb-0 text-light">Ashton Abrahams -<span class="text-success"> online</span></h6>
+          <span class="text-danger">Admin</span>
       </div>
   </div>
 
   <div class="offcanvas-body">
-    <div class="nav-item nav-link text-danger"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</div>
+    <div class="nav-item nav-link text-dark bg-danger py-2 ps-2 rounded-pill"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</div>
     
   </div>
 </div>
@@ -212,7 +212,6 @@
     </template>
 <script>
 export default {
-    // props: ["product"],
     data() {
     return {
       products: null,
@@ -288,7 +287,7 @@ export default {
   margin-top: 150px;
 }
 #profit {
-  margin-top: 150px;
+  margin-top: 80px;
   background-color: black;
 }
 #charts {
