@@ -18,7 +18,7 @@
                             <i class="fas fa-phone"></i>
                             <div class="cta-text">
                                 <h4>Call us</h4>
-                                <span>+112 233 3094</span>
+                                <span>065 863 2731</span>
                             </div>
                         </div>
                     </div>
@@ -27,7 +27,7 @@
                             <i class="far fa-envelope-open"></i>
                             <div class="cta-text">
                                 <h4>Mail us</h4>
-                                <span>Phantomslaye4427@gmail.com</span>
+                                <span>phantomslaye4427@gmail.com</span>
                             </div>
                         </div>
                     </div>

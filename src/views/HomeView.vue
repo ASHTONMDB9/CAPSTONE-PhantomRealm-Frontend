@@ -262,7 +262,7 @@ export default {
     height: 100vh;
   }
   #greeting {
-    padding-top: 400px;
+    padding-top: 450px;
     font-size: 50px;
     color: black;
     text-shadow: 0 0 4px red, 0 0 4px red, 0 0 4px red, 9px 3px 7px rgb(36, 36, 36);
