@@ -7,7 +7,7 @@
 
 <div class="offcanvas offcanvas-end bg-dark" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
   <div class="offcanvas-header">
-    <h3 class="offcanvas-title text-danger" id="offcanvasScrollingLabel">PhantomRealm</h3>
+    <h3 class="offcanvas-title" style="color: red;" id="offcanvasScrollingLabel">PhantomRealm</h3>
     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   <div class="d-flex align-items-center ms-4 mb-4">
@@ -17,12 +17,12 @@
       </div>
       <div class="ms-3">
           <h6 class="mb-0 text-light">Ashton Abrahams -<span class="text-success"> online</span></h6>
-          <span class="text-danger">Admin</span>
+          <span style="color: red;">Admin</span>
       </div>
   </div>
 
   <div class="offcanvas-body">
-    <div class="nav-item nav-link text-dark bg-danger py-2 ps-2 rounded-pill"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</div>
+    <div class="nav-item nav-link text-dark py-2 ps-2 rounded-pill" style="background-color: red;"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</div>
     
   </div>
 </div>
