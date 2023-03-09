@@ -12,11 +12,11 @@
           <h5 class="card-title">{{product.title}}</h5>
           <p class="card-category">{{product.category.toUpperCase()}}</p>
           <div class="rating mb-3">
+            <i class="fa-solid fa-star"></i>
                 <i class="fa-solid fa-star"></i>
                 <i class="fa-solid fa-star"></i>
                 <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star-half-stroke"></i>
-                <i class="fa-regular fa-star"></i>
+                <i class="fa-regular fa-star-half-stroke"></i>
                 </div>
         <h6 class="card-text lead">{{product.description}}</h6>
         <hr>

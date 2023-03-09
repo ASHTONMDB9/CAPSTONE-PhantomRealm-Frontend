@@ -10,8 +10,8 @@
                 <i class="fa-solid fa-star"></i>
                 <i class="fa-solid fa-star"></i>
                 <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star-half-stroke"></i>
-                <i class="fa-regular fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-regular fa-star-half-stroke"></i>
                 </div>
                 <h3 class="card-title">{{product.title}}</h3>
                 <h5 class="card-text">{{product.category.toUpperCase()}}</h5>
