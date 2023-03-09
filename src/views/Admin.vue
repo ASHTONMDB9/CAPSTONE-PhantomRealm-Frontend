@@ -96,6 +96,42 @@
                 </div>
             </div>
 
+
+            <div class="container-fluid pt-4 px-4">
+                <div class="bg-dark text-light text-center rounded p-4">
+                    <div class="d-flex align-items-center justify-content-between mb-2">
+                        <h4 class="mb-0">Users</h4>
+                    </div>
+
+<div class="table-responsive mt-4">
+                        <table class="table text-start align-middle table-bordered table-hover mb-0">
+                            <thead>
+                                <tr class="text-white">
+                                    <th scope="col"><input class="form-check-input" type="checkbox"></th>
+                                    <th scope="col">Id</th>
+                                    <th scope="col">Fullname</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Password</th>
+                                    <th scope="col">User type</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="user in users" v-bind:key="user.id">
+                                    <td><input class="form-check-input" type="checkbox"></td>
+                                    <td class="text-light">{{user.id}}</td>
+                                    <td class="text-light">{{user.full_name}}</td>
+                                    <td class="text-light">{{user.email}}</td>
+                                    <td class="text-light">{{user.password}}</td>
+                                    <td class="text-light">{{user.user_type}}</td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    </div>
+                    </div>
+
+
             <div class="container-fluid pt-4 px-4">
                 <div class="bg-dark text-light text-center rounded p-4">
                     <div class="d-flex align-items-center justify-content-between mb-2">
@@ -214,6 +250,12 @@
 export default {
     data() {
     return {
+      users: null,
+      full_name: "",
+      email: "",
+      password: "",
+      phone_number: "",
+      user_type: "User",
       products: null,
       title: "",
       description: "",
@@ -228,6 +270,12 @@ export default {
     })
       .then((res) => res.json())
       .then((data) => (this.products = data), console.log(this.products));
+
+      this.declareAdmin();
+    fetch("https://capstone-phantomrealm-backend.onrender.com/users", {
+    })
+      .then((res) => res.json())
+      .then((data) => (this.users = data), console.log(this.users));
   },
   computed: {
     product() {

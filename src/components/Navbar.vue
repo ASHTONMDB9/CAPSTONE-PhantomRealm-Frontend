@@ -27,6 +27,9 @@
           <li class="nav-item">
           <a  @click="Logout" class="btn" id="signup">Logout</a>
           </li>
+          <div v-for="user in user" v-bind:key="user.id" class="item">
+          <li class="text-light">{{user.full_name}}</li>
+          </div>
         </ul>
         <ul v-else class="navbar-nav mb-1 mb-lg-0">
          <li class="nav-item">
@@ -45,6 +48,11 @@
 
 <script>
 export default {
+  data() {
+    return {
+      user: null,
+    };
+  },
   mounted() {
     window.addEventListener('scroll',changeBackground);
 
@@ -65,7 +73,8 @@ function changeBackground(){
     user() {
       // console.log(this.$store.state.user)
       return this.$store.state.user;
-    }
+    },
+
     },
   
   methods: {

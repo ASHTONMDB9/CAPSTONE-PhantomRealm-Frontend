@@ -442,4 +442,8 @@ export default {
 #tests {
   padding-top: 50px;
 }
+
+@media only screen and (max-width: 1750px){
+ 
+}
 </style>
