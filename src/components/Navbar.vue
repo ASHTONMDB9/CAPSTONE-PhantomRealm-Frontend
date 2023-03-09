@@ -20,7 +20,7 @@
         <li class="nav-item">
           <router-link class="nav-link" to="/Contact">Contact</router-link>
         </li>
-        <ul v-if="user" class="navbar-nav mb-1 mb-lg-0">
+        <ul v-if="user" class="navbar-nav mb-lg-0">
         <li class="nav-item">
           <router-link class="nav-link" to="/Admin">Admin</router-link>
         </li>
@@ -28,7 +28,7 @@
           <a  @click="Logout" class="btn" id="signup">Logout</a>
           </li>
           <div v-for="user in user" v-bind:key="user.id" class="item">
-          <li class="text-light">{{user.full_name}}</li>
+          <h6 class="text-light">{{user.full_name}}</h6>
           </div>
         </ul>
         <ul v-else class="navbar-nav mb-1 mb-lg-0">
