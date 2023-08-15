@@ -16,7 +16,7 @@
           <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-2"></div>
       </div>
       <div class="ms-3">
-          <h6 class="mb-0 text-light">Ashton Abrahams -<span class="text-success"> online</span></h6>
+          <h6 class="mb-0 text-light">{{user.full_name}} -<span class="text-success"> online</span></h6>
           <span style="color: red;">Admin</span>
       </div>
   </div>
