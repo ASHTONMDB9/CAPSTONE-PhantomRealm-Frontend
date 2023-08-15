@@ -124,6 +124,9 @@ export default createStore({
       })
       .then((response) => response.json())
       .then((data) => console.log(data));
+
+      router.push("/Login");
+
         },
     addToCart: async (context, id) => {
       this.state.cart.product.push(id);
