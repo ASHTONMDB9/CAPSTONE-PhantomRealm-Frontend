@@ -49,7 +49,7 @@ export default {
         password: this.password,
         phone_number: this.phone_number,
       });
-      this.$router.push("/Store");
+      this.$router.push("/Login");
     },
   },
 }
