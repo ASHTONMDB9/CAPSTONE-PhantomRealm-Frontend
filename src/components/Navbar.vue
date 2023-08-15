@@ -107,10 +107,10 @@ align-items: center;
   font-size: 20px;
 }
 #ad {
-  display: none;
+  opacity: 0;
 }
 #ad:hover {
-  display: inline;
+  opacity: 1;
 }
 .nav-link:hover {
   color: red;
