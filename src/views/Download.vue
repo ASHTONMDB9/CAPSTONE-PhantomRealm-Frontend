@@ -4,8 +4,8 @@
     <h1 class="text-center text-light">Thank you for your purchase</h1>
   </div>
   <div>
-    <a href="../assets/Games/License.txt" download>
-    <img src="../assets/Images/downloadbtn.png" alt="license" width="100" height="100">
+    <a href="../assets/Games/download.txt" download>
+    <img src="../assets/Images/downloadbtn.png" alt="license" width="200" height="100">
   </a>
   </div>
   </section>
