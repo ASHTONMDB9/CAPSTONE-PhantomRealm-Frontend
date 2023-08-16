@@ -16,7 +16,9 @@
           <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-2"></div>
       </div>
       <div class="ms-3">
+        <div v-for="user in user" v-bind:key="user.id">
           <h6 class="mb-0 text-light">{{user.full_name}} -<span class="text-success"> online</span></h6>
+        </div>
           <span style="color: red;">Admin</span>
       </div>
   </div>
