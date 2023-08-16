@@ -100,7 +100,7 @@ export default {
         phone_number: this.phone_number,
         email: this.email
       });
-      this.$router.push("/");
+      this.$router.push("/Download");
     },
   },
 };
