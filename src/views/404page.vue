@@ -1,11 +1,11 @@
 <template>
-    <PageNotFound></PageNotFound>
+    <nopage></nopage>
   </template>
   <script>
-  import PageNotFound from "../components/404page.vue";
+  import nopage from "../components/404page.vue";
   export default {
     components: {
-      PageNotFound,
+      nopage,
     },
   };
   </script>
