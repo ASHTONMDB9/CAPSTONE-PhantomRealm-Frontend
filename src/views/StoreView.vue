@@ -15,7 +15,7 @@
                 </div>
                 <h3 class="card-title">{{product.title}}</h3>
                 <h5 class="card-text">{{product.category.toUpperCase()}}</h5>
-                <h4 class="card-price">{{product.price}}</h4>
+                <h4 class="card-price">R{{product.price}}</h4>
               </div>
               <div>
               </div>

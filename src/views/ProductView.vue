@@ -20,7 +20,7 @@
                 </div>
         <h6 class="card-text lead">{{product.description}}</h6>
         <hr>
-            <h5 class="card-price">{{product.price}}</h5>
+            <h5 class="card-price">R{{product.price}}</h5>
             <router-link to="/Store"><i class="fa-solid fa-arrow-left-long"></i></router-link>
       </div>
     </div>
