@@ -5,7 +5,7 @@
   </div>
   <div>
     <a href="../assets/Games/License.txt" download>
-    <img src="https://postimg.cc/QBrMpfZN" alt="license" width="100" height="100">
+    <img src="../assets/Images/downloadbtn.png" alt="license" width="100" height="100">
   </a>
   </div>
   </section>
