@@ -17,9 +17,9 @@
       </div>
       <div class="ms-3">
           <h6 class="mb-0 text-light">Ashton 
+            -<span class="text-success"> online</span><br/>
           </h6>
-          -<span class="text-success"> online</span><br/>
-          <span style="color: red;">Admin</span>
+            <span style="color: red;">Admin</span>
       </div>
   </div>
 
