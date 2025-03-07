@@ -85,7 +85,7 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/ProductView.vue')
   },
 ];
-]
+
 
 const router = createRouter({
   history: createWebHistory(),
