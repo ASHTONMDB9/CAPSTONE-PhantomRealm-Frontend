@@ -23,7 +23,7 @@
             </div>
             <div class="mb-3">
               <label for="exampleFormControlTextarea1" class="form-label">Message</label>
-              <textarea type="text" name="Message" class="form-control" id="exampleFormControlTextarea1" required rows="3" style="height: 262px;"></textarea>
+              <textarea type="text" name="Message" class="form-control" id="exampleFormControlTextarea1" placeholder="Type your message..." required rows="3" style="height: 262px;"></textarea>
               <button type="submit">Submit</button>
             </div>
             </div>
@@ -92,9 +92,5 @@ button:hover {
     color: white;
     border-radius: 5px;
     text-shadow: 0 0 4px white, 0 0 4px white, 0 0 4px white, 10px 0px 10px rgb(36, 36, 36);
-}
-iframe {
-    filter: invert(100%);
-    display: flex;
 }
 </style>

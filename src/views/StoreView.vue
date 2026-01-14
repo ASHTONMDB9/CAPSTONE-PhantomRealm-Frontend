@@ -75,7 +75,8 @@ export default {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    padding-top: 180px;
+    padding-top: 150px;
+    padding-bottom: 15px;
   }
   .card:hover {
     background-color: red;
