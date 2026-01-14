@@ -108,6 +108,60 @@ export default createStore({
           });
         }
     },
+
+//Forgot Password
+forgotPassword: async (context, payload) => {
+  fetch(
+    "https://capstone-phantomrealm-backend.onrender.com/users/forgot-password",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: payload.email,
+      }),
+    }
+  )
+    .then((res) => res.json())
+    .then((data) => {
+      if (data.msg === "Email not found") {
+        swal("Error", "Email not found");
+      } else {
+        swal(
+          "Success",
+          "Password reset link sent to your email"
+        );
+      }
+    });
+},
+
+    
+    // Reset Password
+    resetPassword: async (context, payload) => {
+      fetch("https://capstone-phantomrealm-backend.onrender.com/users/reset-password", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          token: payload.token,
+          newPassword: payload.newPassword,
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.msg === "Password reset successfully") {
+            swal("Success", "Password updated successfully");
+            router.push("/login");
+          } else {
+            swal("Error", data.msg);
+          }
+        });
+    },
+    
+
+    // Sign Up
     signUp: async (context, payload) => {
       fetch("https://capstone-phantomrealm-backend.onrender.com/users/register", {
         method: 'POST',
