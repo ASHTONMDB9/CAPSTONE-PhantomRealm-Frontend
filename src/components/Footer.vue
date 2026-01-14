@@ -65,7 +65,7 @@
                                 <h3>Get in Touch</h3>
                             </div>
                             <div class="footer-text mb-25">
-                                <p>To join our community provide your email and we'll get back to you </p>
+                                <p>To join our community send us your email and we'll get back to you </p>
                             </div>
                             <div class="subscribe-form">
                                 <form action="https://formspree.io/f/mkneonwq" method="POST">
@@ -83,7 +83,7 @@
                 <div class="row">
                     <div class="col-xl-6 col-lg-6 text-center text-lg-left">
                         <div class="copyright-text">
-                            <p>Phantomslaye_4427 Copyright &copy; 2022, All Right Reserved</p>
+                            <p>Phantomslaye_4427 (Ashton.A) Copyright &copy; 2022, All Right Reserved</p>
                         </div>
                     </div>
                     <div class="col-xl-6 col-lg-6 d-none d-lg-block text-right">
@@ -120,6 +120,7 @@ ul {
   background-size: cover;
   background-attachment: fixed;
   position: relative;
+  margin-top: 70px;
 }
 .footer-cta {
   border-bottom: 1px solid black;

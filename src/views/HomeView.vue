@@ -106,73 +106,73 @@
 
 <div class="col-md-3">
   <div class="sponser">
-    <img src="https://i.postimg.cc/Fs4sZtnF/a6eeb1c4-a129-47d1-b055-dcb0a371b3ff-removebg-preview.png" alt="" loading="lazy">
+    <img src="../assets/Brands/activision.png" alt="" loading="lazy">
   </div>
 </div>
 
 <div class="col-md-3">
   <div class="sponser">
-    <img src="https://i.postimg.cc/N05gMQLD/Bandai-namco-removebg-preview.png" alt="" loading="lazy">
+    <img src="../assets/Brands/bandai.png" alt="" loading="lazy">
   </div>
 </div>
 
 <div class="col-md-3">
   <div class="sponser">
-    <img src="https://i.postimg.cc/13RmkGQL/Blizzard-Entertainment-Logo-Vector-PNG-SVG-Free-Download-Logowik-com-removebg-preview.png" alt="" loading="lazy">
+    <img src="../assets/Brands/blizzard.png" alt="" loading="lazy">
   </div>
 </div>
 
   <div class="col-md-3">
     <div class="sponser">
-    <img src="https://i.postimg.cc/yW4pfs0X/square.png" alt="" loading="lazy">
+    <img src="../assets/Brands/ea.png" alt="" loading="lazy">
     </div>
   </div>
 
 <div class="col-md-3">
   <div class="sponser">
-  <img src="https://i.postimg.cc/8c8k9xpH/eaa2e1bb-f722-4fd3-80bb-27170a8f8747-removebg-preview.png" alt="" loading="lazy">
+  <img src="../assets/Brands/NaughtyDog.png" alt="" loading="lazy">
   </div>
 </div>
 
   <div class="col-md-3">
     <div class="sponser">
-  <img src="https://i.postimg.cc/3NgrT9WH/Entertainment-Logo-Ideas-Make-Your-Own-Entertainment-Logo-Looka-removebg-preview.png" alt="" loading="lazy">
+  <img src="../assets/Brands/nintendo.png" alt="" loading="lazy">
   </div>
   </div>
 
   <div class="col-md-3">
   <div class="sponser">
-    <img src="https://i.postimg.cc/SNfQ1Zw6/Naughty-Dog-Logo-Vector-SVG-PDF-Ai-EPS-PNG-CDR-Free-Download-Logowik-com-removebg-preview.png" alt="" loading="lazy">
+    <img src="../assets/Brands/ps.png" alt="" loading="lazy">
   </div>
 </div>
 
 <div class="col-md-3">
   <div class="sponser">
-    <img src="https://i.postimg.cc/bYbwkYgF/October-1-1979-Ex-Atari-Employees-Started-Activision-Day-in-Tech-History-removebg-preview.png" alt="" loading="lazy">
+    <img src="../assets/Brands/rockstar.png" alt="" loading="lazy">
   </div>
 </div>
 
 <div class="col-md-3">
   <div class="sponser">
-    <img src="https://i.postimg.cc/9Q1M0xbm/Pin-by-Ivica-Prelesnik-on-Gamer-Playstation-removebg-preview.png" alt="" loading="lazy">
+    <img src="../assets/Brands/sony.png" alt="" loading="lazy">
   </div>
 </div>
 
 <div class="col-md-3">
   <div class="sponser">
-    <img src="https://i.postimg.cc/MGTGQy3y/Sony-Font-and-Sony-Logo-removebg-preview.png" alt="" loading="lazy">
+    <img src="../assets/Brands/square.png" alt="" loading="lazy">
   </div>
 </div>
 
 <div class="col-md-3">
   <div class="sponser">
-    <img src="https://i.postimg.cc/mgdLBPZh/ubisoft-est-n-a-renne-France-en-1986-ubisoft-removebg-preview.png" alt="" loading="lazy">
+    <img src="../assets/Brands/ubisoft.png" alt="" loading="lazy">
   </div>
 </div>
 
 <div class="col-md-3">
   <div class="sponser">
-    <img src="https://i.postimg.cc/V60L7z8v/Xbox-logo-removebg-preview.png" alt="" loading="lazy">
+    <img src="../assets/Brands/xbox.png" alt="" loading="lazy">
   </div>
 </div>
 

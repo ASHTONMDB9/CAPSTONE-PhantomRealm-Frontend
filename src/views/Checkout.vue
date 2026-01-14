@@ -55,7 +55,7 @@
           </div>
             </div>
             <div v-else>
-              <h1 class="text-center text-light">Sign up/Log in to continue</h1>
+              <h1 class="text-center text-light">Please sign up/log in to continue with your purchase</h1>
             </div>
         </section>
             </template>
