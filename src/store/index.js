@@ -109,39 +109,35 @@ export default createStore({
         }
     },
 
-//Forgot Password
-forgotPassword: async (context, payload) => {
-  const res = await fetch(
-    "https://capstone-phantomrealm-backend.onrender.com/users/forgot-password",
-    {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email: payload.email }),
-    }
-  );
-  const data = await res.json();
-
-  if (data.msg === "Email not found") {
-    swal("Error", "Email not found");
-    return;
-  }
-
-  // Formspree using FormData
-  const formData = new FormData();
-  formData.append("email", payload.email);
-  formData.append(
-    "message",
-    `Click this link to reset your password: ${data.resetLink}`
-  );
-
-  await fetch("https://formspree.io/f/mkneonwq", {
-    method: "POST",
-    body: formData
-  });
-
-  swal("Success", "Password reset link sent to your email! This link will expire in 15 mins.");
-},
-
+    forgotPassword: async (context, payload) => {
+      const res = await fetch(
+        "https://capstone-phantomrealm-backend.onrender.com/users/forgot-password",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: payload.email }),
+        }
+      );
+      const data = await res.json();
+    
+      if (data.msg === "Email not found") {
+        swal("Error", "Email not found");
+        return;
+      }
+    
+      // Now send the email via Formspree
+      await fetch("https://formspree.io/f/YOUR_FORM_ID", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: payload.email,
+          message: `Click this link to reset your password: ${data.resetLink}`,
+        }),
+      });
+    
+      swal("Success", "Password reset link sent to your email!");
+    },    
+    
     // Reset Password
     resetPassword: async (context, payload) => {
       fetch("https://capstone-phantomrealm-backend.onrender.com/users/reset-password", {
