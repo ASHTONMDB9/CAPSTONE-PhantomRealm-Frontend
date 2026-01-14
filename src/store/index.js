@@ -126,20 +126,22 @@ forgotPassword: async (context, payload) => {
     return;
   }
 
-  // Now send the email via Formspree
+  // Formspree using FormData
+  const formData = new FormData();
+  formData.append("email", payload.email);
+  formData.append(
+    "message",
+    `Click this link to reset your password: ${data.resetLink}`
+  );
+
   await fetch("https://formspree.io/f/mkneonwq", {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      email: payload.email,
-      message: `Click this link to reset your password: ${data.resetLink}`,
-    }),
+    body: formData
   });
 
-  swal("Password reset link sent to your email!", "This link will expire in 15 mins.");
+  swal("Success", "Password reset link sent to your email! This link will expire in 15 mins.");
 },
 
-    
     // Reset Password
     resetPassword: async (context, payload) => {
       fetch("https://capstone-phantomrealm-backend.onrender.com/users/reset-password", {

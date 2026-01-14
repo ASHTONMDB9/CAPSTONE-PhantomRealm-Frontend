@@ -3,12 +3,12 @@
       <h1 class="about">Reset Password</h1>
   
       <div id="form" class="container-fluid">
-        <form @submit.prevent="resetPassword">
+        <form @submit.prevent="submitReset">
           <div class="mb-3">
             <label for="password" class="form-label">New Password</label>
             <input
               type="password"
-              v-model="password"
+              v-model="newPassword"
               class="form-control"
               id="password"
               placeholder="New password"
@@ -45,22 +45,34 @@
     },
     data() {
       return {
-        password: "",
+        newPassword: "",
         confirmPassword: "",
       };
     },
     methods: {
-      resetPassword() {
-        if (this.password !== this.confirmPassword) {
+      submitReset() {
+        // Check passwords match
+        if (this.newPassword !== this.confirmPassword) {
           swal("Error", "Passwords do not match");
           return;
         }
   
+        // Get token from query params
         const token = this.$route.query.token;
+        if (!token) {
+          swal("Error", "Invalid or missing reset token");
+          return;
+        }
   
+        // Call Vuex action to reset password
         this.$store.dispatch("resetPassword", {
           token: token,
-          newPassword: this.password,
+          newPassword: this.newPassword,
+        })
+        .then(() => {
+          // Clear form
+          this.newPassword = "";
+          this.confirmPassword = "";
         });
       },
     },
