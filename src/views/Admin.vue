@@ -145,7 +145,7 @@
   <div class="modal-dialog modal-fullscreen">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+        <h5 class="modal-title">Add Product</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -168,7 +168,7 @@
         </form>
     </div>
     <div class="modal-footer">
-          <button id="addProduct" type="submit" class="btn btn-primary">Add Product</button>
+          <button id="addProduct" type="submit" class="btn btn-primary" @click="addProduct">Add Product</button>
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
       </div>
     </div>
@@ -205,11 +205,12 @@
   <div class="modal-dialog modal-fullscreen">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title">Update Product</h5>
+
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-       <form @submit.prevent="UpdateProduct(product.id)">
+        <form @submit.prevent="UpdateProduct(product)">
     
         <textarea type="text" v-model="product.title" placeholder="title" style="height: 100px; width: 680px;" required></textarea>
           <div>
@@ -278,6 +279,8 @@ export default {
     })
       .then((res) => res.json())
       .then((data) => (this.users = data), console.log(this.users));
+
+      this.$store.dispatch("getProduct");
   },
   computed: {
     product() {
@@ -301,7 +304,13 @@ export default {
         category: this.category,
         image: this.image,
         price: this.price,
-      });
+      }).then(() => {
+    this.title = "";
+    this.description = "";
+    this.category = "";
+    this.image = "";
+    this.price = "";
+  });
     },
     declareAdmin() {
         if  (this.user.user) {
@@ -314,17 +323,17 @@ export default {
             token:this.token
         })
     },
-    UpdateProduct(id){
-        this.$store.dispatch("UpdateProduct",{
-           id:id,
-           token:this.token,
-        title: this.title,
-        description: this.description,
-        category: this.category,
-        image: this.image,
-        price: this.price  
-        })
-    }
+    UpdateProduct(product) {
+  this.$store.dispatch("UpdateProduct", {
+    id: product.id,
+    token: this.token,
+    title: product.title,
+    description: product.description,
+    category: product.category,
+    image: product.image,
+    price: product.price,
+  });
+}
   },
 }
 </script>
@@ -359,4 +368,77 @@ export default {
   height: 60px;
   width: 80px
 }
+
+.modal-content {
+  background-color: #000;
+  color: #f8f9fa;
+  border-radius: 12px;
+  border: 1px solid red;
+  font-family: phantom;
+}
+
+.modal-header {
+  border-bottom: 1px solid red;
+  background-color: #000;
+}
+
+.modal-title {
+  color: red;
+  font-size: 1.5rem;
+  text-shadow: 0 0 4px red;
+}
+
+.modal-body {
+  background-color: #000;
+}
+
+.modal-footer {
+  border-top: 1px solid red;
+  background-color: #000;
+}
+
+.modal textarea,
+.modal input {
+  width: 100%;
+  background-color: #111;
+  color: #f8f9fa;
+  border: 1px solid red;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 15px;
+  font-family: phantom;
+}
+
+.modal textarea::placeholder,
+.modal input::placeholder {
+  color: #aaa;
+}
+
+.modal .btn-primary {
+  background-color: red;
+  border: none;
+  color: black;
+  font-weight: bold;
+}
+
+.modal .btn-primary:hover {
+  background-color: darkred;
+  color: white;
+}
+
+.modal .btn-secondary {
+  background-color: transparent;
+  border: 1px solid red;
+  color: red;
+}
+
+.modal .btn-secondary:hover {
+  background-color: red;
+  color: black;
+}
+
+.modal .btn-close {
+  filter: invert(1);
+}
+
 </style>
