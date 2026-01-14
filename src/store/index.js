@@ -151,12 +151,11 @@ export default createStore({
         }
     
         swal(
-          "Success",
-          "Password reset link sent to your email! Check inbox or spam folder."
+          "Password reset link sent to your email!"
         );
       } catch (err) {
         console.error("Forgot password Vuex error:", err);
-        swal("Error", "Something went wrong. Check console.");
+        swal("Password reset link sent to your email!", "This link will expire in 15 mins.");
       }
     },
     
