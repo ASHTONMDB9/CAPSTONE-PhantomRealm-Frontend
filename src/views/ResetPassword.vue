@@ -3,7 +3,7 @@
       <h1 class="about">Reset Password</h1>
   
       <div id="form" class="container-fluid">
-        <form @submit.prevent="resetPassword">
+        <form @submit.prevent="submitReset">
           <div class="mb-3">
             <label for="password" class="form-label">New Password</label>
             <input
@@ -38,19 +38,24 @@
   
   <script>
   import swal from "sweetalert";
+  import router from "../router/index";
   
   export default {
-    mounted() {
-      window.scrollTo(0, 0);
-    },
     data() {
       return {
         password: "",
         confirmPassword: "",
       };
     },
+    mounted() {
+      window.scrollTo(0, 0);
+      if (!this.$route.query.token) {
+        swal("Error", "No token provided. Cannot reset password.");
+        router.push("/login");
+      }
+    },
     methods: {
-      resetPassword() {
+      async submitReset() {
         if (this.password !== this.confirmPassword) {
           swal("Error", "Passwords do not match");
           return;
@@ -58,10 +63,36 @@
   
         const token = this.$route.query.token;
   
-        this.$store.dispatch("resetPassword", {
-          token: token,
-          newPassword: this.password,
-        });
+        try {
+          console.log("Sending reset password request with token:", token);
+  
+          const res = await fetch(
+            "https://capstone-phantomrealm-backend.onrender.com/users/reset-password",
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                token: token,
+                newPassword: this.password,
+              }),
+            }
+          );
+  
+          console.log("Reset password response status:", res.status);
+  
+          const data = await res.json();
+          console.log("Reset password response data:", data);
+  
+          if (data.msg === "Password reset successfully") {
+            swal("Success", "Password updated successfully");
+            router.push("/login");
+          } else {
+            swal("Error", data.msg);
+          }
+        } catch (err) {
+          console.error("Reset password error:", err);
+          swal("Error", "Network or server error. Check console.");
+        }
       },
     },
   };
