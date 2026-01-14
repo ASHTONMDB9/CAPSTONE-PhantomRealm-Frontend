@@ -111,9 +111,9 @@ export default createStore({
 
     forgotPassword: async (context, payload) => {
       try {
-        console.log("Forgot password called for:", payload.email);
+        console.log("Vuex forgotPassword called with:", payload.email);
     
-        // Send request to backend to generate reset token
+        // 1️⃣ Request backend to generate token
         const res = await fetch(
           "https://capstone-phantomrealm-backend.onrender.com/users/forgot-password",
           {
@@ -131,7 +131,7 @@ export default createStore({
           return;
         }
     
-        // Send the reset link via Formspree using FormData
+        // 2️⃣ Send reset link via Formspree (must be FormData)
         const formData = new FormData();
         formData.append("email", payload.email);
         formData.append(
@@ -141,23 +141,25 @@ export default createStore({
     
         const formspreeRes = await fetch("https://formspree.io/f/mkneonwq", {
           method: "POST",
-          body: formData, // Must be FormData, not JSON
+          body: formData,
         });
     
         if (!formspreeRes.ok) {
-          throw new Error("Failed to send email via Formspree");
+          console.error("Formspree failed:", formspreeRes.statusText);
+          swal("Error", "Failed to send email. Try again.");
+          return;
         }
     
         swal(
           "Success",
-          "Password reset link sent to your email! Check inbox or spam folder.", "This link will expire in 15 mins."
+          "Password reset link sent to your email! Check inbox or spam folder."
         );
       } catch (err) {
-        console.error("Forgot password error:", err);
-        swal("Error!", "Something went wrong. Try again later.");
+        console.error("Forgot password Vuex error:", err);
+        swal("Error", "Something went wrong. Check console.");
       }
     },
-      
+    
     
     // Reset Password
     resetPassword: async (context, payload) => {

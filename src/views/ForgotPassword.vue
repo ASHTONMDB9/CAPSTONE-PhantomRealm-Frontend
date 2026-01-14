@@ -3,7 +3,7 @@
       <h1 class="about">Forgot Password</h1>
   
       <div id="form" class="container-fluid">
-        <form @submit.prevent="submitForgot">
+        <form @submit.prevent="forgotPassword">
           <div class="mb-3">
             <label for="email" class="form-label">Email</label>
             <input
@@ -25,22 +25,35 @@
   </template>
   
   <script>
-    export default {
-      data() {
-        return {
-          email: "",
-        };
+  import swal from "sweetalert";
+  
+  export default {
+    data() {
+      return {
+        email: "",
+      };
+    },
+    methods: {
+      async forgotPassword() {
+        if (!this.email) {
+          swal("Error", "Please enter your email");
+          return;
+        }
+  
+        console.log("Forgot password triggered for:", this.email);
+  
+        try {
+          // Dispatch Vuex action
+          await this.$store.dispatch("forgotPassword", { email: this.email });
+        } catch (err) {
+          console.error("Error in forgotPassword method:", err);
+          swal("Error", "Something went wrong. Check console.");
+        }
       },
-      methods: {
-        forgotPassword() {
-          console.log("Dispatching forgotPassword for:", this.email);
-          this.$store.dispatch("forgotPassword", {
-            email: this.email,
-          });
-        },
-      },
-    };
-    </script>
+    },
+  };
+  </script>
+  
     
   
   <style scoped>
