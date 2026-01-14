@@ -126,6 +126,7 @@ forgotPassword: async (context, payload) => {
     return;
   }
 
+  // Now send the email via Formspree
   await fetch("https://formspree.io/f/mkneonwq", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -137,6 +138,7 @@ forgotPassword: async (context, payload) => {
 
   swal("Password reset link sent to your email!", "This link will expire in 15 mins.");
 },
+
     
     // Reset Password
     resetPassword: async (context, payload) => {
