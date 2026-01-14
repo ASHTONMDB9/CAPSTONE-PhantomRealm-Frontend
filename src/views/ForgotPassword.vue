@@ -25,71 +25,23 @@
   </template>
   
   <script>
-  import swal from "sweetalert";
-  
-  export default {
-    data() {
-      return {
-        email: "",
-      };
-    },
-    mounted() {
-      window.scrollTo(0, 0);
-    },
-    methods: {
-      async submitForgot() {
-        if (!this.email) {
-          swal("Error", "Please enter your email");
-          return;
-        }
-  
-        try {
-          console.log("Sending forgot-password request for:", this.email);
-  
-          // 1️⃣ Send request to backend
-          const res = await fetch(
-            "https://capstone-phantomrealm-backend.onrender.com/users/forgot-password",
-            {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ email: this.email }),
-            }
-          );
-  
-          console.log("Backend response status:", res.status);
-  
-          const data = await res.json();
-          console.log("Backend response data:", data);
-  
-          if (data.msg === "Email not found") {
-            swal("Error", "Email not found");
-            return;
-          }
-  
-          // 2️⃣ Send email via Formspree
-          const formspreeRes = await fetch("https://formspree.io/f/mkneonwq", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              email: this.email,
-              message: `Click this link to reset your password: ${data.resetLink}`,
-            }),
-          });
-  
-          console.log("Formspree response:", formspreeRes.status);
-  
-          swal(
-            "Success",
-            "Password reset link sent to your email! Check spam folder if you don't see it."
-          );
-        } catch (err) {
-          console.error("Forgot password error:", err);
-          swal("Error", "Network or server error. Check console.");
-        }
+    export default {
+      data() {
+        return {
+          email: "",
+        };
       },
-    },
-  };
-  </script>
+      methods: {
+        forgotPassword() {
+          console.log("Dispatching forgotPassword for:", this.email);
+          this.$store.dispatch("forgotPassword", {
+            email: this.email,
+          });
+        },
+      },
+    };
+    </script>
+    
   
   <style scoped>
   .container {

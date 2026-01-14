@@ -110,33 +110,54 @@ export default createStore({
     },
 
     forgotPassword: async (context, payload) => {
-      const res = await fetch(
-        "https://capstone-phantomrealm-backend.onrender.com/users/forgot-password",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email: payload.email }),
+      try {
+        console.log("Forgot password called for:", payload.email);
+    
+        // Send request to backend to generate reset token
+        const res = await fetch(
+          "https://capstone-phantomrealm-backend.onrender.com/users/forgot-password",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email: payload.email }),
+          }
+        );
+    
+        const data = await res.json();
+        console.log("Backend response:", data);
+    
+        if (data.msg === "Email not found") {
+          swal("Error", "Email not found");
+          return;
         }
-      );
-      const data = await res.json();
     
-      if (data.msg === "Email not found") {
-        swal("Error", "Email not found");
-        return;
+        // Send the reset link via Formspree using FormData
+        const formData = new FormData();
+        formData.append("email", payload.email);
+        formData.append(
+          "message",
+          `Hello! Click this link to reset your password: ${data.resetLink}`
+        );
+    
+        const formspreeRes = await fetch("https://formspree.io/f/mkneonwq", {
+          method: "POST",
+          body: formData, // Must be FormData, not JSON
+        });
+    
+        if (!formspreeRes.ok) {
+          throw new Error("Failed to send email via Formspree");
+        }
+    
+        swal(
+          "Success",
+          "Password reset link sent to your email! Check inbox or spam folder.", "This link will expire in 15 mins."
+        );
+      } catch (err) {
+        console.error("Forgot password error:", err);
+        swal("Error!", "Something went wrong. Try again later.");
       }
-    
-      // Now send the email via Formspree
-      await fetch("https://formspree.io/f/mkneonwq", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email: payload.email,
-          message: `Click this link to reset your password: ${data.resetLink}`,
-        }),
-      });
-    
-      swal("Success", "Password reset link sent to your email!");
-    },    
+    },
+      
     
     // Reset Password
     resetPassword: async (context, payload) => {
