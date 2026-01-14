@@ -111,31 +111,33 @@ export default createStore({
 
 //Forgot Password
 forgotPassword: async (context, payload) => {
-  fetch(
+  const res = await fetch(
     "https://capstone-phantomrealm-backend.onrender.com/users/forgot-password",
     {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: payload.email,
-      }),
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: payload.email }),
     }
-  )
-    .then((res) => res.json())
-    .then((data) => {
-      if (data.msg === "Email not found") {
-        swal("Error", "Email not found");
-      } else {
-        swal(
-          "Success",
-          "Password reset link sent to your email"
-        );
-      }
-    });
-},
+  );
+  const data = await res.json();
 
+  if (data.msg === "Email not found") {
+    swal("Error", "Email not found");
+    return;
+  }
+
+  // Now send the email via Formspree
+  await fetch("https://formspree.io/f/mkneonwq", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      email: payload.email,
+      message: `Click this link to reset your password: ${data.resetLink}`,
+    }),
+  });
+
+  swal("Password reset link sent to your email!", "This link will expire in 15 mins.");
+},
     
     // Reset Password
     resetPassword: async (context, payload) => {
