@@ -126,7 +126,6 @@ forgotPassword: async (context, payload) => {
     return;
   }
 
-  // Now send the email via Formspree
   await fetch("https://formspree.io/f/mkneonwq", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
