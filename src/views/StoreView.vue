@@ -3,8 +3,8 @@
     <div v-if="products" class="container-fluid">
         <div v-for="product in products" v-bind:key="product.id">
           <router-link :to="{ name: 'ProductView', params: { id: product.id }}">
-            <div class="card ms-3 me-3 mt-4 mb-4" style="width: 18rem; ">
-              <img v-bind:src="product.image" class="card-img" style="height: 22rem;">
+            <div class="card ms-3 me-3 mt-4 mb-4">
+              <img v-bind:src="product.image" class="card-img">
               <div class="card-img-overlay">
                 <div class="rating">
                 <i class="fa-solid fa-star"></i>
@@ -15,7 +15,7 @@
                 </div>
                 <h3 class="card-title">{{product.title}}</h3>
                 <h5 class="card-text">{{product.category.toUpperCase()}}</h5>
-                <h4 class="card-price">R{{product.price}}</h4>
+                <h4 class="card-price">R{{product.price}}.00</h4>
               </div>
               <div>
               </div>
@@ -54,6 +54,10 @@ export default {
 <style scoped>
 #load {
   background-color: black;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .box img{
   padding-top: 100px;
@@ -62,49 +66,85 @@ export default {
 	margin-left: auto;
   margin-right: auto;
 }
-  #store {
-    background-image: url(../assets/Images/download.gif);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    background-blend-mode: darken;
-  }
-  .container-fluid {
-	  overflow: hidden;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    padding-top: 150px;
-    padding-bottom: 15px;
-  }
-  .card:hover {
-    background-color: red;
-    transform: scale(1.2);
-    transition: all 0.5s linear;
-  }
-  .card-img-overlay {
-    opacity: 0;
-    display: flex;
-    justify-content: flex-end;
-    flex-direction: column;
-  }
-  .card .card-img-overlay:hover {
-    opacity: 1;
-    transition: all 0.5s linear;
-    text-shadow: 0 0 2px white, 0 0 2px white, 0 0 2px white, 3px 3px 3px black;
-    font-family: phantom;
-    color: black;
-    text-align: start;
-    font-size: 30px;
-    font-family: game;
-  }
-  .rating i {
+#store {
+  background-image: url(../assets/Images/download.gif);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-blend-mode: darken;
+}
+.container-fluid {
+  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
+  gap: 30px;
+  padding-top: 150px;
+  padding-bottom: 60px;
+}
+.card {
+  width: 18rem;
+  border-radius: 16px;
+  overflow: hidden;
+  background-color: black;
+  transition: 
+    transform 0.4s ease,
+    box-shadow 0.4s ease;
+}
+.card-title {
+  font-size: 28px;
+  margin-bottom: 5px;
+}
+.card-text {
   font-size: 18px;
-  color: black;
+  letter-spacing: 1px;
+}
+.card-price {
+  font-size: 26px;
+  margin-top: 10px;
+}
+.card-img {
+  height: 22rem;
+  object-fit: cover;
+  transition: filter 0.4s ease, transform 0.4s ease;
+}
+.card:hover {
+  background-color: red;
+  transform: scale(1.2);
+  transition: all 0.5s linear;
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 0 35px rgba(255, 0, 0, 0.6);
 }
 .card:hover .card-img {
+  filter: brightness(0.4);
   filter: opacity(0.7);
   color: red;
 }
+.card-img-overlay {
+  opacity: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 20px;
+  background: transparent
+}
+.card .card-img-overlay:hover {
+  opacity: 1;
+  transition: all 0.5s linear;
+  text-shadow: 0 0 2px black, 0 0 2px black, 0 0 2px black, 3px 3px 3px red;
+  font-family: phantom;
+  color: white;
+  text-align: start;
+  font-size: 30px;
+  font-family: game;
+}
+.rating i {
+  font-size: 18px;
+  color: black;
+}
+.card:hover .rating i {
+  color: yellow;
+}
+
 </style>

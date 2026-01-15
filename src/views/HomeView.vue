@@ -15,7 +15,7 @@
 
     <div class="container">
     <div class="row">
-      <div id="services" class="col-md-4">
+      <div class="col-md-4 service-card">
         <div class="card text-bg-dark shadow-lg">
   <img src="../assets/Images/knight.jpg" class="card-img" alt="...">
   <div class="card-img-overlay">
@@ -26,7 +26,7 @@
 </div>
       </div>
 
-      <div id="services" class="col-md-4">
+      <div class="col-md-4 service-card">
         <div class="card text-bg-dark shadow-lg">
   <img src="../assets/Images/fantasy.jpg" class="card-img" alt="...">
   <div class="card-img-overlay">
@@ -37,7 +37,7 @@
 </div>
       </div>
 
-      <div id="services" class="col-md-4">
+      <div class="col-md-4 service-card">
         <div class="card text-bg-dark shadow-lg">
   <img src="../assets/Images/dragon.jpg" class="card-img">
   <div class="card-img-overlay">
@@ -319,7 +319,7 @@ export default {
     height: 35vh;
     background-color: black;
   }
-  #services {
+  .service-card {
     padding-top: 25px;
     object-fit: cover;
     height: 70px;
