@@ -10,16 +10,15 @@
 
           <div class="item-details">
             <h4 class="item-title">{{ item.title }}</h4>
-            <p class="item-category">{{ item.category }}</p>
-
+            
             <div class="rating">
-              <i class="fa-solid fa-star" v-for="i in 3" :key="i"></i>
-              <i class="fa-solid fa-star-half-stroke"></i>
-              <i class="fa-regular fa-star"></i>
+              {{ item.category }}
             </div>
 
             <div class="item-actions">
-              <button @click="decrease(item.id)" class="qty-btn">−</button>
+              <button @click="decrease(item.id)" class="qty-btn">
+                <i class="fa-solid fa-minus"></i>
+              </button>
               <span class="qty">{{ item.quantity }}</span>
               <button @click="remove(item.id)" class="delete-btn">
                 <i class="fa-solid fa-trash"></i>
@@ -33,12 +32,16 @@
         </div>
       </div>
 
+      
       <div class="cart-summary">
         <h3>Order Summary</h3>
-
         <div class="summary-row">
           <span>Items</span>
           <span>{{ cart.length }}</span>
+          </div>
+
+          <div v-for="item in cart" :key="item.id" class="summary-item">
+          <span>{{ item.quantity }} x {{ item.title }}</span>
         </div>
 
         <div class="summary-row total">
@@ -81,7 +84,7 @@
   
   <style scoped>
     .cart-page {
-      margin-top: 160px;
+      margin-top: 10px;
       padding: 40px;
     }
     
@@ -93,7 +96,7 @@
     
     .cart-heading {
       font-family: phantom;
-      color: white;
+      color: black;
       text-shadow: 0 0 6px red;
       margin-bottom: 30px;
       text-align: center;
@@ -115,14 +118,14 @@
     
     .item-image {
       width: 100%;
-      height: 120px;
+      height: 100%;
       object-fit: cover;
       border-radius: 10px;
     }
     
     .item-title {
       font-family: detail;
-      font-size: 28px;
+      font-size: 50px;
       color: black;
       text-shadow: 0 0 4px red;
     }
@@ -132,7 +135,13 @@
       color: black;
       font-size: 18px;
     }
-    
+
+    .rating {
+      color: white;
+      font-size: 25px;
+      font-family: game;
+    }
+
     .item-actions {
       display: flex;
       align-items: center;
@@ -144,10 +153,9 @@
       background: transparent;
       border: 2px solid red;
       color: red;
-      font-size: 24px;
       border-radius: 50%;
-      width: 40px;
-      height: 40px;
+      width: 50px;
+      height: 50px;
     }
     
     .delete-btn {
@@ -164,8 +172,8 @@
     
     .item-price {
       font-family: detail;
-      font-size: 26px;
-      color: black;
+      font-size: 40px;
+      color: white;
       text-shadow: 0 0 4px red;
       align-self: center;
     }
@@ -183,7 +191,7 @@
     
     .cart-summary h3 {
       font-family: detail;
-      color: red;
+      color: black;
       text-shadow: 0 0 6px red;
       margin-bottom: 20px;
     }
@@ -192,10 +200,18 @@
       display: flex;
       justify-content: space-between;
       margin-bottom: 15px;
-      color: black;
+      color: white;
       font-size: 20px;
     }
     
+    .summary-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 15px;
+      color: white;
+      font-size: 20px;
+    }
+
     .total {
       font-size: 26px;
       font-family: detail;
