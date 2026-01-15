@@ -20,11 +20,13 @@ export default createStore({
     },
 
     cartTotal(state) {
-      return state.cart.reduce(
-        (total, item) => total + item.price * item.quantity,
-        0
-      )
+      return state.cart.reduce((total, item) => {
+        const price = Number(item.price) || 0
+        const qty = Number(item.quantity) || 0
+        return total + price * qty
+      }, 0)
     }
+    
   },
   mutations: {
     setUser: (state, user) => {
@@ -54,12 +56,13 @@ export default createStore({
     },
     AddtoCart(state, product) {
       const item = state.cart.find(p => p.id === product.id)
-  
+    
       if (item) {
         item.quantity++
       } else {
         state.cart.push({
           ...product,
+          price: Number(product.price),
           quantity: 1
         })
       }
@@ -270,8 +273,26 @@ export default createStore({
       .then((data) => console.log(data));
 
         },
-        addToCart({ commit }, product) {
+        addToCart({ commit, state }, product) {
+          const existingItem = state.cart.find(p => p.id === product.id)
+        
           commit("AddtoCart", product)
+        
+          if (existingItem) {
+            swal({
+              title: "Updated Cart",
+              text: `Item ${product.title} has been updated in your cart`,
+              timer: 5000,
+              buttons: false
+            })
+          } else {
+            swal({
+              title: "Added to Cart!",
+              text: `${product.title} has been added to your cart`,
+              timer: 5000,
+              buttons: false
+            })
+          }
         },
       
         removeFromCart({ commit }, id) {

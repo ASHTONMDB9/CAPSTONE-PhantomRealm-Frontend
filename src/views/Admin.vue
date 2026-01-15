@@ -375,6 +375,7 @@ export default {
   border-radius: 12px;
   border: 1px solid red;
   font-family: phantom;
+  font-size: x-large;
 }
 
 .modal-header {
@@ -406,7 +407,8 @@ export default {
   border-radius: 8px;
   padding: 12px;
   margin-bottom: 15px;
-  font-family: phantom;
+  font-family: detail;
+  font-size: game;
 }
 
 .modal textarea::placeholder,

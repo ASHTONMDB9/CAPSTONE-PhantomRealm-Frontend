@@ -1,153 +1,237 @@
 <template>
-    <div class="container">
-          <button class="btn" id="checkout"><router-link class="checkout" to="/Checkout">Checkout</router-link></button>
-        <div v-for="item in cart" :key="item.id" class="item">
-            <div class="card mb-3 ms-4 me-4">
-                <div class="row g-0">
-                    <div class="col-md-4">
-                        <img v-bind:src="item.image" class="img-fluid"> 
-                    </div>
-                    <div class="col-md-8">
-                      <button id="delete" @click="decrease(item.id)" class="btn"><i class="fa-solid fa-minus"></i></button><br/>
-                      <button id="delete" @click="remove(item.id)" class="btn"><i class="fa-solid fa-trash"></i></button>
-      <div class="card-body">
-        <h5  class="card-title">Quantity: {{item.quantity}}</h5>
-          <h5 class="card-title">{{item.title}}</h5>
-          <p class="card-category">{{item.category}}</p>
-          <div class="rating text-center">
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star-half-stroke"></i>
-                <i class="fa-regular fa-star"></i>
-                </div>
-            <hr>
-            <h5 class="card-price">{{item.price}}</h5>
+  <h2 class="cart-heading">Your Cart:</h2>
+  <div class="cart-page">
+    <div class="cart">
+
+      <div class="cart-items">
+
+        <div v-for="item in cart" :key="item.id" class="cart-item">
+          <img :src="item.image" class="item-image" />
+
+          <div class="item-details">
+            <h4 class="item-title">{{ item.title }}</h4>
+            <p class="item-category">{{ item.category }}</p>
+
+            <div class="rating">
+              <i class="fa-solid fa-star" v-for="i in 3" :key="i"></i>
+              <i class="fa-solid fa-star-half-stroke"></i>
+              <i class="fa-regular fa-star"></i>
+            </div>
+
+            <div class="item-actions">
+              <button @click="decrease(item.id)" class="qty-btn">−</button>
+              <span class="qty">{{ item.quantity }}</span>
+              <button @click="remove(item.id)" class="delete-btn">
+                <i class="fa-solid fa-trash"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="item-price">
+            R {{ item.price * item.quantity }}
           </div>
         </div>
       </div>
+
+      <div class="cart-summary">
+        <h3>Order Summary</h3>
+
+        <div class="summary-row">
+          <span>Items</span>
+          <span>{{ cart.length }}</span>
+        </div>
+
+        <div class="summary-row total">
+          <span>Total</span>
+          <span>R {{ cartTotal }}</span>
+        </div>
+
+        <router-link to="/Checkout" class="checkout-btn">
+          Proceed to Checkout
+        </router-link>
+      </div>
+
     </div>
-  </div> 
-  <p>Total: {{ total }}</p>
-</div>
-  </template>
-  <script>
+  </div>
+</template>
+
+<script>
   export default {
-    mounted(){
-        window.scrollTo(0,0)
+    mounted() {
+      window.scrollTo(0, 0)
     },
-    data() {
-      return {
-        total: "",
-      };
+    computed: {
+      cart() {
+        return this.$store.state.cart
+      },
+      cartTotal() {
+  return this.$store.getters.cartTotal
+}
     },
     methods: {
       decrease(id) {
-    this.$store.dispatch("decreaseQty", id)
-  },
-  remove(id) {
-    this.$store.dispatch("removeFromCart", id)
-  }
-    },
-  
-    computed: {
-      cart() {
-    return this.$store.state.cart
-  },
-      product() {
-        return this.$store.state.product;
+        this.$store.dispatch("decreaseQty", id)
       },
-    },
-  };
+      remove(id) {
+        this.$store.dispatch("removeFromCart", id)
+      }
+    }
+  }
   </script>
+  
   <style scoped>
-.container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    box-shadow: 0px 0px 0px 6px red;
-    filter: drop-shadow(0 0 2.3rem red);
-    align-items: center;
-    margin-top: 180px;
-    padding-top: 50px;
-    padding-bottom: 50px;
-    height: auto;
-}
-.card {
-    display: flex;
-    margin-top: 50px;
-    box-shadow: 0px 0px 0px 6px red;
-    filter: drop-shadow(0 0 2.3rem red);
-    background-color: black;
-}
-.img-fluid {
-    display: flex;
-    height: 500px;
-    width: 100vh;
-    justify-content: flex-start;
-    align-items: flex-start;
-}
-#delete {
-    background: transparent;
-    border: 3px solid red;
-    color: red;
-    display: flex;
-    justify-content: flex-end;
-    align-content: flex-end;
-    border-radius: 30px;
-    font-size: 50px;
-}
-.card-title {
-    text-shadow: 0 0 2px red, 0 0 2px red, 0 0 2px red, 3px 3px 3px red;
-    font-family: detail;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: black;
-    font-size: 60px;
-}
-.card-category {
-    text-shadow: 0 0 2px red, 0 0 2px red, 0 0 2px red, 3px 3px 3px red;
-    font-size: xx-large;
-    font-family: game;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: black;
-}
-.card-price {
-    text-shadow: 0 0 2px red, 0 0 2px red, 0 0 2px red, 3px 3px 3px red;
-    font-family: detail;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: black;
-    font-size: 60px;
-}
-i {
-    font-size: 30px;
-    color: red;
-}
-#checkout {
-    background: transparent;
-    border: 3px solid red;
-    color: red;
-    display: flex;
-    justify-content: flex-end;
-    align-content: flex-end;
-    font-size: 25px;
-    text-decoration-color: red;
-}
-.checkout {
-    color: red;
-    display: flex;
-    justify-content: flex-end;
-    align-content: flex-end;
-    font-size: 25px;
-}
-.rating i {
-  font-size: 18px;
-  color: gold;
-}
-  </style>
+    .cart-page {
+      margin-top: 160px;
+      padding: 40px;
+    }
+    
+    .cart {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 40px;
+    }
+    
+    .cart-heading {
+      font-family: phantom;
+      color: white;
+      text-shadow: 0 0 6px red;
+      margin-bottom: 30px;
+      text-align: center;
+      padding-top: 150px;
+      font-size: 100px;
+    }
+    
+    .cart-item {
+      display: grid;
+      grid-template-columns: 120px 1fr 120px;
+      gap: 20px;
+      padding: 20px;
+      background: black;
+      border: 3px solid red;
+      border-radius: 16px;
+      box-shadow: 0 0 20px red;
+      margin-bottom: 25px;
+    }
+    
+    .item-image {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+    
+    .item-title {
+      font-family: detail;
+      font-size: 28px;
+      color: black;
+      text-shadow: 0 0 4px red;
+    }
+    
+    .item-category {
+      font-family: game;
+      color: black;
+      font-size: 18px;
+    }
+    
+    .item-actions {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-top: 10px;
+    }
+    
+    .qty-btn {
+      background: transparent;
+      border: 2px solid red;
+      color: red;
+      font-size: 24px;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+    }
+    
+    .delete-btn {
+      background: transparent;
+      border: none;
+      color: red;
+      font-size: 24px;
+    }
+    
+    .qty {
+      font-size: 22px;
+      color: red;
+    }
+    
+    .item-price {
+      font-family: detail;
+      font-size: 26px;
+      color: black;
+      text-shadow: 0 0 4px red;
+      align-self: center;
+    }
+    
+    .cart-summary {
+      background: black;
+      border: 3px solid red;
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 0 25px red;
+      height: fit-content;
+      position: sticky;
+      top: 180px;
+    }
+    
+    .cart-summary h3 {
+      font-family: detail;
+      color: red;
+      text-shadow: 0 0 6px red;
+      margin-bottom: 20px;
+    }
+    
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 15px;
+      color: black;
+      font-size: 20px;
+    }
+    
+    .total {
+      font-size: 26px;
+      font-family: detail;
+    }
+    
+    .checkout-btn {
+      display: block;
+      margin-top: 25px;
+      text-align: center;
+      padding: 15px;
+      border: 3px solid red;
+      color: red;
+      font-size: 22px;
+      text-decoration: none;
+      border-radius: 12px;
+      transition: 0.3s;
+    }
+    
+    .checkout-btn:hover {
+      background: red;
+      color: black;
+    }
+    
+    /* Media queries */
+    @media (max-width: 900px) {
+      .cart-wrapper {
+        grid-template-columns: 1fr;
+      }
+      .cart-item {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      .item-price {
+        margin-top: 10px;
+      }
+    }
+    </style>
+    
   
