@@ -1,18 +1,19 @@
 <template>
     <div class="container">
           <button class="btn" id="checkout"><router-link class="checkout" to="/Checkout">Checkout</router-link></button>
-        <div v-for="product in cartProducts" v-bind:key="product.id" class="item">
+        <div v-for="item in cart" :key="item.id" class="item">
             <div class="card mb-3 ms-4 me-4">
                 <div class="row g-0">
                     <div class="col-md-4">
-                        <img v-bind:src="product.image" class="img-fluid"> 
+                        <img v-bind:src="item.image" class="img-fluid"> 
                     </div>
                     <div class="col-md-8">
-                    <button id="delete" @click="deleteFromCart(product.id)" class="btn"><i class="fa-solid fa-trash"></i></button>
+                      <button id="delete" @click="decrease(item.id)" class="btn"><i class="fa-solid fa-minus"></i></button><br/>
+                      <button id="delete" @click="remove(item.id)" class="btn"><i class="fa-solid fa-trash"></i></button>
       <div class="card-body">
-        <h5  class="card-title">ID:{{product.id}}</h5>
-          <h5 class="card-title">{{product.title}}</h5>
-          <p class="card-category">{{product.category.toUpperCase()}}</p>
+        <h5  class="card-title">Quantity: {{item.quantity}}</h5>
+          <h5 class="card-title">{{item.title}}</h5>
+          <p class="card-category">{{item.category}}</p>
           <div class="rating text-center">
                 <i class="fa-solid fa-star"></i>
                 <i class="fa-solid fa-star"></i>
@@ -21,12 +22,13 @@
                 <i class="fa-regular fa-star"></i>
                 </div>
             <hr>
-            <h5 class="card-price">{{product.price}}</h5>
+            <h5 class="card-price">{{item.price}}</h5>
+          </div>
         </div>
+      </div>
     </div>
-</div>
-</div>
-</div> 
+  </div> 
+  <p>Total: {{ total }}</p>
 </div>
   </template>
   <script>
@@ -40,15 +42,18 @@
       };
     },
     methods: {
-      deleteFromCart(id) {
-        return this.$store.dispatch("deleteFromCart", id);
-      },
+      decrease(id) {
+    this.$store.dispatch("decreaseQty", id)
+  },
+  remove(id) {
+    this.$store.dispatch("removeFromCart", id)
+  }
     },
   
     computed: {
-      cartProducts() {
-        return this.$store.state.cart;
-      },
+      cart() {
+    return this.$store.state.cart
+  },
       product() {
         return this.$store.state.product;
       },

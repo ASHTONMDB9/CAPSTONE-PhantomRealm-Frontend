@@ -46,9 +46,9 @@ export default {
     };
   },
    methods: {
-    addToCart(item) {
-      this.$store.commit("updateCart", item);
-    },
+    addToCart(product) {
+    this.$store.dispatch("addToCart", product)
+  }
   },
   mounted() {
     fetch("https://capstone-phantomrealm-backend.onrender.com/products/" + this.$route.params.id)

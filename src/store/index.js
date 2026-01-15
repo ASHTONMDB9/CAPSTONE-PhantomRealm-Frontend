@@ -7,9 +7,24 @@ export default createStore({
     user: null,
     Token: null,
     user_type: null,
-    Product: [],
+    product: [],
     cart: [],
     order: null,
+  },
+  getters: {
+    cartCount(state) {
+      return state.cart.reduce(
+        (total, item) => total + item.quantity,
+        0
+      )
+    },
+
+    cartTotal(state) {
+      return state.cart.reduce(
+        (total, item) => total + item.price * item.quantity,
+        0
+      )
+    }
   },
   mutations: {
     setUser: (state, user) => {
@@ -19,7 +34,7 @@ export default createStore({
       state.Token = token  ;
     },
     setProduct: (state, product) => {
-      state.Product = product
+      state.product = product
     },
     setCart: (state, cart) => {
       state.cart = cart;
@@ -36,6 +51,34 @@ export default createStore({
     },
     Logout(state) {
       (state.user = ""), (state.Token = "")
+    },
+    AddtoCart(state, product) {
+      const item = state.cart.find(p => p.id === product.id)
+  
+      if (item) {
+        item.quantity++
+      } else {
+        state.cart.push({
+          ...product,
+          quantity: 1
+        })
+      }
+    },
+    RemoveFromCart(state, id) {
+      state.cart = state.cart.filter(p => p.id !== id)
+    },
+    DecreaseQTY(state, id) {
+      const item = state.cart.find(p => p.id === id)
+      if (!item) return
+  
+      if (item.quantity > 1) {
+        item.quantity--
+      } else {
+        state.cart = state.cart.filter(p => p.id !== id)
+      }
+    },
+    ClearCart(state) {
+      state.cart = []
     }
   },
   actions: {
@@ -227,13 +270,20 @@ export default createStore({
       .then((data) => console.log(data));
 
         },
-    addToCart: async (context, id) => {
-      this.state.cart.product.push(id);
-          context.dispatch("updateCart", this.state.cart);
+        addToCart({ commit }, product) {
+          commit("AddtoCart", product)
         },
-    deleteFromCart: async (context, id) => {
-          const newCart = context.state.cart.filter((product) => product.id != id);
-          context.commit("removeFromCart", newCart);
+      
+        removeFromCart({ commit }, id) {
+          commit("RemoveFromCart", id)
+        },
+      
+        decreaseQty({ commit }, id) {
+          commit("DecreaseQTY", id)
+        },
+      
+        clearCart({ commit }) {
+          commit("ClearCart")
         },
        // Delete product
     deleteProduct: async (context, payload) => {
