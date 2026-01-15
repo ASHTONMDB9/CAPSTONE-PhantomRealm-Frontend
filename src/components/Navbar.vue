@@ -28,7 +28,7 @@
           <a  @click="Logout" class="btn" id="signup">Logout</a>
           </li>
           <div v-for="user in user" v-bind:key="user.id" class="item">
-          <h6 class="text-light">{{user.full_name}}</h6>
+          <h6 class="text-light d-left">{{user.full_name}}</h6>
           </div>
         </ul>
         <ul v-else class="navbar-nav mb-1 mb-lg-0">
@@ -80,6 +80,7 @@ function changeBackground(){
   methods: {
     Logout(){
       this.$store.commit("Logout");
+      localStorage.removeItem("vuex")
       this.$router.push("/Login");
     }}
 };

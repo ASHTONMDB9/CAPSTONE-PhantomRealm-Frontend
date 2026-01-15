@@ -50,7 +50,7 @@ export default createStore({
       state.order = order;
     },
     Logout(state) {
-      (state.user = ""), (state.Token = "")
+      (state.user = ""), (state.Token = ""), (state.cart = [])
     },
     AddtoCart(state, product) {
       const item = state.cart.find(p => p.id === product.id)
@@ -205,7 +205,7 @@ export default createStore({
         formData.append("email", payload.email);
         formData.append(
           "message",
-          `Hello! Click this link to reset your password: ${data.resetLink}`
+          `Hello (name) Click this link to reset your password: ${data.resetLink}`
         );
     
         const formspreeRes = await fetch("https://formspree.io/f/mkneonwq", {
@@ -310,7 +310,7 @@ export default createStore({
             let data = await res.json();
             console.log(data);
 
-            swal("Deleted!", "Product has been deleted.");
+            swal("Deleted!", "Product has been deleted.", "success");
             
             context.dispatch("getProduct");
           } catch (error) {
@@ -351,7 +351,7 @@ export default createStore({
             let data = await res.json();
             console.log(data);
 
-            swal("Updated!", "Product updated successfully.");
+            swal("Updated!", "Product updated successfully.", "success");
             // Auto-refresh products
             context.dispatch("getProduct");
           } catch (error) {
