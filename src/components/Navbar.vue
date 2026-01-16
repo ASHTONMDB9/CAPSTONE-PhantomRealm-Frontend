@@ -1,7 +1,7 @@
 <template>
     <nav id="nav" class="navbar navbar-dark navbar-expand-lg">
   <div class="container-fluid">
-    <a class="navbar-brand"><img src="../assets/Images/nav.png">
+    <a href="/" class="navbar-brand"><img src="../assets/Images/nav.png" style="height: 50px;">
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#Toggler" aria-controls="Toggler" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -24,19 +24,19 @@
         <li class="nav-item " id="ad">
           <router-link class="nav-link" to="/Admin">Admin</router-link>
         </li>
+        <div v-for="user in user" v-bind:key="user.id" class="item">
+        <h6 class="text-light d-left">{{user.full_name}}</h6>
+        </div>
           <li class="nav-item">
           <a  @click="Logout" class="btn" id="signup">Logout</a>
           </li>
-          <div v-for="user in user" v-bind:key="user.id" class="item">
-          <h6 class="text-light d-left">{{user.full_name}}</h6>
-          </div>
         </ul>
         <ul v-else class="navbar-nav mb-1 mb-lg-0">
          <li class="nav-item">
            <router-link to="/SignUp" class="btn" id="signup">Sign Up</router-link>
          </li>
          <li class="nav-item">
-           <router-link to="/Login" class="btn" id="signup">Log in</router-link>
+           <router-link to="/Login" class="btn" id="login">Log in</router-link>
          </li>
       </ul>
       </ul>
@@ -128,10 +128,5 @@ align-items: center;
   color: red;
   margin-right: 5px;
   font-size: 15px;
-}
-@media only screen and (max-width: 510px) {
-  .navbar-brand {
-    width: 1px;
-  };
 }
 </style>

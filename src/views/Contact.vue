@@ -44,7 +44,7 @@ export default {
 #contact {
     height: 75vh;
     background-image: url(../assets/Images/reaper.png);
-    background-size: cover;
+    background-size: stretch;
     background-attachment: fixed;
     padding-top: 120px;
     display: flex;

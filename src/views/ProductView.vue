@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
     <div v-if="product" id="container-fluid">
         <div v-for="product in product" v-bind:key="product.id" class="item">
             <div class="card mb-3 ms-4 me-4">
@@ -31,7 +31,300 @@
         <div  v-else class="box">
 			<div class="loader"></div>
 		</div>
+</template> -->
+
+<template>
+  <div v-if="product" id="container-fluid">
+    <div v-for="product in product" :key="product.id" class="item">
+
+      <div class="card game-shelf-card mb-3 ms-4 me-4">
+
+        <!-- Game Cover + Disc Side -->
+        <div class="cover-disc-wrapper">
+
+          <!-- Angled Game Box with Spine -->
+          <div class="game-box-angle">
+            <!-- Spine -->
+            <div class="cover-spine">
+              <span>{{ product.title }}</span>
+            </div>
+            <!-- Front -->
+            <div class="cover-front">
+              <img :src="product.image" alt="Game Cover Front">
+            </div>
+            <!-- Depth side to enhance 3D effect -->
+            <div class="cover-depth"></div>
+          </div>
+
+          <!-- Physical Disc -->
+          <div class="game-disc">
+            <div class="disc-hole"></div>
+            <img :src="product.image" alt="Disc Media">
+          </div>
+
+        </div>
+
+        <!-- Manual / Description -->
+        <div class="manual-wrapper">
+          <div class="manual-content">
+            <p class="card-category">{{ product.category.toUpperCase() }}</p>
+            <h5 class="card-title">{{ product.title }}</h5>
+
+            <div class="rating mb-2">
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-regular fa-star-half-stroke"></i>
+            </div>
+
+            <div class="manual-text">
+              {{ product.description }}
+            </div>
+
+            <div class="purchase-wrapper mt-3 d-flex justify-content-between align-items-center">
+              <h5 class="card-price">R{{ product.price }}</h5>
+              <button class="btn add-cart-btn" @click="addToCart(product)">Add to Cart</button>
+            </div>
+
+            <router-link to="/Store" class="back-link mt-2">
+              <i class="fa-solid fa-arrow-left-long"></i> Back
+            </router-link>
+          </div>
+        </div>
+
+      </div>
+      
+    </div>
+  </div>
+
+  <div v-else class="box">
+    <div class="loader"></div>
+  </div>
 </template>
+
+<style scoped>
+/* --- Game Shelf Card Layout --- */
+.game-shelf-card {
+  display: flex;
+  flex-direction: row;
+  background-color: #000;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-top: 180px;
+  box-shadow: 0 0 2rem red;
+  padding: 50px;
+}
+
+/* Cover + Disc Wrapper */
+.cover-disc-wrapper {
+  flex: 0 0 40%;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: flex-start;
+  gap: 20px;
+  padding: 10px;
+  perspective: 1000px;
+}
+
+/* Angled Box with Spine */
+.game-box-angle {
+  width: 250px;
+  height: 480px;
+  position: relative;
+  transform-style: preserve-3d;
+  transform: rotateY(50deg) rotateX(0deg);
+}
+
+/* Spine */
+.cover-spine {
+  position: absolute;
+  width: 70px;
+  height: 100%;
+  background: white;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: rotateY(-100deg) translateX(-35px);
+}
+.cover-spine span {
+  writing-mode: vertical-rl;
+  font-family: phantom;
+  font-size: 20px;
+  letter-spacing: 1px;
+}
+
+/* Front Face */
+.cover-front {
+  position: absolute;
+  left: 35px; 
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  backface-visibility: hidden;
+}
+.cover-front img {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+}
+
+/* Depth side for 3D realism */
+.cover-depth {
+  position: absolute;
+  top: 0;
+  left: 120px;
+  width: 20px;
+  height: 100%;
+  transform: rotateY(90deg);
+  transform-origin: left;
+  z-index: 1;
+}
+
+/* Physical Disc */
+.game-disc {
+  position: relative;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.game-disc img {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  border-radius: 50%;
+  transform: rotate(15deg);
+}
+.disc-hole {
+  position: absolute;
+  width: 35px;
+  height: 35px;
+  background: #000;
+  border-radius: 50%;
+  border: 5px solid rgb(231, 231, 231);
+  z-index: 2;
+}
+
+/* Manual / Description */
+.manual-wrapper {
+  flex: 0 0 60%;
+  display: flex;
+  align-items: flex-start;
+  padding: 10px 20px;
+}
+.manual-content {
+  background: #111;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 0 2rem red;
+  flex: 1;
+}
+
+/* Typography */
+.card-category {
+  font-family: game;
+  color: white;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  text-shadow: 0 0 5px red;
+  margin-bottom: 5px;
+}
+.card-title {
+  font-family: detail;
+  font-size: 2rem;
+  color: black;
+  text-shadow: 0 0 10px red;
+  margin-bottom: 10px;
+}
+
+/* Rating */
+.rating i {
+  font-size: 20px;
+  color: gold;
+  margin-right: 3px;
+}
+
+/* Manual Text */
+.manual-text {
+  font-size: 20px;
+  color: #eee;
+  background: rgba(255, 0, 0, 0.05);
+  padding: 10px;
+  border-radius: 10px;
+  max-height: auto;
+}
+
+/* Purchase Section */
+.add-cart-btn {
+  background: transparent;
+  border: 2px solid red;
+  color: red;
+  border-radius: 25px;
+  padding: 8px 20px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+.add-cart-btn:hover {
+  background: red;
+  color: black;
+  box-shadow: 0 0 1rem red;
+}
+
+.card-price {
+  font-family: detail;
+  font-size: 1.8rem;
+  color: white;
+  text-shadow: 0 0 8px black;
+}
+
+/* Back Link */
+.back-link {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: red;
+  text-decoration: none;
+}
+.back-link:hover {
+  text-shadow: 0 0 8px red;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .game-shelf-card {
+    flex-direction: column;
+    align-items: center;
+  }
+  .cover-disc-wrapper,
+  .manual-wrapper {
+    flex: 1 1 100%;
+    padding: 10px 0;
+    justify-content: center;
+  }
+  .game-box-angle {
+    width: 120px;
+    height: 200px;
+  }
+  .game-disc {
+    width: 80px;
+    height: 80px;
+  }
+  .card-title {
+    font-size: 1.8rem;
+  }
+  .card-price {
+    font-size: 1.5rem;
+  }
+}
+</style>
+
+
 <script>
 export default {
   props: ["id"],
@@ -60,7 +353,7 @@ export default {
   },
 };
 </script>
-<style scoped>
+<!-- <style scoped>
  .box{
   padding-top: 100px;
 	display: block;
@@ -172,4 +465,4 @@ i {
     font-size: 30px;
     color: red;
 }
-</style>
+</style> -->
