@@ -1,14 +1,18 @@
 <template>
   <section id="landing">
-    <h3 id="greeting" class="d-flex justify-content-center">Welcome to</h3>
+    <div class="hero-overlay"></div>
 
-    <h1 id="name" class="d-flex justify-content-center">The PhantomRealm</h1>
-
-
-    <img src="../assets/Images/enter.png" loading="lazy" style="height: 80px; width: 80px; display: block; margin-left: auto; margin-right: auto; filter: invert(1);">
+    <div class="hero-content">
+      <h3 id="greeting" class="d-flex justify-content-center">Welcome to</h3>
+      
+      <h1 id="name" class="d-flex justify-content-center">The PhantomRealm</h1>
+      
+      
+      <img src="../assets/Images/enter.png" loading="lazy" style="height: 80px; width: 80px; display: block; margin-left: auto; margin-right: auto; filter: invert(1);">
     <a href="#home"><i id="arrow" class="fa-solid fa-chevron-down d-flex justify-content-center" style="font-size: 40px; color: white;"></i></a>
 
     <h5 id="scrollmsg" class="d-flex justify-content-center">Enter if you dare</h5>
+  </div>
   </section>
   
   <section id="home">
@@ -259,8 +263,26 @@ export default {
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    height: 100vh;
+    position: relative;
+    min-height: 100vh;
   }
+  .hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    rgba(0,0,0,0.35),
+    rgba(0,0,0,0.55)
+  );
+}
+.hero-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
   #greeting {
     padding-top: 450px;
     font-size: 50px;
@@ -269,7 +291,7 @@ export default {
     font-family: phantom;
   }
   #name {
-    font-size: 100px;
+    font-size: clamp(3.5rem, 8vw, 6rem);
     color: black;
     text-shadow: 0 0 4px red, 0 0 4px red, 0 0 4px red, 10px 0px 10px rgb(36, 36, 36);
     font-family: phantom;

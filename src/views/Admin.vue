@@ -233,13 +233,12 @@
     </div>
   </div>
 </div>
-
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
+ </tr>
+  </tbody>
+    </table>
+      </div>
+        </div>
+          </div>
         </div>
     </div>
     <div v-else>
