@@ -58,7 +58,7 @@
 
   <section id="about">
     <h1 class="about d-flex justify-content-center pb-5">About Us</h1>
-    <div class="container-fluid pt-5">
+    <div class="container-fluid pt-3">
       <div class="row">
         <div id="description" class="col-md-6 text-light">
           <h4>Torture and Torment await all that oppose!</h4>
@@ -547,6 +547,7 @@ img {
 #tests {
   padding-top: 50px;
 }
+
 /* mobile */
 @media (max-width: 576px) {
 #landing {
@@ -587,12 +588,19 @@ img {
 .service-icon {
   display: none !important;
 }
-
+#about {
+  background-position: center;
+}
+#about h1 {
+  padding-bottom: 0 !important;
+}
 .about {
   font-size: 2.8rem;
   text-align: center;
 }
-
+.emblemtext {
+  font-size: 15px;
+}
 #description {
   padding: 0 20px;
   text-align: center;
@@ -601,8 +609,11 @@ img {
 #description br {
   display: none;
 }
+#about .col-md-6 {
+  padding-top: 30px;
+}
 #about .col-md-6:last-child {
-  display: none;
+  font-size: 10px !important;
 }
 
 #showcase {
@@ -621,14 +632,19 @@ img {
   position: relative;
   transform: none !important;
   margin-bottom: 1.5rem;
+  display: grid;
 }
 
 .gallery span img {
-  max-height: 180px;
+  max-height: 200px;
+}
+.row {
+  justify-content: center;
 }
 
 #banner {
   padding: 2rem 0;
+  margin-top: 0 !important;
   background-position: center;
 }
 
@@ -638,8 +654,8 @@ img {
 }
 
 .sponser img {
-  height: 80px;
-  width: 80px;
+  height: 65px;
+  width: 65px;
 }
 
 #testimonials {
