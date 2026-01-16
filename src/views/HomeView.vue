@@ -18,36 +18,36 @@
   <section id="home">
 
     <div class="container">
-    <div class="row">
-      <div class="col-md-4 service-card">
+      <div class="row">
+      <div class="col-md-4 service-tile">
         <div class="card text-bg-dark shadow-lg">
   <img src="../assets/Images/knight.jpg" class="card-img" alt="...">
   <div class="card-img-overlay">
     <h5 class="card-title d-flex justify-content-center">Bargin Prices</h5>
     <p class="card-text d-flex justify-content-center">When shopping with us you are guarenteed a good deal on all our products. We always save you money.</p>
-    <img src="../assets/Images/save-money.png" loading="lazy" style="height: 60px; width: 60px; display: block; margin-left: auto; margin-right: auto; filter: invert(1);">
+    <img src="../assets/Images/save-money.png" class="service-icon" loading="lazy">
   </div>
 </div>
       </div>
 
-      <div class="col-md-4 service-card">
+      <div class="col-md-4 service-tile">
         <div class="card text-bg-dark shadow-lg">
   <img src="../assets/Images/fantasy.jpg" class="card-img" alt="...">
   <div class="card-img-overlay">
     <h5 class="card-title d-flex justify-content-center">Free Delivery</h5>
     <p class="card-text">We offer all our customers free delivery on all products in our store.</p>
-    <img src="../assets/Images/truck.png" loading="lazy" style="height: 79px; width: 103px; display: block; margin-left: auto; margin-right: auto; filter: invert(1);">
+    <img src="../assets/Images/truck.png" class="service-icon" loading="lazy">
   </div>
 </div>
       </div>
 
-      <div class="col-md-4 service-card">
+      <div class="col-md-4 service-tile">
         <div class="card text-bg-dark shadow-lg">
   <img src="../assets/Images/dragon.jpg" class="card-img">
   <div class="card-img-overlay">
     <h5 class="card-title d-flex justify-content-center">Exceptional Quality</h5>
     <p class="card-text">All our products are tested for quality before they are added. We give you only the best in gaming.</p>
-    <img src="../assets/Images/clipboard.png" loading="lazy" style="height: 61px; width: 78px; display: block; margin-left: auto; margin-right: auto; filter: invert(1);">
+    <img src="../assets/Images/clipboard.png" class="service-icon" loading="lazy">
   </div>
 </div>
       </div>
@@ -75,33 +75,48 @@
   </section>
   <section id="showcase">
     <h1 class="about d-flex justify-content-center">Some of our products</h1>
-    <router-link to="/Store"><div class="gallery">
+    <div class="gallery">
      <span style="--i:1">
+      <router-link to="/products/4">
       <img src="../assets/Games/bloodbornei.png" alt="" loading="lazy" />
+      </router-link>
     </span>
   <span style="--i:2">
+    <router-link to="/products/5">
     <img src="../assets/Games/darksiders.png" alt="" loading="lazy" />
+    </router-link>
   </span>
   <span style="--i:3">
+    <router-link to="/products/6">
     <img src="../assets/Games/darksouls.png" alt="" loading="lazy" />
+    </router-link>
   </span>
   <span style="--i:4">
+    <router-link to="/products/7">
     <img src="../assets/Games/godofwar.png" alt="" loading="lazy" />
+    </router-link>
   </span>
   <span style="--i:5">
+    <router-link to="/products/2">
     <img src="../assets/Games/nfsheat.png" alt="" loading="lazy" />
+    </router-link>
   </span>
   <span style="--i:6">
+    <router-link to="/products/3">
     <img src="../assets/Games/grandtheftautov.png" alt="" loading="lazy" />
+    </router-link>
   </span>
   <span style="--i:7">
+    <router-link to="/products/8">
     <img src="../assets/Games/skyrim.png" alt="" loading="lazy" />
+    </router-link>
   </span>
   <span style="--i:8">
+    <router-link to="/products/9">
     <img src="../assets/Games/uncharted.png" alt="" loading="lazy" />
+    </router-link>
   </span>
 </div>
-</router-link>
   </section>
   <section id="banner">
 
@@ -192,7 +207,7 @@
           <div class="card bg-black">
   <img src="../assets/Images/beanie-2562646_1920.jpg" loading="lazy" class="card-img-top" style="border-radius: 100%; object-fit: cover; width: 15rem; display: block; margin-left: auto; margin-right: auto;" alt="...">
   <div class="card-body">
-    <p class="card-text text-light d-flex justify-content-center">Excellent service. Definitely one of the best online game stores I've visited. Exceptional</p>
+    <p class="test-text text-light d-flex justify-content-center">Excellent service. Definitely one of the best online game stores I've visited. Exceptional</p>
     <div class="rating">
       <i class="fa-solid fa-star"></i>
       <i class="fa-solid fa-star"></i>
@@ -207,7 +222,7 @@
           <div class="card bg-black">
   <img src="../assets/Images/man-792821_1920.jpg" loading="lazy" class="card-img-top" style="border-radius: 100%; object-fit: cover; width: 15rem; display: block; margin-left: auto; margin-right: auto;" alt="...">
   <div class="card-body">
-    <p class="card-text text-light d-flex justify-content-center">Very good service delivery and good quality products. A great store for your gaming needs.</p>
+    <p class="test-text text-light d-flex justify-content-center">Very good service delivery and good quality products. A great store for your gaming needs.</p>
     <div class="rating">
       <i class="fa-solid fa-star"></i>
       <i class="fa-solid fa-star"></i>
@@ -222,7 +237,7 @@
           <div class="card bg-black">
   <img src="../assets/Images/woman-1063100_1920.jpg" loading="lazy" class="card-img-top" style="border-radius: 100%; object-fit: cover; width: 15rem; display: block; margin-left: auto; margin-right: auto;" alt="...">
   <div class="card-body">
-    <p class="card-text text-light d-flex justify-content-center">The PhantomRealm is the best place to get your gaming equipment and merch. I love this website.</p>
+    <p class="test-text text-light d-flex justify-content-center">The PhantomRealm is the best place to get your gaming equipment and merch. I love this website.</p>
     <div class="rating">
       <i class="fa-solid fa-star"></i>
       <i class="fa-solid fa-star"></i>
@@ -258,6 +273,18 @@ export default {
   font-family: detail;
   src: url(../assets/Fonts/SundayRomantic/Sundayromanticdemo-Wy7a9.otf);
 }
+section {
+  overflow: hidden;
+}
+img {
+  max-width: 100%;
+  height: auto;
+}
+.card,
+.card-img-overlay {
+  overflow: hidden;
+}
+
   #landing {
     background-image: url(../assets/Images/cutter-man-4660655_1920.jpg);
     background-size: cover;
@@ -341,12 +368,45 @@ export default {
     height: 35vh;
     background-color: black;
   }
-  .service-card {
-    padding-top: 25px;
-    object-fit: cover;
-    height: 70px;
-    animation: float-anim 5s infinite;
-  }
+  .service-tile {
+  position: relative;
+  height: 320px;
+  border-radius: 18px;
+  background: black;
+  padding-top: 25px;
+  animation: float-anim 5s infinite;
+}
+
+.service-tile img {
+  object-fit: fill;
+}
+
+.service-tile::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,.8), transparent);
+}
+
+.service-tile .content {
+  position: absolute;
+  bottom: 0;
+  padding: 1.5rem;
+  z-index: 2;
+  text-align: center;
+}
+
+.service-icon {
+  height: 60px; 
+  width: 60px; 
+  display: block; 
+  margin-left: auto; 
+  margin-right: auto; 
+  filter: invert(1);
+}
+.card-text {
+  text-shadow: 0 0 4px black, 0 0 4px black, 0 0 4px white, 10px 0px 10px rgb(36, 36, 36);
+}
     @keyframes float-anim {
   0% {
     opacity: 1;
@@ -379,10 +439,11 @@ export default {
   background-image: url(../assets/Images/REDBLA_1.jpg);
   background-attachment: fixed;
   background-size: cover;
-  height: 80vh;
+  padding: 6rem 0;
+  min-height: auto;
 }
 #description {
-  font-size: 25px;
+  font-size: 1.1rem;
   padding-left: 80px
 }
 .emblem {
@@ -409,7 +470,7 @@ export default {
   width: 300px;
   height: 500px;
   transform-style: preserve-3d;
-  animation: rotate 35s linear infinite;
+  animation: rotate 45s linear infinite;
 }
 @keyframes rotate{
   from{
@@ -432,11 +493,20 @@ export default {
 .gallery span img{
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  transition: all 0.5s ease;
+}
+.gallery:hover {
+  animation-play-state: paused;
+}
+.gallery span:hover img {
+  transform: scale(1.2);
+  transition: all 0.5s ease;
 }
 #banner {
   margin-top: 85px;
-  height: 54vh;
+  padding: 4rem 0;
+  min-height: auto;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -445,17 +515,30 @@ export default {
   background-attachment: fixed;
 }
 .sponser img {
+  opacity: 0.85;
   margin-top: 15px;
   height: 150px;
   width: 150px;
   display: block;
   margin-left: auto;
   margin-right: auto;
-  filter: drop-shadow(0px 0px 0.2rem white);
+  filter: drop-shadow(0px 0px 0.2rem black);
+}
+.sponser img:hover {
+  opacity: 1;
+  transform: scale(1.1);
+  transition: all 0.3s ease;
+  filter: brightness(1.2);
+  filter: drop-shadow(0px 0px 0.2rem black);
 }
 #testimonials {
   margin-top: 20px;
   height: 60vh;
+}
+#testimonials .card {
+  border-radius: 20px;
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(8px);
 }
 .rating i {
   font-size: 18px;
@@ -464,8 +547,102 @@ export default {
 #tests {
   padding-top: 50px;
 }
-
-@media only screen and (max-width: 1750px){
- 
+/* mobile */
+@media (max-width: 576px) {
+#landing {
+  background-position: center;
 }
+#greeting {
+  padding-top: 320px;
+  font-size: 26px;
+}
+
+#name {
+  font-size: 2.8rem;
+}
+
+#home {
+  height: auto;
+  padding-bottom: 2rem;
+}
+
+.service-tile {
+  height: auto;
+  animation: none;
+}
+
+.service-tile img {
+  max-height: 160px;
+  object-fit: fill;
+}
+
+.service-tile .card-img-overlay img {
+  display: none;
+}
+
+.card-text {
+  display: none !important;
+}
+
+.service-icon {
+  display: none !important;
+}
+
+.about {
+  font-size: 2.8rem;
+  text-align: center;
+}
+
+#description {
+  padding: 0 20px;
+  text-align: center;
+}
+#description br {
+  display: none;
+}
+#about .col-md-6:last-child {
+  display: none;
+}
+
+#showcase {
+  height: auto;
+  padding: 3rem 0;
+}
+
+.gallery {
+  animation: none;
+  transform: none;
+  width: 100%;
+  height: auto;
+}
+
+.gallery span {
+  position: relative;
+  transform: none !important;
+  margin-bottom: 1.5rem;
+}
+
+.gallery span img {
+  max-height: 180px;
+}
+
+#banner {
+  padding: 2rem 0;
+}
+
+#banner .col-md-3:nth-child(n+5) {
+  display: none;
+}
+
+.sponser img {
+  height: 80px;
+  width: 80px;
+}
+
+#testimonials {
+  height: auto;
+  padding-bottom: 3rem;
+}
+}
+
 </style>

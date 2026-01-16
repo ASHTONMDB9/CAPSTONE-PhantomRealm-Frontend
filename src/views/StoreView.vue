@@ -106,13 +106,13 @@ export default {
 }
 .card-img {
   height: 22rem;
-  object-fit: cover;
-  transition: filter 0.4s ease, transform 0.4s ease;
+  object-fit: fill;
+  transition: filter 0.4s ease, transform all 0.5s ease;
 }
 .card:hover {
   background-color: red;
   transform: scale(1.2);
-  transition: all 0.5s linear;
+  transition: all 0.5s ease;
   transform: translateY(-10px) scale(1.05);
   box-shadow: 0 0 35px rgba(255, 0, 0, 0.6);
 }
