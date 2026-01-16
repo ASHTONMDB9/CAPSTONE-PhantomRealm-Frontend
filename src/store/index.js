@@ -208,7 +208,7 @@ export default createStore({
         formData.append("email", payload.email);
         formData.append(
           "message",
-          `Hello (name) Click this link to reset your password: ${data.resetLink}`
+          `Hello ${user.full_name} Click this link to reset your password: ${data.resetLink}`
         );
     
         const formspreeRes = await fetch("https://formspree.io/f/mkneonwq", {
@@ -331,7 +331,7 @@ export default createStore({
             let data = await res.json();
             console.log(data);
 
-            swal("Deleted!", "Product has been deleted.", "success");
+            swal("Deleted!", "Product has been deleted.");
             
             context.dispatch("getProduct");
           } catch (error) {
@@ -372,7 +372,7 @@ export default createStore({
             let data = await res.json();
             console.log(data);
 
-            swal("Updated!", "Product updated successfully.", "success");
+            swal("Updated!", "Product updated successfully.");
             // Auto-refresh products
             context.dispatch("getProduct");
           } catch (error) {

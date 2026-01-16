@@ -64,12 +64,15 @@ export default {
  .box{
   padding-top: 100px;
 	display: block;
-	height: 50vh;
+	height: 75vh;
 	position: relative;
 	margin-left: auto;
   margin-right: auto;
 	transition: all .2s ease;
-  background-image: url(../assets/Images/sekigan.gif);
+  background-image: url(../assets/Images/loaderback.gif);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 .loader{
 	position: relative;
