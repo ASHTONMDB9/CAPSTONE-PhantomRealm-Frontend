@@ -208,7 +208,7 @@ export default createStore({
         formData.append("email", payload.email);
         formData.append(
           "message",
-          `Hello ${user.full_name} Click this link to reset your password: ${data.resetLink}`
+          `Hello, Click this link to reset your password: ${data.resetLink}`
         );
     
         const formspreeRes = await fetch("https://formspree.io/f/mkneonwq", {
