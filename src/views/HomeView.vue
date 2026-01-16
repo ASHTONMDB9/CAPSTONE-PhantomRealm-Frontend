@@ -443,7 +443,7 @@ img {
   min-height: auto;
 }
 #description {
-  font-size: 1.1rem;
+  font-size: 25px;
   padding-left: 80px
 }
 .emblem {
@@ -596,6 +596,7 @@ img {
 #description {
   padding: 0 20px;
   text-align: center;
+  font-size: 15px;
 }
 #description br {
   display: none;
@@ -628,10 +629,12 @@ img {
 
 #banner {
   padding: 2rem 0;
+  background-position: center;
 }
 
-#banner .col-md-3:nth-child(n+5) {
-  display: none;
+#banner .col-md-3 {
+  height: 100px;
+  width: 100px;
 }
 
 .sponser img {
@@ -642,6 +645,69 @@ img {
 #testimonials {
   height: auto;
   padding-bottom: 3rem;
+}
+}
+
+/* Tablet */
+@media (min-width: 577px) and (max-width: 991px) {
+  #landing {
+  background-position: center;
+}
+#greeting {
+  padding-top: 320px;
+}
+
+#scrollmsg {
+  display: none;
+}
+
+#home {
+  height: auto;
+}
+
+.service-tile {
+  height: 280px;
+  animation: none;
+}
+
+#description {
+  padding-left: 30px;
+}
+
+#about br {
+  display: none;
+}
+
+#showcase {
+  height: auto;
+}
+
+.gallery {
+  animation: none;
+  transform: none;
+  width: 100%;
+  height: auto;
+  display: grid;
+  flex-wrap: wrap;
+}
+
+.gallery span {
+  position: relative;
+  transform: none !important;
+  margin-bottom: 1.5rem;
+}
+
+.gallery span img {
+  max-height: 300px;
+}
+
+.sponser img {
+  height: 110px;
+  width: 110px;
+}
+
+#testimonials {
+  height: auto;
 }
 }
 
