@@ -39,24 +39,21 @@
 
       <div class="card game-shelf-card mb-3 ms-4 me-4">
 
-        <!-- Game Cover + Disc Side -->
         <div class="cover-disc-wrapper">
 
-          <!-- Angled Game Box with Spine -->
           <div class="game-box-angle">
-            <!-- Spine -->
+
             <div class="cover-spine">
               <span>{{ product.title }}</span>
             </div>
-            <!-- Front -->
+
             <div class="cover-front">
               <img :src="product.image" alt="Game Cover Front">
             </div>
-            <!-- Depth side to enhance 3D effect -->
+
             <div class="cover-depth"></div>
           </div>
 
-          <!-- Physical Disc -->
           <div class="game-disc">
             <div class="disc-hole"></div>
             <img :src="product.image" alt="Disc Media">
@@ -64,7 +61,7 @@
 
         </div>
 
-        <!-- Manual / Description -->
+
         <div class="manual-wrapper">
           <div class="manual-content">
             <p class="card-category">{{ product.category.toUpperCase() }}</p>
@@ -142,7 +139,7 @@
   position: absolute;
   width: 70px;
   height: 100%;
-  background: white;
+  background: rgb(73, 16, 16);
   z-index: 3;
   display: flex;
   align-items: center;
@@ -150,12 +147,22 @@
   transform: rotateY(-100deg) translateX(-35px);
 }
 .cover-spine span {
+  max-height: 90%;
+  overflow: hidden;
+  color: white;
+  text-align: center;
+  line-height: 1.1;
   writing-mode: vertical-rl;
-  font-family: phantom;
-  font-size: 20px;
+  font-family: detail;
+  font-size: clamp(15px, 1.6vw, 50px);
   letter-spacing: 1px;
+  padding: 8px 6px;
+  border-radius: 6px;
+  text-shadow:
+    0 0 4px black,
+    0 0 6px black,
+    1px 1px 2px black;
 }
-
 /* Front Face */
 .cover-front {
   position: absolute;

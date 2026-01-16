@@ -1,7 +1,30 @@
 <template>
   <section id="store">
+
+    <div v-if="products" class="store-controls">
+      <input
+  type="text"
+  v-model="searchQuery"
+  placeholder="Search..."
+/>
+  <select v-model="selectedCategory">
+    <option value="">All Categories</option>
+    <option v-for="cat in categories" :key="cat" :value="cat">
+      {{ cat.toUpperCase() }}
+    </option>
+  </select>
+
+  <select v-model="sortOption">
+    <option value="">Sort By</option>
+    <option value="price-asc">Price: Low to High</option>
+    <option value="price-desc">Price: High to Low</option>
+    <option value="title-asc">Name: A–Z</option>
+    <option value="title-desc">Name: Z–A</option>
+  </select>
+</div>
+
     <div v-if="products" class="container-fluid">
-        <div v-for="product in products" v-bind:key="product.id">
+      <div v-for="product in filteredProducts" v-bind:key="product.id">
           <router-link :to="{ name: 'ProductView', params: { id: product.id }}">
             <div class="card ms-3 me-3 mt-4 mb-4">
               <img v-bind:src="product.image" class="card-img">
@@ -31,11 +54,14 @@
 </template>
 <script>
 export default {
-    data() {
-    return {
-      products: null,
-    };
-  },
+  data() {
+  return {
+    products: null,
+    selectedCategory: "",
+    sortOption: "",
+    searchQuery: ""
+  };
+},
   mounted() {
     fetch("https://capstone-phantomrealm-backend.onrender.com/products", {
     })
@@ -47,6 +73,42 @@ export default {
     product() {
       return this.$store.state.product;
     },
+    categories() {
+    if (!this.products) return [];
+    return [...new Set(this.products.map(p => p.category))];
+  },
+  filteredProducts() {
+  if (!this.products) return [];
+
+  let result = [...this.products];
+
+  if (this.searchQuery) {
+    const query = this.searchQuery.toLowerCase();
+    result = result.filter(p =>
+      p.title.toLowerCase().includes(query) ||
+      p.category.toLowerCase().includes(query)
+    );
+  }
+  if (this.selectedCategory) {
+    result = result.filter(
+      p => p.category === this.selectedCategory
+    );
+  }
+  if (this.sortOption === "price-asc") {
+    result.sort((a, b) => a.price - b.price);
+  }
+  if (this.sortOption === "price-desc") {
+    result.sort((a, b) => b.price - a.price);
+  }
+  if (this.sortOption === "title-asc") {
+    result.sort((a, b) => a.title.localeCompare(b.title));
+  }
+  if (this.sortOption === "title-desc") {
+    result.sort((a, b) => b.title.localeCompare(a.title));
+  }
+
+  return result;
+}
   },
 }
 </script>
@@ -56,6 +118,7 @@ export default {
   background-color: black;
   min-height: 100vh;
   display: flex;
+  z-index: 1000;
   align-items: center;
   justify-content: center;
 }
@@ -73,6 +136,57 @@ export default {
   background-position: center;
   background-blend-mode: darken;
 }
+
+.store-controls {
+  position: relative;
+  z-index: 1;
+  padding-top: 180px;
+  display: flex;
+  justify-content: end;
+  gap: 20px;
+}
+
+.store-controls input {
+  background-color: black;
+  color: white;
+  border: 2px solid red;
+  padding: 10px 16px;
+  font-family: game;
+  font-size: 16px;
+  border-radius: 8px;
+  width: 220px;
+  transition: all 0.3s ease;
+}
+
+.store-controls input::placeholder {
+  color: white;
+}
+
+.store-controls input:focus {
+  outline: none;
+  box-shadow: 0 0 15px red;
+}
+
+.store-controls select {
+  background-color: black;
+  color: white;
+  border: 2px solid red;
+  padding: 10px 16px;
+  font-family: detail;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.store-controls select:hover {
+  box-shadow: 0 0 10px red;
+}
+
+.store-controls select:focus {
+  box-shadow: 0 0 15px red;
+}
+
 .container-fluid {
   overflow: hidden;
   display: flex;
@@ -80,7 +194,7 @@ export default {
   justify-content: center;
   align-items: stretch;
   gap: 30px;
-  padding-top: 150px;
+  padding-top: 45px;
   padding-bottom: 60px;
 }
 .card {
