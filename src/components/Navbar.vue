@@ -17,10 +17,10 @@
         <li class="nav-item">
           <router-link class="nav-link" to="/Contact">Contact</router-link>
         </li>
+        <li class="nav-item">
+          <router-link class="nav-link" to="/Cart">Cart</router-link>
+        </li>
         <ul v-if="user" class="navbar-nav mb-lg-0">
-          <li class="nav-item">
-            <router-link class="nav-link" to="/Cart">Cart</router-link>
-          </li>
         <li class="nav-item " id="ad">
           <router-link class="nav-link" to="/Admin">Admin</router-link>
         </li>
