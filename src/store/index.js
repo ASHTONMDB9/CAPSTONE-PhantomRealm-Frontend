@@ -1,7 +1,7 @@
-import { createStore } from 'vuex'
-import router from '../router/index'
+import { createStore } from "vuex";
+import router from "../router/index";
 import createPersistedState from "vuex-persistedstate";
-import swal from 'sweetalert';
+import swal from "sweetalert";
 export default createStore({
   state: {
     user: null,
@@ -13,36 +13,31 @@ export default createStore({
   },
   getters: {
     cartCount(state) {
-      return state.cart.reduce(
-        (total, item) => total + item.quantity,
-        0
-      )
+      return state.cart.reduce((total, item) => total + item.quantity, 0);
     },
 
     cartTotal(state) {
       return state.cart.reduce((total, item) => {
-        const price = Number(item.price) || 0
-        const qty = Number(item.quantity) || 0
-        return total + price * qty
-      }, 0)
-    }
-    
+        const price = Number(item.price) || 0;
+        const qty = Number(item.quantity) || 0;
+        return total + price * qty;
+      }, 0);
+    },
   },
   mutations: {
     setUser: (state, user) => {
-      state.user = user  ;
+      state.user = user;
     },
     setToken: (state, token) => {
-      state.Token = token  ;
+      state.Token = token;
     },
     setProduct: (state, product) => {
-      state.product = product
+      state.product = product;
     },
     setCart: (state, cart) => {
       state.cart = cart;
     },
     updateCart: (state, product) => {
-
       state.cart.push(product);
     },
     removeFromCart: (state, cart) => {
@@ -52,37 +47,37 @@ export default createStore({
       state.order = order;
     },
     Logout(state) {
-      (state.user = ""), (state.Token = ""), (state.cart = [])
+      (state.user = ""), (state.Token = ""), (state.cart = []);
     },
     AddtoCart(state, product) {
-      const item = state.cart.find(p => p.id === product.id)
-    
+      const item = state.cart.find((p) => p.id === product.id);
+
       if (item) {
-        item.quantity++
+        item.quantity++;
       } else {
         state.cart.push({
           ...product,
           price: Number(product.price),
-          quantity: 1
-        })
+          quantity: 1,
+        });
       }
     },
     RemoveFromCart(state, id) {
-      state.cart = state.cart.filter(p => p.id !== id)
+      state.cart = state.cart.filter((p) => p.id !== id);
     },
     DecreaseQTY(state, id) {
-      const item = state.cart.find(p => p.id === id)
-      if (!item) return
-  
+      const item = state.cart.find((p) => p.id === id);
+      if (!item) return;
+
       if (item.quantity > 1) {
-        item.quantity--
+        item.quantity--;
       } else {
-        state.cart = state.cart.filter(p => p.id !== id)
+        state.cart = state.cart.filter((p) => p.id !== id);
       }
     },
     ClearCart(state) {
-      state.cart = []
-    }
+      state.cart = [];
+    },
   },
   actions: {
     // Get all products
@@ -126,23 +121,26 @@ export default createStore({
       }
     },
 
-        // new order
-        addOrder: async (context, order) => {
-          fetch("https://capstone-phantomrealm-backend.onrender.com/orders/add_order", {
-            method: "POST",
-            body: JSON.stringify(order),
-            headers: {
-              "Content-type": "application/json; charset=UTF-8",
-            },
-          })
-            .then((response) => response.json())
-            .then(() => context.dispatch("getOrder"));
+    // new order
+    addOrder: async (context, order) => {
+      fetch(
+        "https://capstone-phantomrealm-backend.onrender.com/orders/add_order",
+        {
+          method: "POST",
+          body: JSON.stringify(order),
+          headers: {
+            "Content-type": "application/json; charset=UTF-8",
+          },
+        }
+      )
+        .then((response) => response.json())
+        .then(() => context.dispatch("getOrder"));
 
-            router.push("/Store");
-        },
+      router.push("/Store");
+    },
 
-     // Login
-     login: async (context, payload) => {
+    // Login
+    login: async (context, payload) => {
       let res = await fetch(
         "https://capstone-phantomrealm-backend.onrender.com/users/login",
         {
@@ -158,33 +156,35 @@ export default createStore({
       );
       let data = await res.json();
       console.log(data);
-        context.commit("setToken", data.token);
-        if(data.msg === "Password incorrect"){
-          swal("Error","Incorrect Password"); 
-      } else if(data.msg === "Email not found please register") {
-          swal("Error", "Email not found please register");
-      } else{
-
+      context.commit("setToken", data.token);
+      if (data.msg === "Password incorrect") {
+        swal("Error", "Incorrect Password");
+      } else if (data.msg === "Email not found please register") {
+        swal("Error", "Email not found please register");
+      } else {
         // Verify token
-        fetch("https://capstone-phantomrealm-backend.onrender.com/users/users/verify", {
-          headers: {
-            "Content-Type": "application/json",
-            "x-auth-token": data.token,
-          },
-        })
+        fetch(
+          "https://capstone-phantomrealm-backend.onrender.com/users/users/verify",
+          {
+            headers: {
+              "Content-Type": "application/json",
+              "x-auth-token": data.token,
+            },
+          }
+        )
           .then((res) => res.json())
           .then((user) => {
             context.commit("setUser", user);
 
             router.push("/Store");
           });
-        }
+      }
     },
 
     forgotPassword: async (context, payload) => {
       try {
         console.log("Vuex forgotPassword called with:", payload.email);
-    
+
         // Generate token
         const res = await fetch(
           "https://capstone-phantomrealm-backend.onrender.com/users/forgot-password",
@@ -194,15 +194,15 @@ export default createStore({
             body: JSON.stringify({ email: payload.email }),
           }
         );
-    
+
         const data = await res.json();
         console.log("Backend response:", data);
-    
+
         if (data.msg === "Email not found") {
           swal("Error", "Email not found");
           return;
         }
-    
+
         // Send reset link via Formspree
         const formData = new FormData();
         formData.append("email", payload.email);
@@ -210,39 +210,43 @@ export default createStore({
           "message",
           `Hello, Click this link to reset your password: ${data.resetLink}`
         );
-    
+
         const formspreeRes = await fetch("https://formspree.io/f/mkneonwq", {
           method: "POST",
           body: formData,
         });
-    
+
         if (!formspreeRes.ok) {
           console.error("Formspree failed:", formspreeRes.statusText);
           swal("Error", "Failed to send email. Try again.");
           return;
         }
-    
-        swal(
-          "Password reset link sent to your email!"
-        );
+
+        swal("Password reset link sent to your email!");
       } catch (err) {
         console.error("Forgot password Vuex error:", err);
-        swal("Password reset link sent to your email!", "This link will expire in 15 mins.");
+        swal(
+          "Password reset link sent to your email!",
+          "This link will expire in 15 mins."
+        );
       }
     },
-    
+
     // Reset Password
     resetPassword: async (context, payload) => {
-      fetch("https://capstone-phantomrealm-backend.onrender.com/users/reset-password", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          token: payload.token,
-          newPassword: payload.newPassword,
-        }),
-      })
+      fetch(
+        "https://capstone-phantomrealm-backend.onrender.com/users/reset-password",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            token: payload.token,
+            newPassword: payload.newPassword,
+          }),
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
           if (data.msg === "Password reset successfully") {
@@ -253,60 +257,62 @@ export default createStore({
           }
         });
     },
-  
+
     // Sign Up
     signUp: async (context, payload) => {
-      fetch("https://capstone-phantomrealm-backend.onrender.com/users/register", {
-        method: 'POST',
-        body: JSON.stringify({
+      fetch(
+        "https://capstone-phantomrealm-backend.onrender.com/users/register",
+        {
+          method: "POST",
+          body: JSON.stringify({
             full_name: payload.full_name,
             email: payload.email,
             password: payload.password,
             phone_number: payload.phone_number,
             user_type: "User",
-        }),
-        headers: {
-          "Content-type": "application/json",
-        },
-      })
-      .then((response) => response.json())
-      .then((data) => console.log(data));
+          }),
+          headers: {
+            "Content-type": "application/json",
+          },
+        }
+      )
+        .then((response) => response.json())
+        .then((data) => console.log(data));
+    },
+    addToCart({ commit, state }, product) {
+      const existingItem = state.cart.find((p) => p.id === product.id);
 
-        },
-        addToCart({ commit, state }, product) {
-          const existingItem = state.cart.find(p => p.id === product.id)
-        
-          commit("AddtoCart", product)
-        
-          if (existingItem) {
-            swal({
-              title: "Updated Cart",
-              text: `Item ${product.title} has been updated in your cart`,
-              timer: 5000,
-              buttons: false
-            })
-          } else {
-            swal({
-              title: "Added to Cart!",
-              text: `${product.title} has been added to your cart`,
-              timer: 5000,
-              buttons: false
-            })
-          }
-        },
-      
-        removeFromCart({ commit }, id) {
-          commit("RemoveFromCart", id)
-        },
-      
-        decreaseQty({ commit }, id) {
-          commit("DecreaseQTY", id)
-        },
-      
-        clearCart({ commit }) {
-          commit("ClearCart")
-        },
-       // Delete product
+      commit("AddtoCart", product);
+
+      if (existingItem) {
+        swal({
+          title: "Updated Cart",
+          text: `Item ${product.title} has been updated in your cart`,
+          timer: 5000,
+          buttons: false,
+        });
+      } else {
+        swal({
+          title: "Added to Cart!",
+          text: `${product.title} has been added to your cart`,
+          timer: 5000,
+          buttons: false,
+        });
+      }
+    },
+
+    removeFromCart({ commit }, id) {
+      commit("RemoveFromCart", id);
+    },
+
+    decreaseQty({ commit }, id) {
+      commit("DecreaseQTY", id);
+    },
+
+    clearCart({ commit }) {
+      commit("ClearCart");
+    },
+    // Delete product
     deleteProduct: async (context, payload) => {
       swal({
         title: "Are you sure?",
@@ -318,7 +324,8 @@ export default createStore({
         if (willDelete) {
           try {
             let res = await fetch(
-              "https://capstone-phantomrealm-backend.onrender.com/products/delete_product/" + payload.id,
+              "https://capstone-phantomrealm-backend.onrender.com/products/delete_product/" +
+                payload.id,
               {
                 method: "DELETE",
                 headers: {
@@ -332,7 +339,7 @@ export default createStore({
             console.log(data);
 
             swal("Deleted!", "Product has been deleted.");
-            
+
             context.dispatch("getProduct");
           } catch (error) {
             console.error(error);
@@ -341,7 +348,7 @@ export default createStore({
         }
       });
     },
-         // Update product
+    // Update product
     UpdateProduct: async (context, payload) => {
       swal({
         title: "Update Product?",
@@ -352,7 +359,8 @@ export default createStore({
         if (willUpdate) {
           try {
             let res = await fetch(
-              "https://capstone-phantomrealm-backend.onrender.com/products/update_product/" + payload.id,
+              "https://capstone-phantomrealm-backend.onrender.com/products/update_product/" +
+                payload.id,
               {
                 method: "PUT",
                 headers: {
@@ -382,15 +390,7 @@ export default createStore({
         }
       });
     },
-        
   },
   modules: {},
   plugins: [createPersistedState()],
 });
-
-  
-
-
-
-
-

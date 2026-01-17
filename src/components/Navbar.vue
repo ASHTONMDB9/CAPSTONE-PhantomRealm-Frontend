@@ -1,49 +1,61 @@
 <template>
-    <nav id="nav" class="navbar navbar-dark navbar-expand-lg">
-  <div class="container-fluid">
-    <a href="/" class="navbar-brand"><img src="../assets/Images/nav.png" style="height: 50px;">
-    </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#Toggler" aria-controls="Toggler" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="Toggler">
-      <ul class="navbar-nav mb-1 mb-lg-0">
-        <li class="nav-item">
-          <router-link class="nav-link" to="/">Home</router-link>
-        </li>
-        <li class="nav-item">
-          <router-link class="nav-link" to="/Store">Store</router-link>
-        </li>
-        <li class="nav-item">
-          <router-link class="nav-link" to="/Contact">Contact</router-link>
-        </li>
-        <li class="nav-item">
-          <router-link class="nav-link" to="/Cart">Cart</router-link>
-        </li>
-        <ul v-if="user" class="navbar-nav mb-lg-0">
-        <li class="nav-item " id="ad">
-          <router-link class="nav-link" to="/Admin">Admin</router-link>
-        </li>
-        <div v-for="user in user" v-bind:key="user.id" class="item">
-        <h6 class="text-light d-left">{{user.full_name}}</h6>
-        </div>
+  <nav id="nav" class="navbar navbar-dark navbar-expand-lg">
+    <div class="container-fluid">
+      <a href="/" class="navbar-brand"
+        ><img src="../assets/Images/nav.png" style="height: 50px" />
+      </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#Toggler"
+        aria-controls="Toggler"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="Toggler">
+        <ul class="navbar-nav mb-1 mb-lg-0">
           <li class="nav-item">
-          <a  @click="Logout" class="btn" id="signup">Logout</a>
+            <router-link class="nav-link" to="/">Home</router-link>
           </li>
+          <li class="nav-item">
+            <router-link class="nav-link" to="/Store">Store</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link class="nav-link" to="/Contact">Contact</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link class="nav-link" to="/Cart">Cart</router-link>
+          </li>
+          <ul v-if="user" class="navbar-nav mb-lg-0">
+            <li class="nav-item" id="ad">
+              <router-link class="nav-link" to="/Admin">Admin</router-link>
+            </li>
+            <div v-for="user in user" v-bind:key="user.id" class="item">
+              <h6 class="text-light d-left">{{ user.full_name }}</h6>
+            </div>
+            <li class="nav-item">
+              <a @click="Logout" class="btn" id="signup">Logout</a>
+            </li>
+          </ul>
+          <ul v-else class="navbar-nav mb-1 mb-lg-0">
+            <li class="nav-item">
+              <router-link to="/SignUp" class="btn" id="signup"
+                >Sign Up</router-link
+              >
+            </li>
+            <li class="nav-item">
+              <router-link to="/Login" class="btn" id="login"
+                >Log in</router-link
+              >
+            </li>
+          </ul>
         </ul>
-        <ul v-else class="navbar-nav mb-1 mb-lg-0">
-         <li class="nav-item">
-           <router-link to="/SignUp" class="btn" id="signup">Sign Up</router-link>
-         </li>
-         <li class="nav-item">
-           <router-link to="/Login" class="btn" id="login">Log in</router-link>
-         </li>
-      </ul>
-      </ul>
-
       </div>
-    </div> 
-</nav>
+    </div>
+  </nav>
 </template>
 
 <script>
@@ -54,35 +66,33 @@ export default {
     };
   },
   mounted() {
-    window.addEventListener('scroll',changeBackground);
+    window.addEventListener("scroll", changeBackground);
 
-function changeBackground(){
-  let navbar = document.getElementById("nav");
-  let scrollValue = window.scrollY;
-  if(scrollValue <50){
-    navbar.style.background = "transparent";
-    navbar.style.transition = "all 0.5s linear"
-
-    
-}else{
-    navbar.style.background = "black";
-}
-}
+    function changeBackground() {
+      let navbar = document.getElementById("nav");
+      let scrollValue = window.scrollY;
+      if (scrollValue < 50) {
+        navbar.style.background = "transparent";
+        navbar.style.transition = "all 0.5s linear";
+      } else {
+        navbar.style.background = "black";
+      }
+    }
   },
-  computed:{
+  computed: {
     user() {
       // console.log(this.$store.state.user)
       return this.$store.state.user;
     },
+  },
 
-    },
-  
   methods: {
-    Logout(){
+    Logout() {
       this.$store.commit("Logout");
-      localStorage.removeItem("vuex")
+      localStorage.removeItem("vuex");
       this.$router.push("/Login");
-    }}
+    },
+  },
 };
 </script>
 
@@ -95,11 +105,11 @@ function changeBackground(){
   z-index: 1000;
 }
 .navbar-nav {
-display: flex;
-flex-direction: column;
-justify-content: center;
-transition: smooth;
-align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: smooth;
+  align-items: center;
 }
 .navbar-nav li {
   justify-content: center;

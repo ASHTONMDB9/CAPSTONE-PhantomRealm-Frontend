@@ -28,9 +28,7 @@
           />
         </div>
 
-        <button id="login" type="submit" class="btn">
-          Login
-        </button>
+        <button id="login" type="submit" class="btn">Login</button>
 
         <!-- Forgot Password Link -->
         <div class="forgot">
@@ -45,16 +43,16 @@
 
 <script>
 export default {
-    computed:{
+  computed: {
     user() {
-      console.log(this.$store.state.user)
+      console.log(this.$store.state.user);
       return this.$store.state.user;
-    }
     },
-    mounted(){
-        window.scrollTo(0,0)
-    },
-    data() {
+  },
+  mounted() {
+    window.scrollTo(0, 0);
+  },
+  data() {
     return {
       email: "",
       password: "",
@@ -66,69 +64,66 @@ export default {
         email: this.email,
         password: this.password,
       });
-      
     },
-    
-},
-}
+  },
+};
 </script>
 <style scoped>
-    .container {
-      padding-top: 165px;
-    }
-    
-    .about {
-      color: black;
-      text-shadow: 0 0 4px red, 0 0 4px red, 0 0 4px red,
-        10px 0px 10px rgb(36, 36, 36);
-      font-family: phantom;
-      font-size: 100px;
-    }
-    
-    #form {
-      background-color: red;
-      background-image: url(../assets/Images/REDBLA_1.jpg);
-      background-attachment: fixed;
-      background-size: cover;
-      display: flex;
-      justify-content: center;
-      height: 55vh;
-      align-items: center;
-    }
-    
-    .form-label {
-      filter: drop-shadow(0px 0px 0.2rem white);
-      color: white;
-    }
-    
-    button {
-      width: 100%;
-      margin-top: 10px;
-      height: 50px;
-      background-color: transparent;
-      border: 3px solid red;
-      color: white;
-      border-radius: 5px;
-      text-shadow: 0 0 4px white, 0 0 4px white,
-        0 0 4px white, 10px 0px 10px rgb(36, 36, 36);
-    }
-    
-    .forgot {
-      margin-top: 15px;
-      text-align: center;
-    }
-    
-    .forgot-link {
-      color: white;
-      text-decoration: none;
-      font-size: 14px;
-      text-shadow: 0 0 4px red, 0 0 4px red;
-      transition: 0.3s ease;
-    }
-    
-    .forgot-link:hover {
-      color: red;
-      text-shadow: 0 0 6px white, 0 0 6px white;
-    }
-    </style>
-    
+.container {
+  padding-top: 165px;
+}
+
+.about {
+  color: black;
+  text-shadow: 0 0 4px red, 0 0 4px red, 0 0 4px red,
+    10px 0px 10px rgb(36, 36, 36);
+  font-family: phantom;
+  font-size: 100px;
+}
+
+#form {
+  background-color: red;
+  background-image: url(../assets/Images/REDBLA_1.jpg);
+  background-attachment: fixed;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  height: 55vh;
+  align-items: center;
+}
+
+.form-label {
+  filter: drop-shadow(0px 0px 0.2rem white);
+  color: white;
+}
+
+button {
+  width: 100%;
+  margin-top: 10px;
+  height: 50px;
+  background-color: transparent;
+  border: 3px solid red;
+  color: white;
+  border-radius: 5px;
+  text-shadow: 0 0 4px white, 0 0 4px white, 0 0 4px white,
+    10px 0px 10px rgb(36, 36, 36);
+}
+
+.forgot {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.forgot-link {
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+  text-shadow: 0 0 4px red, 0 0 4px red;
+  transition: 0.3s ease;
+}
+
+.forgot-link:hover {
+  color: red;
+  text-shadow: 0 0 6px white, 0 0 6px white;
+}
+</style>
