@@ -284,6 +284,9 @@ export default {
   box-shadow: 0 0 2rem red;
   flex: 1;
 }
+.manual-text {
+  height: 280px;
+}
 .card-category {
   font-family: game;
   color: white;
