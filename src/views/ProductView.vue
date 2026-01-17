@@ -246,6 +246,7 @@ export default {
 }
 .game-disc {
   position: relative;
+  margin-bottom: 50px;
   width: 250px;
   height: 250px;
   border-radius: 50%;
@@ -259,7 +260,7 @@ export default {
   height: 100%;
   object-fit: fill;
   border-radius: 50%;
-  transform: rotate(15deg);
+  transform: rotate(20deg);
 }
 .disc-hole {
   position: absolute;
