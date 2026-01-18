@@ -1,22 +1,24 @@
 <template>
   <nav id="nav" class="navbar navbar-dark navbar-expand-lg">
     <div class="container-fluid">
-      <a href="/" class="navbar-brand"
-        ><img src="../assets/Images/nav.png" style="height: 50px" />
-      </a>
+      <router-link to="/" class="navbar-brand">
+        <img src="../assets/Images/nav.png" alt="Logo" height="50" />
+      </router-link>
+
       <button
         class="navbar-toggler"
         type="button"
         data-bs-toggle="collapse"
-        data-bs-target="#Toggler"
-        aria-controls="Toggler"
+        data-bs-target="#navbarContent"
+        aria-controls="navbarContent"
         aria-expanded="false"
         aria-label="Toggle navigation"
       >
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="Toggler">
-        <ul class="navbar-nav mb-1 mb-lg-0">
+
+      <div class="collapse navbar-collapse" id="navbarContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
             <router-link class="nav-link" to="/">Home</router-link>
           </li>
@@ -29,29 +31,37 @@
           <li class="nav-item">
             <router-link class="nav-link" to="/Cart">Cart</router-link>
           </li>
-          <ul v-if="user" class="navbar-nav mb-lg-0">
-            <li class="nav-item" id="ad">
-              <router-link class="nav-link" to="/Admin">Admin</router-link>
+        </ul>
+
+        <ul class="navbar-nav align-items-lg-center">
+          <template v-if="user">
+            <li class="nav-item" v-if="user">
+              <router-link class="nav-link admin-link" to="/Admin">
+                Admin
+              </router-link>
             </li>
-            <div v-for="user in user" v-bind:key="user.id" class="item">
-              <h6 class="text-light d-left">{{ user.full_name }}</h6>
-            </div>
+
+            <li v-for="user in user" :key="user.id" class="nav-item-user">
+              {{ user.full_name }}
+            </li>
+
             <li class="nav-item">
-              <a @click="Logout" class="btn" id="signup">Logout</a>
+              <button @click="Logout" class="btn nav-link" id="signup">Logout</button>
             </li>
-          </ul>
-          <ul v-else class="navbar-nav mb-1 mb-lg-0">
+          </template>
+
+          <template v-else>
             <li class="nav-item">
-              <router-link to="/SignUp" class="btn" id="signup"
-                >Sign Up</router-link
-              >
+              <router-link to="/SignUp" class="btn nav-link" id="signup">
+                Sign Up
+              </router-link>
             </li>
             <li class="nav-item">
-              <router-link to="/Login" class="btn" id="login"
-                >Log in</router-link
-              >
+              <router-link to="/Login" class="btn nav-link" id="login">
+                Log in
+              </router-link>
             </li>
-          </ul>
+          </template>
         </ul>
       </div>
     </div>
@@ -103,25 +113,21 @@ export default {
   position: fixed;
   width: 100%;
   z-index: 1000;
-}
-.navbar-nav {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  transition: smooth;
-  align-items: center;
-}
-.navbar-nav li {
-  justify-content: center;
+  transition: background 0.4s ease;
 }
 .nav-item {
-  font-size: 20px;
+  font-size: 25px;
+  margin: 0 6px;
+  font-family: detail;
 }
-#ad {
-  opacity: 0;
+.nav-item-user {
+  color: white;
+  font-family: phantom;
+  font-size: 16px;
+  margin: 0 5px;
 }
-#ad:hover {
-  opacity: 1;
+.nav-link {
+  transition: color 0.2s ease;
 }
 .nav-link:hover {
   color: red;
@@ -130,13 +136,36 @@ export default {
   color: red;
   text-decoration: line-through;
   text-decoration-thickness: 2px;
-  text-decoration-color: red;
 }
 .btn {
-  background: transparent;
-  border: 3px solid red;
-  color: red;
-  margin-right: 5px;
-  font-size: 15px;
+  background-color: transparent;
+  border: 2px solid red;
+  width: 150px;
+  font-size: 20px;
+  font-family: detail;
+  color: white;
+}
+.btn:hover {
+  background-color: red;
+  border: 2px solid red;
+  color: white;
+}
+.admin-link {
+  opacity: 0;
+}
+.admin-link:hover {
+  opacity: 1;
+}
+
+/* Mobile tweaks */
+@media (max-width: 991px) {
+  .navbar-nav {
+    text-align: center;
+  }
+
+  .btn {
+    margin-top: 8px;
+    width: 100%;
+  }
 }
 </style>

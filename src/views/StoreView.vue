@@ -134,10 +134,13 @@ export default {
 .store-controls {
   position: relative;
   z-index: 1;
-  padding-top: 180px;
+  padding-top: 120px;
   display: flex;
-  justify-content: end;
+  justify-content: center;
   gap: 20px;
+  flex-wrap: wrap;
+  align-content: stretch;
+  align-items: center;
 }
 
 .store-controls input {
@@ -145,7 +148,7 @@ export default {
   color: white;
   border: 2px solid red;
   padding: 10px 16px;
-  font-family: game;
+  font-family: phantom;
   font-size: 16px;
   border-radius: 8px;
   width: 220px;
@@ -166,7 +169,7 @@ export default {
   color: white;
   border: 2px solid red;
   padding: 10px 16px;
-  font-family: detail;
+  font-family: phantom;
   font-size: 16px;
   border-radius: 8px;
   cursor: pointer;

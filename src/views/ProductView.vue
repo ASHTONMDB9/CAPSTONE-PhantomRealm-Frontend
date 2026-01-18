@@ -356,14 +356,14 @@ export default {
 .card-category {
   font-family: game;
   color: white;
-  font-size: 1rem;
+  font-size: 30px;
   letter-spacing: 1px;
   text-shadow: 0 0 5px red;
   margin-bottom: 5px;
 }
 .card-title {
   font-family: detail;
-  font-size: 2rem;
+  font-size: 50px;
   color: black;
   text-shadow: 0 0 10px red;
   margin-bottom: 10px;
@@ -384,7 +384,7 @@ export default {
 .add-cart-btn {
   background: transparent;
   border: 2px solid red;
-  color: red;
+  color: white;
   border-radius: 25px;
   padding: 8px 20px;
   font-size: 1rem;
@@ -392,12 +392,12 @@ export default {
 }
 .add-cart-btn:hover {
   background: red;
-  color: black;
+  color: white;
   box-shadow: 0 0 1rem red;
 }
 .card-price {
   font-family: detail;
-  font-size: 1.8rem;
+  font-size: 40px;
   color: white;
   text-shadow: 0 0 8px black;
 }
