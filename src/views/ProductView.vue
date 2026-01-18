@@ -54,6 +54,32 @@
         </div>
       </div>
     </div>
+
+    <div
+      v-if="recommendedProducts.length"
+      class="recommended-wrapper container-fluid mt-5"
+    >
+      <h2 class="recommended-title mb-4 ms-4">You Might Like</h2>
+
+      <div class="row gx-4 justify-content-center">
+        <div
+          v-for="item in recommendedProducts"
+          :key="item.id"
+          class="col-xl-3 col-lg-4 col-md-6 mb-4"
+        >
+          <router-link
+            :to="{ name: 'ProductView', params: { id: item.id } }"
+            class="recommended-shelf-card"
+          >
+            <img :src="item.image" alt="Recommended Game" />
+            <div class="recommended-info">
+              <h5>{{ item.title }}</h5>
+              <p>R{{ item.price }}</p>
+            </div>
+          </router-link>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div v-else class="box">
@@ -64,32 +90,72 @@
 <script>
 export default {
   props: ["id"],
-  computed: {
-    item() {
-      return this.$store.state.item;
-    },
-  },
   data() {
     return {
       product: null,
+      recommendedProducts: [],
     };
   },
   methods: {
-    addToCart(product) {
-      this.$store.dispatch("addToCart", product);
-    },
+  addToCart(product) {
+    this.$store.dispatch("addToCart", product);
   },
+
+  loadProduct(id) {
+    this.product = null;
+    this.recommendedProducts = [];
+
+    fetch(
+      "https://capstone-phantomrealm-backend.onrender.com/products/" + id
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        this.product = Array.isArray(data) ? data : [data];
+        this.fetchRecommended(this.product[0].category, this.product[0].id);
+      });
+
+    window.scrollTo(0, 0);
+  },
+
+  fetchRecommended(category, currentId) {
+    fetch("https://capstone-phantomrealm-backend.onrender.com/products")
+      .then((res) => res.json())
+      .then((data) => {
+        const filtered = data.filter(
+          (item) =>
+            item.category === category &&
+            item.id !== currentId
+        );
+
+        for (let i = filtered.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [filtered[i], filtered[j]] = [filtered[j], filtered[i]];
+        }
+
+        this.recommendedProducts = filtered.slice(0, 4);
+      });
+  },
+},
   mounted() {
     fetch(
       "https://capstone-phantomrealm-backend.onrender.com/products/" +
         this.$route.params.id
     )
       .then((res) => res.json())
-      .then((data) => (this.product = data));
+      .then((data) => {
+        // ensure array for existing v-for
+        this.product = Array.isArray(data) ? data : [data];
+        this.fetchRecommended(this.product[0].category, this.product[0].id);
+      });
 
-    console.log(this.product);
     window.scrollTo(0, 0);
+    this.loadProduct(this.$route.params.id);
   },
+  watch: {
+  "$route.params.id"(newId) {
+    this.loadProduct(newId);
+  },
+},
 };
 </script>
 <style scoped>
@@ -172,7 +238,7 @@ export default {
   background-color: #000;
   border-radius: 20px;
   overflow: hidden;
-  margin-top: 180px;
+  margin-top: 120px;
   box-shadow: 0 0 2rem red;
   padding: 50px;
 }
@@ -344,6 +410,50 @@ export default {
 }
 .back-link:hover {
   text-shadow: 0 0 8px red;
+}
+.recommended-wrapper {
+  padding-bottom: 80px;
+}
+.recommended-title {
+  font-family: detail;
+  color: white;
+  text-shadow: 0 0 12px red;
+}
+.recommended-shelf-card {
+  display: block;
+  background: #000;
+  border-radius: 20px;
+  padding: 20px;
+  height: 100%;
+  box-shadow: 0 0 2rem red;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+.recommended-shelf-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 0 3rem red;
+}
+.recommended-shelf-card img {
+  width: 100%;
+  height: 300px;
+  object-fit: fill;
+  border-radius: 15px;
+}
+.recommended-info {
+  margin-top: 15px;
+  text-align: center;
+}
+.recommended-info h5 {
+  font-family: detail;
+  color: white;
+  font-size: 30px;
+  text-shadow: 0 0 8px red;
+}
+.recommended-info p {
+  font-family: detail;
+  color: red;
+  font-size: 30px;
+  text-shadow: 0 0 8px black;
 }
 
 /* Responsive */

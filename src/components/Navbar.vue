@@ -99,7 +99,7 @@ export default {
 <style>
 /*Navbar*/
 .navbar {
-  height: 95px;
+  height: 65px;
   position: fixed;
   width: 100%;
   z-index: 1000;
