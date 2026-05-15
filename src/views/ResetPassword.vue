@@ -3,26 +3,26 @@
     <h1 class="about">Reset Password</h1>
 
     <div id="form" class="container-fluid">
-      <form @submit.prevent="submitReset">
+      <form @submit.prevent="resetPassword">
         <div class="mb-3">
-          <label for="password" class="form-label">New Password</label>
+          <label class="form-label">New Password</label>
+
           <input
             type="password"
             v-model="password"
             class="form-control"
-            id="password"
             placeholder="New password"
             required
           />
         </div>
 
         <div class="mb-3">
-          <label for="confirm" class="form-label">Confirm Password</label>
+          <label class="form-label">Confirm Password</label>
+
           <input
             type="password"
             v-model="confirmPassword"
             class="form-control"
-            id="confirm"
             placeholder="Confirm password"
             required
           />
@@ -36,35 +36,46 @@
 
 <script>
 import swal from "sweetalert";
-import router from "../router/index";
 
 export default {
   data() {
     return {
       password: "",
       confirmPassword: "",
+      token: "",
     };
   },
+
   mounted() {
     window.scrollTo(0, 0);
-    if (!this.$route.query.token) {
-      swal("Error", "No token provided. Cannot reset password.");
-      router.push("/login");
+
+    this.token = this.$route.params.token;
+
+    if (!this.token) {
+      swal("Error", "Invalid reset link");
+      this.$router.push("/login");
     }
   },
+
   methods: {
-    submitReset() {
+    async resetPassword() {
       if (this.password !== this.confirmPassword) {
         swal("Error", "Passwords do not match");
         return;
       }
 
-      const token = this.$route.query.token;
+      try {
+        await this.$store.dispatch("resetPassword", {
+          token: this.token,
+          newPassword: this.password,
+        });
 
-      this.$store.dispatch("resetPassword", {
-        token: token,
-        newPassword: this.password,
-      });
+        this.password = "";
+        this.confirmPassword = "";
+      } catch (error) {
+        console.log(error);
+        swal("Error", "Something went wrong");
+      }
     },
   },
 };
@@ -84,7 +95,6 @@ export default {
 }
 
 #form {
-  background-color: red;
   background-image: url(../assets/Images/REDBLA_1.jpg);
   background-attachment: fixed;
   background-size: cover;
@@ -95,7 +105,6 @@ export default {
 }
 
 .form-label {
-  filter: drop-shadow(0px 0px 0.2rem white);
   color: white;
 }
 
@@ -106,8 +115,5 @@ button {
   background-color: transparent;
   border: 3px solid red;
   color: white;
-  border-radius: 5px;
-  text-shadow: 0 0 4px white, 0 0 4px white, 0 0 4px white,
-    10px 0px 10px rgb(36, 36, 36);
 }
 </style>

@@ -27,7 +27,7 @@
               <i class="far fa-envelope-open"></i>
               <div class="cta-text">
                 <h4>Mail us</h4>
-                <span>phantomslaye4427@gmail.com</span>
+                <span>thephantomrealm4427@gmail.com</span>
               </div>
             </div>
           </div>
