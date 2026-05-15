@@ -182,55 +182,23 @@ export default createStore({
     },
 
     forgotPassword: async (context, payload) => {
-      try {
-        console.log("Vuex forgotPassword called with:", payload.email);
+  try {
+    const res = await fetch("http://localhost:3000/forgot-password", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email: payload.email }),
+    });
 
-        // Generate token
-        const res = await fetch(
-          "https://capstone-phantomrealm-backend.onrender.com/users/forgot-password",
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email: payload.email }),
-          }
-        );
+    const data = await res.json();
 
-        const data = await res.json();
-        console.log("Backend response:", data);
-
-        if (data.msg === "Email not found") {
-          swal("Error", "Email not found");
-          return;
-        }
-
-        // Send reset link via Formspree
-        const formData = new FormData();
-        formData.append("email", payload.email);
-        formData.append(
-          "message",
-          `Hello, Click this link to reset your password: ${data.resetLink}`
-        );
-
-        const formspreeRes = await fetch("https://formspree.io/f/mkneonwq", {
-          method: "POST",
-          body: formData,
-        });
-
-        if (!formspreeRes.ok) {
-          console.error("Formspree failed:", formspreeRes.statusText);
-          swal("Error", "Failed to send email. Try again.");
-          return;
-        }
-
-        swal("Password reset link sent to your email!");
-      } catch (err) {
-        console.error("Forgot password Vuex error:", err);
-        swal(
-          "Password reset link sent to your email!",
-          "This link will expire in 15 mins."
-        );
-      }
-    },
+    swal("Success", data.msg);
+  } catch (err) {
+    console.error(err);
+    swal("Error", "Something went wrong");
+  }
+},
 
     // Reset Password
     resetPassword: async (context, payload) => {

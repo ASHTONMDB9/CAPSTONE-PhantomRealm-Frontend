@@ -435,7 +435,7 @@
     <h3 class="text-center text-light">
       You found an Easter Egg you can't open ☹
     </h3>
-    <img class="box" src="../assets/Images/easteregg.gif" />
+    <Video autoplay class="box"><source src="../assets/Images/easter egg.mp4" type="video/mp4" loading="lazy" /> </video>
   </div>
 </template>
 <script>
