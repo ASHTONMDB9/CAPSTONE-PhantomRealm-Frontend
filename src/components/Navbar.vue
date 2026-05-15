@@ -42,11 +42,15 @@
             </li>
 
             <li v-for="user in user" :key="user.id" class="nav-item-user">
-              {{ user.full_name }}
+              <router-link :to="`/user/${user.id}`" style="text-decoration: none; color: white;">
+                {{ user.full_name }}
+              </router-link>
             </li>
 
             <li class="nav-item">
-              <button @click="Logout" class="btn nav-link" id="signup">Logout</button>
+              <button @click="Logout" class="btn nav-link" id="signup">
+                Logout
+              </button>
             </li>
           </template>
 
@@ -106,7 +110,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 /*Navbar*/
 .navbar {
   height: 65px;

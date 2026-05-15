@@ -78,6 +78,11 @@ const routes = [
     name: "EditProduct",
     component: () => import("../views/ProductView.vue"),
   },
+  {
+    path: "/user/:id",
+    name: "UserProfile",
+    component: () => import("../views/UserProfile.vue"),
+  },
 ];
 
 const router = createRouter({
