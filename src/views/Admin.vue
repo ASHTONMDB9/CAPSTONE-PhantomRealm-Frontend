@@ -428,14 +428,20 @@
       </div>
     </div>
   </div>
-  <div v-else>
-    <h1 class="text-center text-light" style="margin-top: 100px">
-      Access Denied
-    </h1>
-    <h3 class="text-center text-light">
-      You found an Easter Egg you can't open ☹
-    </h3>
-    <video autoplay class="box"><source src="../assets/Images/easteregg.mp4" type="video/mp4" loading="lazy" /> </video>
+  <div v-else class="video-container">
+    <video autoplay muted playsinline class="box">
+      <source
+        src="../assets/Images/easteregg.mp4"
+        type="video/mp4"
+        loading="lazy"
+      />
+    </video>
+    <div class="overlay-text">
+      <h1 class="text-center">Access Denied</h1>
+      <h3 class="text-center">
+        You found an Easter Egg you can't open ☹
+      </h3>
+    </div>
   </div>
 </template>
 <script>
@@ -543,12 +549,43 @@ export default {
   margin-top: 5px;
   background-color: black;
 }
+.video-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
 .box {
   padding-top: 10px;
   display: block;
   height: auto;
+  width: auto;
   margin-left: auto;
   margin-right: auto;
+  object-fit: cover;
+}
+.overlay-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  opacity: 0;
+  animation: fadeIn 1.5s ease forwards;
+  animation-delay: 3.5s;
+  font-family: detail;
+  color: black;
+  text-shadow: 0 0 4px red, 0 0 4px red, 0 0 4px red,
+    10px 0px 10px rgb(36, 36, 36);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 #off {
   margin-top: -100px;
@@ -558,7 +595,6 @@ export default {
   height: 60px;
   width: 80px;
 }
-
 .modal-content {
   background-color: #000;
   color: #f8f9fa;
@@ -567,27 +603,22 @@ export default {
   font-family: phantom;
   font-size: x-large;
 }
-
 .modal-header {
   border-bottom: 1px solid red;
   background-color: #000;
 }
-
 .modal-title {
   color: red;
   font-size: 1.5rem;
   text-shadow: 0 0 4px red;
 }
-
 .modal-body {
   background-color: #000;
 }
-
 .modal-footer {
   border-top: 1px solid red;
   background-color: #000;
 }
-
 .modal textarea,
 .modal input {
   width: 100%;
@@ -600,35 +631,29 @@ export default {
   font-family: detail;
   font-size: game;
 }
-
 .modal textarea::placeholder,
 .modal input::placeholder {
   color: #aaa;
 }
-
 .modal .btn-primary {
   background-color: red;
   border: none;
   color: black;
   font-weight: bold;
 }
-
 .modal .btn-primary:hover {
   background-color: darkred;
   color: white;
 }
-
 .modal .btn-secondary {
   background-color: transparent;
   border: 1px solid red;
   color: red;
 }
-
 .modal .btn-secondary:hover {
   background-color: red;
   color: black;
 }
-
 .modal .btn-close {
   filter: invert(1);
 }
