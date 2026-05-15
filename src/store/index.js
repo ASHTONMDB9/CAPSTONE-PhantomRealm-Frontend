@@ -181,49 +181,71 @@ export default createStore({
       }
     },
 
+    //Forgot password
     forgotPassword: async (context, payload) => {
       try {
-        const res = await fetch("http://localhost:3000/forgot-password", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email: payload.email }),
-        });
+        let res = await fetch(
+          "https://capstone-phantomrealm-backend.onrender.com/users/forgot-password",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              email: payload.email,
+            }),
+          }
+        );
 
-        const data = await res.json();
+        let data = await res.json();
 
-        swal("Success", data.msg);
-      } catch (err) {
-        console.error(err);
+        console.log(data);
+
+        if (data.msg === "Reset link sent successfully") {
+          swal("Success", "Password reset link has been sent to your email");
+        } else {
+          swal("Error", data.msg);
+        }
+      } catch (error) {
+        console.error(error);
+
         swal("Error", "Something went wrong");
       }
     },
 
     // Reset Password
     resetPassword: async (context, payload) => {
-      fetch(
-        "https://capstone-phantomrealm-backend.onrender.com/users/reset-password",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            token: payload.token,
-            newPassword: payload.newPassword,
-          }),
-        }
-      )
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.msg === "Password reset successfully") {
-            swal("Success", "Password updated successfully");
-            router.push("/login");
-          } else {
-            swal("Error", data.msg);
+      try {
+        let res = await fetch(
+          "https://capstone-phantomrealm-backend.onrender.com/users/reset-password",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              token: payload.token,
+              newPassword: payload.newPassword,
+            }),
           }
-        });
+        );
+
+        let data = await res.json();
+
+        console.log(data);
+
+        if (data.msg === "Password reset successfully") {
+          swal("Success", "Password updated successfully");
+
+          router.push("/login");
+        } else {
+          swal("Error", data.msg);
+        }
+      } catch (error) {
+        console.error(error);
+
+        swal("Error", "Something went wrong");
+      }
     },
 
     updateUser: async (context, payload) => {

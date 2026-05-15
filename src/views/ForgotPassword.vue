@@ -38,15 +38,9 @@ export default {
         return;
       }
 
-      console.log("Forgot password triggered for:", this.email);
-
-      try {
-        // Dispatch Vuex action
-        await this.$store.dispatch("forgotPassword", { email: this.email });
-      } catch (err) {
-        console.error("Error in forgotPassword method:", err);
-        swal("Error", "Something went wrong. Check console.");
-      }
+      this.$store.dispatch("forgotPassword", {
+        email: this.email,
+      });
     },
   },
 };

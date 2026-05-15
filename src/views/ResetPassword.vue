@@ -53,7 +53,7 @@ export default {
     }
   },
   methods: {
-    async submitReset() {
+    submitReset() {
       if (this.password !== this.confirmPassword) {
         swal("Error", "Passwords do not match");
         return;
@@ -61,36 +61,10 @@ export default {
 
       const token = this.$route.query.token;
 
-      try {
-        console.log("Sending reset password request with token:", token);
-
-        const res = await fetch(
-          "https://capstone-phantomrealm-backend.onrender.com/users/reset-password",
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              token: token,
-              newPassword: this.password,
-            }),
-          }
-        );
-
-        console.log("Reset password response status:", res.status);
-
-        const data = await res.json();
-        console.log("Reset password response data:", data);
-
-        if (data.msg === "Password reset successfully") {
-          swal("Success", "Password updated successfully");
-          router.push("/login");
-        } else {
-          swal("Error", data.msg);
-        }
-      } catch (err) {
-        console.error("Reset password error:", err);
-        swal("Error", "Network or server error. Check console.");
-      }
+      this.$store.dispatch("resetPassword", {
+        token: token,
+        newPassword: this.password,
+      });
     },
   },
 };
