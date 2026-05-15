@@ -42,6 +42,58 @@
                 Logout
               </button>
             </div>
+
+            <!-- ADDED BUTTONS (BOTTOM OF CARD) -->
+            <!-- EDIT FORM -->
+            <div v-if="isEditing" class="mt-4">
+              <input
+                v-model="editForm.email"
+                class="form-control mb-2"
+                placeholder="Email"
+              />
+              <input
+                v-model="editForm.full_name"
+                class="form-control mb-2"
+                placeholder="Full Name"
+              />
+
+              <input
+                v-model="editForm.phone_number"
+                class="form-control mb-2"
+                placeholder="Phone Number"
+              />
+
+              <input
+                v-model="editForm.password"
+                type="password"
+                class="form-control mb-2"
+                placeholder="Password (required)"
+              />
+
+              <div class="d-flex gap-3">
+                <button class="btn btn-outline-danger" @click="saveProfile">
+                  Save
+                </button>
+
+                <button
+                  class="btn btn-outline-danger"
+                  @click="isEditing = false"
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+
+            <!-- ACTION BUTTONS (BOTTOM OF CARD) -->
+            <div class="d-flex justify-content-center gap-3 mt-4">
+              <button class="btn btn-outline-danger" @click="editProfile">
+                Edit Profile
+              </button>
+
+              <button class="btn btn-outline-danger" @click="deleteAccount">
+                Delete Account
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -56,6 +108,16 @@
 
 <script>
 export default {
+  data() {
+    return {
+      isEditing: false,
+      editForm: {
+        email: "",
+        full_name: "",
+      },
+    };
+  },
+
   computed: {
     currentUser() {
       return this.$store.state.user?.user;
@@ -67,6 +129,40 @@ export default {
       this.$store.commit("Logout");
       localStorage.removeItem("vuex");
       this.$router.push("/Login");
+    },
+
+    // OPEN EDIT MODE
+    editProfile() {
+      this.isEditing = true;
+
+      this.editForm.email = this.currentUser.email;
+      this.editForm.full_name = this.currentUser.full_name;
+      this.editForm.phone_number = this.currentUser.phone_number || "";
+      this.editForm.user_type = this.currentUser.user_type;
+      this.editForm.password = ""; // important
+    },
+
+    // SAVE UPDATED PROFILE
+    saveProfile() {
+      this.$store.dispatch("updateUser", {
+        id: this.currentUser.id,
+        token: this.$store.state.Token,
+        email: this.editForm.email,
+        password: this.editForm.password,
+        full_name: this.editForm.full_name,
+        phone_number: this.editForm.phone_number,
+        user_type: this.currentUser.user_type,
+      });
+
+      this.isEditing = false;
+    },
+
+    // DELETE ACCOUNT
+    deleteAccount() {
+      this.$store.dispatch("deleteUser", {
+        id: this.currentUser.id,
+        token: this.$store.state.Token,
+      });
     },
   },
 };

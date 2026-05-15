@@ -182,23 +182,23 @@ export default createStore({
     },
 
     forgotPassword: async (context, payload) => {
-  try {
-    const res = await fetch("http://localhost:3000/forgot-password", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email: payload.email }),
-    });
+      try {
+        const res = await fetch("http://localhost:3000/forgot-password", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email: payload.email }),
+        });
 
-    const data = await res.json();
+        const data = await res.json();
 
-    swal("Success", data.msg);
-  } catch (err) {
-    console.error(err);
-    swal("Error", "Something went wrong");
-  }
-},
+        swal("Success", data.msg);
+      } catch (err) {
+        console.error(err);
+        swal("Error", "Something went wrong");
+      }
+    },
 
     // Reset Password
     resetPassword: async (context, payload) => {
@@ -224,6 +224,99 @@ export default createStore({
             swal("Error", data.msg);
           }
         });
+    },
+
+    updateUser: async (context, payload) => {
+      swal({
+        title: "Update Profile?",
+        text: "Do you want to save these changes?",
+        icon: "warning",
+        buttons: true,
+      }).then(async (willUpdate) => {
+        if (willUpdate) {
+          try {
+            let res = await fetch(
+              `https://capstone-phantomrealm-backend.onrender.com/users/update_user/${payload.id}`,
+              {
+                method: "PUT",
+                headers: {
+                  "Content-Type": "application/json",
+                  "x-auth-token": payload.token,
+                },
+                body: JSON.stringify({
+                  email: payload.email,
+                  password: payload.password,
+                  full_name: payload.full_name,
+                  phone_number: payload.phone_number,
+                  user_type: payload.user_type,
+                }),
+              }
+            );
+
+            let data = await res.json();
+            console.log(data);
+
+            if (data.msg === "User updated successfully") {
+              swal("Updated!", "Profile updated successfully.");
+
+              // optional: refresh user state
+              context.commit("setUser", {
+                ...context.state.user,
+                user: {
+                  ...context.state.user.user,
+                  email: payload.email,
+                  full_name: payload.full_name,
+                  phone_number: payload.phone_number,
+                },
+              });
+            } else {
+              swal("Error", "Failed to update profile", "error");
+            }
+          } catch (error) {
+            console.error(error);
+            swal("Error", "Something went wrong", "error");
+          }
+        }
+      });
+    },
+
+    deleteUser: async (context, payload) => {
+      swal({
+        title: "Are you sure?",
+        text: "This account will be permanently deleted!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      }).then(async (willDelete) => {
+        if (willDelete) {
+          try {
+            let res = await fetch(
+              `https://capstone-phantomrealm-backend.onrender.com/users/delete_user/${payload.id}`,
+              {
+                method: "DELETE",
+                headers: {
+                  "Content-Type": "application/json",
+                  "x-auth-token": payload.token,
+                },
+              }
+            );
+
+            let data = await res.json();
+            console.log(data);
+
+            swal("Deleted!", "User account has been deleted.");
+
+            // logout after deletion (important)
+            context.commit("Logout");
+
+            // redirect to login
+            window.location.href = "/login";
+          } catch (error) {
+            console.error(error);
+            swal("Error", "Failed to delete user", "error");
+          }
+        }
+      });
     },
 
     // Sign Up

@@ -551,28 +551,19 @@ export default {
 }
 .video-container {
   position: relative;
-  width: 100%;
-  height: 100%;
   overflow: hidden;
-}
-.box {
-  padding-top: 10px;
-  display: block;
   height: auto;
-  width: auto;
-  margin-left: auto;
-  margin-right: auto;
-  object-fit: cover;
+  width: 100%;
 }
 .overlay-text {
   position: absolute;
-  top: 50%;
+  top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 10;
   opacity: 0;
   animation: fadeIn 1.5s ease forwards;
-  animation-delay: 3.5s;
+  animation-delay: 4s;
   font-family: detail;
   color: black;
   text-shadow: 0 0 4px red, 0 0 4px red, 0 0 4px red,
