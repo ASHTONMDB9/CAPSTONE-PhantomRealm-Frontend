@@ -3,7 +3,7 @@
     <h1 class="about">Forgot Password</h1>
 
     <div id="form" class="container-fluid">
-      <form @submit.prevent="submitEmail">
+      <form @submit.prevent="sendResetLink">
         <div class="mb-3">
           <label for="email" class="form-label">Email</label>
 
@@ -24,8 +24,6 @@
 </template>
 
 <script>
-import swal from "sweetalert";
-
 export default {
   data() {
     return {
@@ -34,18 +32,14 @@ export default {
   },
 
   methods: {
-    async submitEmail() {
-      try {
-        // Vuex action
-        const response = await this.$store.dispatch("forgotPassword", {
-          email: this.email,
-        });
-
-        this.email = "";
-      } catch (error) {
-        console.log(error);
-        swal("Error", "Something went wrong");
+    sendResetLink() {
+      if (!this.email) {
+        return;
       }
+
+      this.$store.dispatch("forgotPassword", {
+        email: this.email,
+      });
     },
   },
 };

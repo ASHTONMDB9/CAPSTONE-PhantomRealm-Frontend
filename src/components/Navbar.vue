@@ -42,7 +42,10 @@
             </li>
 
             <li v-for="user in user" :key="user.id" class="nav-item-user">
-              <router-link :to="`/user/${user.id}`" style="text-decoration: none; color: white;">
+              <router-link
+                :to="`/user/${user.id}`"
+                style="text-decoration: none; color: white"
+              >
                 {{ user.full_name }}
               </router-link>
             </li>

@@ -35,47 +35,31 @@
 </template>
 
 <script>
-import swal from "sweetalert";
-
 export default {
   data() {
     return {
       password: "",
       confirmPassword: "",
-      token: "",
     };
   },
 
-  mounted() {
-    window.scrollTo(0, 0);
-
-    this.token = this.$route.params.token;
-
-    if (!this.token) {
-      swal("Error", "Invalid reset link");
-      this.$router.push("/login");
-    }
-  },
-
   methods: {
-    async resetPassword() {
-      if (this.password !== this.confirmPassword) {
-        swal("Error", "Passwords do not match");
+    resetPassword() {
+      if (!this.password || !this.confirmPassword) {
         return;
       }
 
-      try {
-        await this.$store.dispatch("resetPassword", {
-          token: this.token,
-          newPassword: this.password,
-        });
-
-        this.password = "";
-        this.confirmPassword = "";
-      } catch (error) {
-        console.log(error);
-        swal("Error", "Something went wrong");
+      if (this.password !== this.confirmPassword) {
+        alert("Passwords do not match");
+        return;
       }
+
+      const token = this.$route.params.token;
+
+      this.$store.dispatch("resetPassword", {
+        token,
+        password: this.password,
+      });
     },
   },
 };

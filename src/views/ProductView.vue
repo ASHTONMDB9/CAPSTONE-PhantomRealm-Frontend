@@ -97,45 +97,41 @@ export default {
     };
   },
   methods: {
-  addToCart(product) {
-    this.$store.dispatch("addToCart", product);
+    addToCart(product) {
+      this.$store.dispatch("addToCart", product);
+    },
+
+    loadProduct(id) {
+      this.product = null;
+      this.recommendedProducts = [];
+
+      fetch("https://capstone-phantomrealm-backend.onrender.com/products/" + id)
+        .then((res) => res.json())
+        .then((data) => {
+          this.product = Array.isArray(data) ? data : [data];
+          this.fetchRecommended(this.product[0].category, this.product[0].id);
+        });
+
+      window.scrollTo(0, 0);
+    },
+
+    fetchRecommended(category, currentId) {
+      fetch("https://capstone-phantomrealm-backend.onrender.com/products")
+        .then((res) => res.json())
+        .then((data) => {
+          const filtered = data.filter(
+            (item) => item.category === category && item.id !== currentId
+          );
+
+          for (let i = filtered.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [filtered[i], filtered[j]] = [filtered[j], filtered[i]];
+          }
+
+          this.recommendedProducts = filtered.slice(0, 4);
+        });
+    },
   },
-
-  loadProduct(id) {
-    this.product = null;
-    this.recommendedProducts = [];
-
-    fetch(
-      "https://capstone-phantomrealm-backend.onrender.com/products/" + id
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        this.product = Array.isArray(data) ? data : [data];
-        this.fetchRecommended(this.product[0].category, this.product[0].id);
-      });
-
-    window.scrollTo(0, 0);
-  },
-
-  fetchRecommended(category, currentId) {
-    fetch("https://capstone-phantomrealm-backend.onrender.com/products")
-      .then((res) => res.json())
-      .then((data) => {
-        const filtered = data.filter(
-          (item) =>
-            item.category === category &&
-            item.id !== currentId
-        );
-
-        for (let i = filtered.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          [filtered[i], filtered[j]] = [filtered[j], filtered[i]];
-        }
-
-        this.recommendedProducts = filtered.slice(0, 4);
-      });
-  },
-},
   mounted() {
     fetch(
       "https://capstone-phantomrealm-backend.onrender.com/products/" +
@@ -152,10 +148,10 @@ export default {
     this.loadProduct(this.$route.params.id);
   },
   watch: {
-  "$route.params.id"(newId) {
-    this.loadProduct(newId);
+    "$route.params.id"(newId) {
+      this.loadProduct(newId);
+    },
   },
-},
 };
 </script>
 <style scoped>

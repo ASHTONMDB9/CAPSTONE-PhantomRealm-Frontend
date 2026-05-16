@@ -181,7 +181,7 @@ export default createStore({
       }
     },
 
-    //Forgot password
+    // Forgot Password
     forgotPassword: async (context, payload) => {
       try {
         let res = await fetch(
@@ -199,17 +199,21 @@ export default createStore({
 
         let data = await res.json();
 
-        console.log(data);
-
         if (data.msg === "Reset link sent successfully") {
-          swal("Success", "Password reset link has been sent to your email");
+          swal(
+            "Success",
+            "Password reset link has been sent to your email",
+            "success"
+          );
+
+          router.push("/login");
         } else {
-          swal("Error", data.msg);
+          swal("Error", data.msg, "error");
         }
       } catch (error) {
-        console.error(error);
+        console.log(error);
 
-        swal("Error", "Something went wrong");
+        swal("Error", "Something went wrong", "error");
       }
     },
 
@@ -217,37 +221,35 @@ export default createStore({
     resetPassword: async (context, payload) => {
       try {
         let res = await fetch(
-          "https://capstone-phantomrealm-backend.onrender.com/users/reset-password",
+          `https://capstone-phantomrealm-backend.onrender.com/users/reset-password/${payload.token}`,
           {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
-              token: payload.token,
-              newPassword: payload.newPassword,
+              password: payload.password,
             }),
           }
         );
 
         let data = await res.json();
 
-        console.log(data);
-
-        if (data.msg === "Password reset successfully") {
-          swal("Success", "Password updated successfully");
+        if (data.msg === "Password reset successful") {
+          swal("Success", "Password updated successfully", "success");
 
           router.push("/login");
         } else {
-          swal("Error", data.msg);
+          swal("Error", data.msg, "error");
         }
       } catch (error) {
-        console.error(error);
+        console.log(error);
 
-        swal("Error", "Something went wrong");
+        swal("Error", "Something went wrong", "error");
       }
     },
 
+    //updateUser
     updateUser: async (context, payload) => {
       swal({
         title: "Update Profile?",
@@ -302,6 +304,7 @@ export default createStore({
       });
     },
 
+    //deleteUser
     deleteUser: async (context, payload) => {
       swal({
         title: "Are you sure?",
@@ -395,6 +398,7 @@ export default createStore({
     clearCart({ commit }) {
       commit("ClearCart");
     },
+
     // Delete product
     deleteProduct: async (context, payload) => {
       swal({
@@ -431,6 +435,7 @@ export default createStore({
         }
       });
     },
+
     // Update product
     UpdateProduct: async (context, payload) => {
       swal({

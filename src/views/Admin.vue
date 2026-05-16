@@ -438,9 +438,7 @@
     </video>
     <div class="overlay-text">
       <h1 class="text-center">Access Denied</h1>
-      <h3 class="text-center">
-        You found an Easter Egg you can't open ☹
-      </h3>
+      <h3 class="text-center">You found an Easter Egg you can't open ☹</h3>
     </div>
   </div>
 </template>
