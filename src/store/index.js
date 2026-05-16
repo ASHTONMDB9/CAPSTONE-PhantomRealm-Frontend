@@ -160,7 +160,7 @@ export default createStore({
       if (data.msg === "Password incorrect") {
         swal("Error", "Incorrect Password");
       } else if (data.msg === "Email not found please register") {
-        swal("Error", "Email not found please register");
+        swal("Error", "Email incorrect or not found please register");
       } else {
         // Verify token
         fetch(
@@ -200,11 +200,7 @@ export default createStore({
         let data = await res.json();
 
         if (data.msg === "Reset link sent successfully") {
-          swal(
-            "Success",
-            "Password reset link has been sent to your email",
-            "success"
-          );
+          swal("Success", "Password reset link has been sent to your email");
 
           router.push("/login");
         } else {
@@ -236,7 +232,7 @@ export default createStore({
         let data = await res.json();
 
         if (data.msg === "Password reset successful") {
-          swal("Success", "Password updated successfully", "success");
+          swal("Sucess", "Password updated successfully");
 
           router.push("/login");
         } else {
