@@ -279,7 +279,7 @@ export default createStore({
             if (data.msg === "User updated successfully") {
               swal("Updated!", "Profile updated successfully.");
 
-              // optional: refresh user state
+              // refresh user state
               context.commit("setUser", {
                 ...context.state.user,
                 user: {
@@ -342,25 +342,42 @@ export default createStore({
 
     // Sign Up
     signUp: async (context, payload) => {
-      fetch(
-        "https://capstone-phantomrealm-backend.onrender.com/users/register",
-        {
-          method: "POST",
-          body: JSON.stringify({
-            full_name: payload.full_name,
-            email: payload.email,
-            password: payload.password,
-            phone_number: payload.phone_number,
-            user_type: "User",
-          }),
-          headers: {
-            "Content-type": "application/json",
-          },
+      try {
+        let res = await fetch(
+          "https://capstone-phantomrealm-backend.onrender.com/users/register",
+          {
+            method: "POST",
+            body: JSON.stringify({
+              full_name: payload.full_name,
+              email: payload.email,
+              password: payload.password,
+              phone_number: payload.phone_number,
+              user_type: "User",
+            }),
+            headers: {
+              "Content-type": "application/json",
+            },
+          }
+        );
+        let data = await res.json();
+
+        if (res.status === 409) {
+          swal("Error", "Email already exists", "error");
+          return false;
         }
-      )
-        .then((response) => response.json())
-        .then((data) => console.log(data));
+        if (!res.ok) {
+          swal("Error", data.msg || "Signup failed", "error");
+          return false;
+        }
+        swal("Success", "Account created successfully");
+        return true;
+      } catch (error) {
+        console.error(error);
+        swal("Error", "Something went wrong", "error");
+        return false;
+      }
     },
+
     addToCart({ commit, state }, product) {
       const existingItem = state.cart.find((p) => p.id === product.id);
 

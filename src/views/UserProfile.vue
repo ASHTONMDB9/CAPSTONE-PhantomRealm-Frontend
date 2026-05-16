@@ -49,25 +49,25 @@
               <input
                 v-model="editForm.email"
                 class="form-control mb-2"
-                placeholder="Email"
+                placeholder="Email" required
               />
               <input
                 v-model="editForm.full_name"
                 class="form-control mb-2"
-                placeholder="Full Name"
+                placeholder="Full Name" required
               />
 
               <input
                 v-model="editForm.phone_number"
                 class="form-control mb-2"
-                placeholder="Phone Number"
+                placeholder="Phone Number" required
               />
 
               <input
                 v-model="editForm.password"
                 type="password"
                 class="form-control mb-2"
-                placeholder="Password (required)"
+                placeholder="Password (required)" required
               />
 
               <div class="d-flex gap-3">
@@ -114,6 +114,7 @@ export default {
       editForm: {
         email: "",
         full_name: "",
+        phone_number: "",
       },
     };
   },

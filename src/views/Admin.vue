@@ -437,8 +437,8 @@
       />
     </video>
     <div class="overlay-text">
-      <h1 class="text-center">Access Denied</h1>
-      <h3 class="text-center">You found an Easter Egg you can't open ☹</h3>
+      <p class="text-center">Access Denied</p>
+      <p class="text-center">You found an Easter Egg you can't open</p>
     </div>
   </div>
 </template>
@@ -555,7 +555,7 @@ export default {
 }
 .overlay-text {
   position: absolute;
-  top: 40%;
+  top: 45%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 10;
@@ -563,8 +563,9 @@ export default {
   animation: fadeIn 1.5s ease forwards;
   animation-delay: 4s;
   font-family: detail;
+  font-size: 65px;
   color: black;
-  text-shadow: 0 0 4px red, 0 0 4px red, 0 0 4px red,
+  text-shadow: 0 0 3px red, 0 0 3px red, 0 0 3px red,
     10px 0px 10px rgb(36, 36, 36);
 }
 
