@@ -1,7 +1,14 @@
 <template>
   <section id="landing">
-    <div class="hero-overlay"></div>
+    <div
+      class="bg-layer"
+      v-for="(bg, index) in backgrounds"
+      :key="index"
+      :style="{ backgroundImage: `url(${bg})` }"
+      :class="{ active: index === currentBgIndex }"
+    ></div>
 
+    <div class="hero-overlay"></div>
     <div class="hero-content">
       <h3 id="greeting" class="d-flex justify-content-center">Welcome to</h3>
 
@@ -396,10 +403,26 @@
     </div>
   </section>
 </template>
+
 <script>
 export default {
+  data() {
+    return {
+      backgrounds: [
+        require("../assets/Images/possible/image01.jpg"),
+        require("../assets/Images/possible/image02.jpeg"),
+        require("../assets/Images/possible/image03.jpg"),
+        require("../assets/Images/possible/image04.jpg"),
+        require("../assets/Images/possible/image05.png"),
+        require("../assets/Images/possible/image06.png"),
+      ],
+      currentBgIndex: 0,
+    };
+  },
   mounted() {
-    window.scrollTo(0, 0);
+    setInterval(() => {
+      this.currentBgIndex = (this.currentBgIndex + 1) % this.backgrounds.length;
+    }, 3000);
   },
 };
 </script>
@@ -427,19 +450,28 @@ img {
 .card-img-overlay {
   overflow: hidden;
 }
-
 #landing {
-  background-image: url(../assets/Images/cutter-man-4660655_1920.jpg);
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+}
+.bg-layer {
+  position: absolute;
+  inset: 0;
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  position: relative;
-  min-height: 100vh;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+.bg-layer.active {
+  opacity: 1;
 }
 .hero-overlay {
   position: absolute;
   inset: 0;
   background: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.55));
+  z-index: 1;
 }
 .hero-content {
   position: relative;
@@ -521,18 +553,15 @@ h5 {
   padding-top: 25px;
   animation: float-anim 5s infinite;
 }
-
 .service-tile img {
   object-fit: fill;
 }
-
 .service-tile::after {
   content: "";
   position: absolute;
   inset: 0;
   background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
 }
-
 .service-tile .content {
   position: absolute;
   bottom: 0;
@@ -540,7 +569,6 @@ h5 {
   z-index: 2;
   text-align: center;
 }
-
 .service-icon {
   height: 60px;
   width: 60px;

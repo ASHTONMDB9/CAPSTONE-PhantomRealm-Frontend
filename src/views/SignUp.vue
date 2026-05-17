@@ -117,7 +117,8 @@ button {
   border: 3px solid red;
   color: white;
   border-radius: 5px;
-  text-shadow: 0 0 4px white, 0 0 4px white, 0 0 4px white,
-    10px 0px 10px rgb(36, 36, 36);
+}
+button:hover {
+  box-shadow: 0 0 1rem red;
 }
 </style>

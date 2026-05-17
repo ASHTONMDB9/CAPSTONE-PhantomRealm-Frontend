@@ -113,7 +113,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 /*Navbar*/
 .navbar {
   height: 65px;
@@ -143,6 +143,9 @@ export default {
   color: red;
   text-decoration: line-through;
   text-decoration-thickness: 2px;
+}
+.navbar a.router-link-exact-active:hover {
+  color: white;
 }
 .btn {
   background-color: transparent;

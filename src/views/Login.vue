@@ -105,8 +105,9 @@ button {
   border: 3px solid red;
   color: white;
   border-radius: 5px;
-  text-shadow: 0 0 4px white, 0 0 4px white, 0 0 4px white,
-    10px 0px 10px rgb(36, 36, 36);
+}
+button:hover {
+  box-shadow: 0 0 1rem red;
 }
 
 .forgot {
@@ -117,13 +118,13 @@ button {
 .forgot-link {
   color: white;
   text-decoration: none;
-  font-size: 14px;
-  text-shadow: 0 0 4px red, 0 0 4px red;
+  font-size: 25px;
+  text-shadow: 0 0 3px red, 0 0 3px red;
   transition: 0.3s ease;
+  font-family: detail;
 }
 
 .forgot-link:hover {
-  color: red;
-  text-shadow: 0 0 6px white, 0 0 6px white;
+  text-decoration: line-through;
 }
 </style>
