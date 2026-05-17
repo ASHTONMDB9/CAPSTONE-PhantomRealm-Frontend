@@ -57,12 +57,38 @@
       </div>
 
       <div class="offcanvas-body">
-        <div
-          class="nav-item nav-link text-dark py-2 ps-2 rounded-pill"
-          style="background-color: red"
-        >
-          <i class="fa fa-tachometer-alt me-2"></i>Dashboard
-        </div>
+        <a href="#profit" style="text-decoration: none">
+          <div
+            class="nav-item nav-link text-dark py-2 ps-2 mb-2 rounded-pill"
+            style="background-color: red"
+          >
+            <i class="fa fa-tachometer-alt me-2"></i> Dashboard
+          </div>
+        </a>
+        <a href="#charts" style="text-decoration: none">
+          <div
+            class="nav-item nav-link text-dark py-2 ps-2 mb-2 rounded-pill"
+            style="background-color: red"
+          >
+            <i class="fa-solid fa-chart-area"></i> Analytics
+          </div>
+        </a>
+        <a href="#users" style="text-decoration: none">
+          <div
+            class="nav-item nav-link text-dark py-2 ps-2 mb-2 rounded-pill"
+            style="background-color: red"
+          >
+            <i class="fa-solid fa-user"></i> Users
+          </div>
+        </a>
+        <a href="#products" style="text-decoration: none">
+          <div
+            class="nav-item nav-link text-dark py-2 ps-2 mb-2 rounded-pill"
+            style="background-color: red"
+          >
+            <i class="fa-solid fa-barcode"></i> Merchandise
+          </div>
+        </a>
       </div>
     </div>
 
@@ -159,7 +185,7 @@
         </div>
       </div>
 
-      <div class="container-fluid pt-4 px-4">
+      <div id="users" class="container-fluid pt-4 px-4">
         <div class="bg-dark text-light text-center rounded p-4">
           <div class="d-flex align-items-center justify-content-between mb-2">
             <h4 class="mb-0">Users</h4>
@@ -285,7 +311,7 @@
             </div>
           </div>
 
-          <div class="table-responsive">
+          <div id="products" class="table-responsive">
             <table
               class="table text-start align-middle table-bordered table-hover mb-0"
             >
