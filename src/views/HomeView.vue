@@ -723,11 +723,37 @@ h5 {
   padding-top: 50px;
 }
 
-/* mobile */
-@media (max-width: 576px) {
-  #landing {
+/* Responsive background images for landing section */
+@media (max-width: 1200px) {
+  #landing .bg-layer {
+    background-size: cover;
     background-position: center;
   }
+}
+
+@media (max-width: 992px) {
+  #landing .bg-layer {
+    background-size: cover;
+    background-position: center;
+  }
+}
+
+@media (max-width: 768px) {
+  #landing .bg-layer {
+    background-size: cover;
+    background-position: center;
+  }
+}
+
+
+/* mobile */
+@media (max-width: 576px) {
+  #landing .bg-layer {
+    background-size: cover;
+    background-position: center;
+    background-attachment: scroll; /* fixed can cause issues on small screens */
+  }
+
   #greeting {
     padding-top: 320px;
     font-size: 26px;

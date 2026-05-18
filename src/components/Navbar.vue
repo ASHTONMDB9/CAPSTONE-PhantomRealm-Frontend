@@ -1,6 +1,6 @@
 <template>
   <nav id="nav" class="navbar navbar-dark navbar-expand-lg">
-    <div class="container-fluid">
+    <div id="nav-sm" class="container-fluid">
       <router-link to="/" class="navbar-brand">
         <img src="../assets/Images/nav.png" alt="Logo" height="50" />
       </router-link>
@@ -20,16 +20,16 @@
       <div class="collapse navbar-collapse" id="navbarContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <router-link class="nav-link" to="/">Home</router-link>
+            <router-link class="nav-link" to="/" @click="collapseNavbar">Home</router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/Store">Store</router-link>
+            <router-link class="nav-link" to="/Store" @click="collapseNavbar">Store</router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/Contact">Contact</router-link>
+            <router-link class="nav-link" to="/Contact" @click="collapseNavbar">Contact</router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/Cart">Cart</router-link>
+            <router-link class="nav-link" to="/Cart" @click="collapseNavbar">Cart</router-link>
           </li>
         </ul>
 
@@ -59,12 +59,12 @@
 
           <template v-else>
             <li class="nav-item">
-              <router-link to="/SignUp" class="btn nav-link" id="signup">
+              <router-link to="/SignUp" class="btn nav-link" id="signup" @click="collapseNavbar">
                 Sign Up
               </router-link>
             </li>
             <li class="nav-item">
-              <router-link to="/Login" class="btn nav-link" id="login">
+              <router-link to="/Login" class="btn nav-link" id="login" @click="collapseNavbar">
                 Log in
               </router-link>
             </li>
@@ -108,6 +108,14 @@ export default {
       this.$store.commit("Logout");
       localStorage.removeItem("vuex");
       this.$router.push("/Login");
+    },
+    collapseNavbar() {
+      // Collapse the burger menu if open
+      const navbarContent = document.getElementById("navbarContent");
+      if (navbarContent.classList.contains("show")) {
+        const bootstrapCollapse = bootstrap.Collapse.getInstance(navbarContent);
+        bootstrapCollapse.hide();
+      }
     },
   },
 };
@@ -169,6 +177,10 @@ export default {
 
 /* Mobile tweaks */
 @media (max-width: 991px) {
+  #nav-sm {
+    background-color: black;
+  }
+
   .navbar-nav {
     text-align: center;
   }

@@ -2,16 +2,21 @@
   <div v-if="product" id="container-fluid">
     <div v-for="product in product" :key="product.id" class="item">
       <div class="card game-shelf-card mb-3 ms-4 me-4">
-        <div class="cover-disc-wrapper">
+        <img
+          v-if="isSmallScreen"
+          :src="product.image"
+          alt="Game Cover"
+          class="standard-product-image mb-3"
+        />
+
+        <div v-else class="cover-disc-wrapper">
           <div class="game-box-angle">
             <div class="cover-spine">
               <span>{{ product.title }}</span>
             </div>
-
             <div class="cover-front">
               <img :src="product.image" alt="Game Cover Front" />
             </div>
-
             <div class="cover-depth"></div>
           </div>
 
@@ -60,7 +65,6 @@
       class="recommended-wrapper container-fluid mt-5"
     >
       <h2 class="recommended-title mb-4 ms-4">You Might Like</h2>
-
       <div class="row gx-4 justify-content-center">
         <div
           v-for="item in recommendedProducts"
@@ -94,11 +98,16 @@ export default {
     return {
       product: null,
       recommendedProducts: [],
+      isSmallScreen: false,
     };
   },
   methods: {
     addToCart(product) {
       this.$store.dispatch("addToCart", product);
+    },
+
+    checkScreenSize() {
+      this.isSmallScreen = window.innerWidth <= 992; // adjust breakpoint as needed
     },
 
     loadProduct(id) {
@@ -133,19 +142,13 @@ export default {
     },
   },
   mounted() {
-    fetch(
-      "https://capstone-phantomrealm-backend.onrender.com/products/" +
-        this.$route.params.id
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        // ensure array for existing v-for
-        this.product = Array.isArray(data) ? data : [data];
-        this.fetchRecommended(this.product[0].category, this.product[0].id);
-      });
+    this.checkScreenSize();
+    window.addEventListener("resize", this.checkScreenSize);
 
-    window.scrollTo(0, 0);
     this.loadProduct(this.$route.params.id);
+  },
+  beforeUnmount() {
+    window.removeEventListener("resize", this.checkScreenSize);
   },
   watch: {
     "$route.params.id"(newId) {
@@ -451,32 +454,115 @@ export default {
   font-size: 30px;
   text-shadow: 0 0 8px black;
 }
+.standard-product-image {
+  width: 100%;
+  height: auto;
+  border-radius: 15px;
+  object-fit: cover;
+  box-shadow: 0 0 2rem red;
+}
+.game-shelf-card {
+  display: flex;
+  flex-direction: row;
+  background-color: #000;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-top: 120px;
+  box-shadow: 0 0 2rem red;
+  padding: 50px;
+}
 
-/* Responsive */
-@media (max-width: 992px) {
+@media (max-width: 1584px) {
   .game-shelf-card {
     flex-direction: column;
     align-items: center;
+    padding: 20px;
   }
-  .cover-disc-wrapper,
   .manual-wrapper {
-    flex: 1 1 100%;
-    padding: 10px 0;
-    justify-content: center;
+    width: 100%;
   }
-  .game-box-angle {
-    width: 120px;
-    height: 200px;
-  }
-  .game-disc {
-    width: 80px;
-    height: 80px;
+  .manual-text {
+    height: auto;
   }
   .card-title {
     font-size: 1.8rem;
   }
   .card-price {
     font-size: 1.5rem;
+  }
+  .add-cart-btn {
+    padding: 6px 12px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .manual-text {
+    font-size: 0.85rem;
+    line-height: 1.4;
+    padding: 8px;
+  }
+  .card-title {
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+  }
+  .card-category {
+    font-size: 1rem;
+  }
+  .card-price {
+    font-size: 1.2rem;
+  }
+  .add-cart-btn {
+    font-size: 0.85rem;
+    padding: 6px 12px;
+  }
+  .standard-product-image {
+    width: 90%;
+    max-width: 300px;
+    margin: 0 auto 15px auto;
+  }
+  .manual-content {
+    padding: 15px;
+  }
+  .game-shelf-card {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 374px) {
+  .manual-text {
+    font-size: 0.75rem;
+    line-height: 1.35;
+    padding: 6px;
+  }
+  .card-title {
+    font-size: 1.3rem;
+    margin-bottom: 6px;
+  }
+  .card-category {
+    font-size: 0.9rem;
+  }
+  .card-price {
+    font-size: 1rem;
+  }
+  .add-cart-btn {
+    font-size: 0.75rem;
+    padding: 5px 10px;
+  }
+  .standard-product-image {
+    width: 85%;
+    max-width: 250px;
+    margin-bottom: 12px;
+  }
+
+  /* Manual content padding */
+  .manual-content {
+    padding: 12px;
+  }
+
+  /* Overall card padding */
+  .game-shelf-card {
+    padding: 15px;
   }
 }
 </style>
