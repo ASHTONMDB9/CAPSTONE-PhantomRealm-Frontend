@@ -43,11 +43,6 @@
 
         <ul class="navbar-nav align-items-lg-center">
           <template v-if="user">
-            <li class="nav-item">
-              <router-link class="nav-link" to="/orders" @click="collapseNavbar"
-                >My Orders</router-link
-              >
-            </li>
             <li class="nav-item" v-if="user">
               <router-link class="nav-link admin-link" to="/Admin">
                 Admin
