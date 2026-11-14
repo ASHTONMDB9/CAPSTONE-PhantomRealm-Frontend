@@ -128,6 +128,9 @@ export default createStore({
     },
 
     // ---------- ORDERS ----------
+    // Place an order from the cart. `shipping` is just the delivery address
+    // (+ optional notes / phone); name, email and phone come from the account
+    // on the server, and prices come from the products table.
     addOrder: async ({ state, commit }, { notes, ...shipping }) => {
       const items = state.cart.map((i) => ({
         product_id: i.id,
@@ -157,7 +160,7 @@ export default createStore({
 
         commit("setOrder", data.order);
         commit("ClearCart");
-        swal("Order placed!", `Your order #${data.order.id} has been received`);
+        swal("Order placed!", `Your order #${data.order.id} has been received`, "success");
         router.push(`/user/${state.user.user.id}`); // their account page shows their orders
         return true;
       } catch (error) {
@@ -240,6 +243,51 @@ export default createStore({
       } catch (error) {
         console.error(error);
         swal("Error", "Could not cancel order", "error");
+        return false;
+      }
+    },
+
+    // ---------- WISHLIST ----------
+    // Products on the logged-in user's wishlist (returned, not stored)
+    getWishlist: async ({ state }) => {
+      if (!state.Token) return [];
+      try {
+        const res = await fetch(`${API}/wishlist`, {
+          headers: { "x-auth-token": state.Token },
+        });
+        return res.ok ? await res.json() : [];
+      } catch (error) {
+        console.error("Failed to fetch wishlist:", error);
+        return [];
+      }
+    },
+
+    // Add (add: true) or remove (add: false) a product. Returns true on success.
+    setWishlisted: async ({ state, commit }, { productId, add }) => {
+      if (!state.Token) {
+        swal("Please log in", "Log in to use your wishlist", "info");
+        router.push("/Login");
+        return false;
+      }
+      try {
+        const res = await fetch(`${API}/wishlist/${productId}`, {
+          method: add ? "POST" : "DELETE",
+          headers: { "x-auth-token": state.Token },
+        });
+        if (res.status === 401) {
+          swal("Session expired", "Please log in again", "error");
+          commit("Logout");
+          router.push("/Login");
+          return false;
+        }
+        if (!res.ok) {
+          const data = await res.json().catch(() => ({}));
+          swal("Wishlist", data.msg || "Something went wrong", "error");
+        }
+        return res.ok;
+      } catch (error) {
+        console.error(error);
+        swal("Wishlist", "Something went wrong", "error");
         return false;
       }
     },

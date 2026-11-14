@@ -14,9 +14,7 @@
             >
               <div class="d-flex align-items-center flex-column flex-md-row">
                 <!-- PROFILE ICON -->
-                <div class="profile-avatar">
-                  {{ currentUser.full_name.charAt(0) }}
-                </div>
+                <ProfileAvatar :name="currentUser.full_name" />
 
                 <!-- USER DETAILS -->
                 <div class="ms-md-4 mt-3 mt-md-0 text-center text-md-start">
@@ -94,6 +92,9 @@
             </div>
 
             <hr class="my-5" />
+            <UserWishlist />
+
+            <hr class="my-5" />
             <UserOrders />
           </div>
         </div>
@@ -109,9 +110,11 @@
 
 <script>
 import UserOrders from "../components/UserOrders.vue";
+import UserWishlist from "../components/UserWishlist.vue";
+import ProfileAvatar from "../components/ProfileAvatar.vue";
 
 export default {
-  components: { UserOrders },
+  components: { UserOrders, UserWishlist, ProfileAvatar },
   data() {
     return {
       isEditing: false,

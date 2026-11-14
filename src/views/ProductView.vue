@@ -49,9 +49,21 @@
               class="purchase-wrapper mt-3 d-flex justify-content-between align-items-center"
             >
               <h5 class="card-price">R{{ product.price }}</h5>
-              <button class="btn add-cart-btn" @click="addToCart(product)">
-                Add to Cart
-              </button>
+              <div class="d-flex flex-wrap justify-content-end gap-2">
+                <button class="btn add-cart-btn" @click="toggleWish(product)">
+                  <i
+                    :class="
+                      isWished(product.id)
+                        ? 'fa-solid fa-heart'
+                        : 'fa-regular fa-heart'
+                    "
+                  ></i>
+                  {{ isWished(product.id) ? "In Wishlist" : "Add to Wishlist" }}
+                </button>
+                <button class="btn add-cart-btn" @click="addToCart(product)">
+                  Add to Cart
+                </button>
+              </div>
             </div>
 
             <router-link to="/Store" class="back-link mt-2">
@@ -106,9 +118,33 @@ export default {
       product: null,
       recommendedProducts: [],
       isSmallScreen: false,
+      wishlistIds: [],
     };
   },
   methods: {
+    isWished(id) {
+      return this.wishlistIds.includes(id);
+    },
+
+    async loadWishlist() {
+      if (!this.$store.state.Token) return;
+      const items = await this.$store.dispatch("getWishlist");
+      this.wishlistIds = items.map((i) => i.id);
+    },
+
+    async toggleWish(product) {
+      const add = !this.isWished(product.id);
+      const ok = await this.$store.dispatch("setWishlisted", {
+        productId: product.id,
+        add,
+      });
+      if (ok) {
+        this.wishlistIds = add
+          ? [...this.wishlistIds, product.id]
+          : this.wishlistIds.filter((id) => id !== product.id);
+      }
+    },
+
     isGame(product) {
       const category = String(product.category || "").toLowerCase();
       return GAME_CATEGORIES.some((word) => category.includes(word));
@@ -154,6 +190,7 @@ export default {
     },
   },
   mounted() {
+    this.loadWishlist();
     this.checkScreenSize();
     window.addEventListener("resize", this.checkScreenSize);
 

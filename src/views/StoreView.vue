@@ -35,6 +35,19 @@
               <h5 class="card-text">{{ product.category.toUpperCase() }}</h5>
               <h4 class="card-price">R{{ product.price }}.00</h4>
             </div>
+            <button
+              type="button"
+              class="wish-btn"
+              :class="{ active: isWished(product.id) }"
+              :title="isWished(product.id) ? 'Remove from wishlist' : 'Add to wishlist'"
+              @click.prevent.stop="toggleWish(product)"
+            >
+              <i
+                :class="
+                  isWished(product.id) ? 'fa-solid fa-heart' : 'fa-regular fa-heart'
+                "
+              ></i>
+            </button>
             <div></div>
           </div>
         </router-link>
@@ -53,9 +66,11 @@ export default {
       selectedCategory: "",
       sortOption: "",
       searchQuery: "",
+      wishlistIds: [],
     };
   },
   mounted() {
+    this.loadWishlist();
     fetch("https://capstone-phantomrealm-backend.onrender.com/products", {})
       .then((res) => res.json())
       .then(
@@ -102,6 +117,28 @@ export default {
       }
 
       return result;
+    },
+  },
+  methods: {
+    isWished(id) {
+      return this.wishlistIds.includes(id);
+    },
+    async loadWishlist() {
+      if (!this.$store.state.Token) return;
+      const items = await this.$store.dispatch("getWishlist");
+      this.wishlistIds = items.map((i) => i.id);
+    },
+    async toggleWish(product) {
+      const add = !this.isWished(product.id);
+      const ok = await this.$store.dispatch("setWishlisted", {
+        productId: product.id,
+        add,
+      });
+      if (ok) {
+        this.wishlistIds = add
+          ? [...this.wishlistIds, product.id]
+          : this.wishlistIds.filter((id) => id !== product.id);
+      }
     },
   },
 };
@@ -247,6 +284,28 @@ export default {
   text-align: start;
   font-size: 30px;
   font-family: game;
+}
+.wish-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 5;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 2px solid red;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.wish-btn:hover {
+  box-shadow: 0 0 0.8rem red;
+}
+.wish-btn.active {
+  color: red;
 }
 .rating i {
   font-size: 18px;
