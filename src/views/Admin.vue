@@ -27,7 +27,7 @@
           style="color: red"
           id="offcanvasScrollingLabel"
         >
-          PhantomRealm
+         The PhantomRealm
         </h3>
         <button
           type="button"
@@ -213,6 +213,68 @@
                   <td class="text-light">{{ user.email }}</td>
                   <td class="text-light">{{ user.password }}</td>
                   <td class="text-light">{{ user.user_type }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div id="users" class="container-fluid pt-4 px-4">
+        <div class="bg-dark text-light text-center rounded p-4">
+          <div class="d-flex align-items-center justify-content-between mb-2">
+            <h4 class="mb-0">Orders</h4>
+          </div>
+
+          <div class="table-responsive mt-4">
+            <table
+              class="table text-start align-middle table-bordered table-hover mb-0"
+            >
+              <thead>
+                <tr class="text-white">
+                  <th scope="col">Order</th>
+                  <th scope="col">Date</th>
+                  <th scope="col">Customer</th>
+                  <th scope="col">Items</th>
+                  <th scope="col">Total</th>
+                  <th scope="col">Delivery</th>
+                  <th scope="col">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="order in orders" v-bind:key="order.id">
+                  <td class="text-light">#{{ order.id }}</td>
+                  <td class="text-light">
+                    {{ order.created_at ? new Date(order.created_at).toLocaleDateString() : "" }}
+                  </td>
+                  <td class="text-light">
+                    {{ order.first_name }} {{ order.last_name }}<br />
+                    <small>{{ order.email }}</small><br />
+                    <small>{{ order.phone_number }}</small>
+                  </td>
+                  <td class="text-light">
+                    <div v-for="item in order.items" :key="item.id">
+                      {{ item.quantity }} × {{ item.title }}
+                    </div>
+                  </td>
+                  <td class="text-light">R {{ Number(order.total).toFixed(2) }}</td>
+                  <td class="text-light">
+                    {{ order.street_address }}, {{ order.city }},
+                    {{ order.province }}, {{ order.postcode }},
+                    {{ order.country }}
+                    <div v-if="order.notes"><small>Note: {{ order.notes }}</small></div>
+                  </td>
+                  <td>
+                    <select
+                      class="form-select form-select-sm"
+                      :value="order.status"
+                      @change="setOrderStatus(order.id, $event.target.value)"
+                    >
+                      <option v-for="s in orderStatuses" :key="s" :value="s">
+                        {{ s }}
+                      </option>
+                    </select>
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -484,6 +546,14 @@ export default {
       category: "",
       image: "",
       price: "",
+      orderStatuses: ["pending", "processing", "shipped", "delivered", "cancelled"],
+      full_name: "",
+      email: "",
+      country: "",
+      city: "",
+      street_address: "",
+      province: "",
+      phone_number: "",
     };
   },
   mounted() {
@@ -498,10 +568,14 @@ export default {
       .then((data) => (this.users = data), console.log(this.users));
 
     this.$store.dispatch("getProduct");
+    this.$store.dispatch("getOrders");
   },
   computed: {
     product() {
       return this.$store.state.product;
+    },
+    orders() {
+      return this.$store.state.orders;
     },
     user() {
       return this.$store.state.user;
@@ -514,6 +588,9 @@ export default {
     },
   },
   methods: {
+    setOrderStatus(id, status) {
+      this.$store.dispatch("updateOrderStatus", { id, status });
+    },
     addProduct() {
       this.$store
         .dispatch("addProduct", {

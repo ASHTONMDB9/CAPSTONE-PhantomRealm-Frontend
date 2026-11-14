@@ -20,21 +20,34 @@
       <div class="collapse navbar-collapse" id="navbarContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <router-link class="nav-link" to="/" @click="collapseNavbar">Home</router-link>
+            <router-link class="nav-link" to="/" @click="collapseNavbar"
+              >Home</router-link
+            >
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/Store" @click="collapseNavbar">Store</router-link>
+            <router-link class="nav-link" to="/Store" @click="collapseNavbar"
+              >Store</router-link
+            >
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/Contact" @click="collapseNavbar">Contact</router-link>
+            <router-link class="nav-link" to="/Contact" @click="collapseNavbar"
+              >Contact</router-link
+            >
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/Cart" @click="collapseNavbar">Cart</router-link>
+            <router-link class="nav-link" to="/Cart" @click="collapseNavbar"
+              >Cart</router-link
+            >
           </li>
         </ul>
 
         <ul class="navbar-nav align-items-lg-center">
           <template v-if="user">
+            <li class="nav-item">
+              <router-link class="nav-link" to="/orders" @click="collapseNavbar"
+                >My Orders</router-link
+              >
+            </li>
             <li class="nav-item" v-if="user">
               <router-link class="nav-link admin-link" to="/Admin">
                 Admin
@@ -44,7 +57,6 @@
             <li v-for="user in user" :key="user.id" class="nav-item-user">
               <router-link
                 :to="`/user/${user.id}`"
-                style="text-decoration: none; color: white"
               >
                 {{ user.full_name }}
               </router-link>
@@ -59,12 +71,22 @@
 
           <template v-else>
             <li class="nav-item">
-              <router-link to="/SignUp" class="btn nav-link" id="signup" @click="collapseNavbar">
+              <router-link
+                to="/SignUp"
+                class="btn nav-link"
+                id="signup"
+                @click="collapseNavbar"
+              >
                 Sign Up
               </router-link>
             </li>
             <li class="nav-item">
-              <router-link to="/Login" class="btn nav-link" id="login" @click="collapseNavbar">
+              <router-link
+                to="/Login"
+                class="btn nav-link"
+                id="login"
+                @click="collapseNavbar"
+              >
                 Log in
               </router-link>
             </li>
@@ -135,11 +157,18 @@ export default {
   margin: 0 6px;
   font-family: detail;
 }
-.nav-item-user {
+.nav-item-user a{
   color: white;
   font-family: phantom;
   font-size: 16px;
   margin: 0 5px;
+  text-decoration: none;
+}
+.nav-item-user a:hover {
+  color: red;
+}
+.nav-item-user a.router-link-exact-active {
+  text-decoration: none;
 }
 .nav-link {
   transition: color 0.2s ease;
@@ -147,7 +176,7 @@ export default {
 .nav-link:hover {
   color: red;
 }
-.navbar a.router-link-exact-active {
+.nav-item a.router-link-exact-active {
   color: red;
   text-decoration: line-through;
   text-decoration-thickness: 2px;

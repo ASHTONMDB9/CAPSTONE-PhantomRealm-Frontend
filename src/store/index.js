@@ -2,6 +2,12 @@ import { createStore } from "vuex";
 import router from "../router/index";
 import createPersistedState from "vuex-persistedstate";
 import swal from "sweetalert";
+
+// Used by the order actions. Set VUE_APP_API_URL in a .env file to point at a local backend.
+const API =
+  process.env.VUE_APP_API_URL ||
+  "https://capstone-phantomrealm-backend.onrender.com";
+
 export default createStore({
   state: {
     user: null,
@@ -10,6 +16,8 @@ export default createStore({
     product: [],
     cart: [],
     order: null,
+    orders: [], // admin: every order
+    myOrders: [], // the logged-in user's orders
   },
   getters: {
     cartCount(state) {
@@ -46,8 +54,24 @@ export default createStore({
     setOrder: (state, order) => {
       state.order = order;
     },
+    setOrders: (state, orders) => {
+      state.orders = orders;
+    },
+    setMyOrders: (state, orders) => {
+      state.myOrders = orders;
+    },
+    setOrderStatus: (state, { id, status }) => {
+      [state.orders, state.myOrders].forEach((list) => {
+        const o = list.find((x) => x.id === id);
+        if (o) o.status = status;
+      });
+    },
     Logout(state) {
-      (state.user = ""), (state.Token = ""), (state.cart = []);
+      (state.user = ""),
+        (state.Token = ""),
+        (state.cart = []),
+        (state.orders = []),
+        (state.myOrders = []);
     },
     AddtoCart(state, product) {
       const item = state.cart.find((p) => p.id === product.id);
@@ -121,22 +145,121 @@ export default createStore({
       }
     },
 
-    // new order
-    addOrder: async (context, order) => {
-      fetch(
-        "https://capstone-phantomrealm-backend.onrender.com/orders/add_order",
-        {
-          method: "POST",
-          body: JSON.stringify(order),
-          headers: {
-            "Content-type": "application/json; charset=UTF-8",
-          },
-        }
-      )
-        .then((response) => response.json())
-        .then(() => context.dispatch("getOrder"));
+    // ---------- ORDERS ----------
 
-      router.push("/Store");
+    addOrder: async ({ state, commit }, { notes, ...shipping }) => {
+      const items = state.cart.map((i) => ({
+        product_id: i.id,
+        quantity: i.quantity,
+      }));
+      try {
+        const res = await fetch(`${API}/orders`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "x-auth-token": state.Token,
+          },
+          body: JSON.stringify({ items, shipping, notes }),
+        });
+        const data = await res.json();
+
+        if (res.status === 401) {
+          swal("Session expired", "Please log in again to place your order", "error");
+          commit("Logout");
+          router.push("/Login");
+          return false;
+        }
+        if (!res.ok) {
+          swal("Could not place order", data.msg || "Please try again");
+          return false;
+        }
+
+        commit("setOrder", data.order);
+        commit("ClearCart");
+        swal("Order placed!", `Your order #${data.order.id} has been received`);
+        router.push("/orders");
+        return true;
+      } catch (error) {
+        console.error(error);
+        swal("Error", "Something went wrong while placing your order");
+        return false;
+      }
+    },
+
+    // The logged-in user's own orders (newest first)
+    getMyOrders: async ({ state, commit }) => {
+      if (!state.Token) return;
+      try {
+        const res = await fetch(`${API}/orders/mine`, {
+          headers: { "x-auth-token": state.Token },
+        });
+        if (res.ok) commit("setMyOrders", await res.json());
+      } catch (error) {
+        console.error("Failed to fetch your orders:", error);
+      }
+    },
+
+    // Admin: every order
+    getOrders: async ({ state, commit }) => {
+      if (!state.Token) return;
+      try {
+        const res = await fetch(`${API}/orders`, {
+          headers: { "x-auth-token": state.Token },
+        });
+        if (res.ok) commit("setOrders", await res.json());
+      } catch (error) {
+        console.error("Failed to fetch orders:", error);
+      }
+    },
+
+    // Admin: change an order's status
+    updateOrderStatus: async ({ state, commit }, { id, status }) => {
+      try {
+        const res = await fetch(`${API}/orders/${id}/status`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            "x-auth-token": state.Token,
+          },
+          body: JSON.stringify({ status }),
+        });
+        const data = await res.json();
+        if (res.ok) {
+          commit("setOrderStatus", { id, status });
+        } else {
+          swal("Error", data.msg || "Failed to update order");
+        }
+      } catch (error) {
+        console.error(error);
+        swal("Error", "Failed to update order");
+      }
+    },
+
+    // Customer: cancel their own pending order
+    cancelOrder: async ({ state, commit }, id) => {
+      const ok = await swal({
+        title: "Cancel this order?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      });
+      if (!ok) return;
+      try {
+        const res = await fetch(`${API}/orders/${id}/cancel`, {
+          method: "PUT",
+          headers: { "x-auth-token": state.Token },
+        });
+        const data = await res.json();
+        if (res.ok) {
+          commit("setOrderStatus", { id, status: "cancelled" });
+          swal("Cancelled", "Your order has been cancelled");
+        } else {
+          swal("Error", data.msg || "Could not cancel order");
+        }
+      } catch (error) {
+        console.error(error);
+        swal("Error", "Could not cancel order");
+      }
     },
 
     // Login

@@ -1,180 +1,206 @@
 <template>
   <section id="order">
-    <div v-if="user">
-      <h1 class="about">Billing Details</h1>
-      <div id="form" class="container-fluid">
-        <form @submit.prevent="addOrder()">
-          <div class="row">
-            <div class="col-md-6">
-              <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label"
-                  >First Name</label
+    <div v-if="account">
+      <h1 class="about">Checkout</h1>
+
+      <div v-if="!cart.length" class="text-center text-light py-5">
+        <h3>Your cart is empty</h3>
+        <router-link to="/Store" class="btn mt-3" style="max-width: 300px"
+          >Browse the store</router-link
+        >
+      </div>
+
+      <div v-else id="form" class="container-fluid py-4">
+        <form @submit.prevent="placeOrder" class="w-100">
+          <div class="row g-4">
+            <!-- LEFT: who + where -->
+            <div class="col-lg-7">
+              <h4 class="text-white">Your details</h4>
+              <div class="details-card mb-4">
+                <div><strong>{{ account.full_name }}</strong></div>
+                <div>{{ account.email }}</div>
+                <div v-if="account.phone_number">{{ account.phone_number }}</div>
+                <small
+                  >Taken from your account.
+                  <router-link :to="`/user/${account.id}`"
+                    >Edit in My Account</router-link
+                  ></small
                 >
+              </div>
+
+              <div v-if="!account.phone_number" class="mb-3">
+                <label for="no" class="form-label">Contact Phone Number</label>
                 <input
-                  type="text"
+                  type="tel"
                   class="form-control"
-                  v-model="first_name"
-                  id="exampleFormControlInput1"
-                  placeholder="John"
+                  v-model.trim="phone_number"
+                  id="no"
+                  placeholder="0123456789"
                   required
                 />
               </div>
-            </div>
-            <div class="col-md-6">
+
+              <h4 class="text-white">Delivery address</h4>
               <div class="mb-3">
-                <label for="first" class="form-label">Last Name</label>
+                <label for="address" class="form-label">Street Address</label>
                 <input
                   type="text"
                   class="form-control"
-                  v-model="last_name"
-                  id="first"
-                  placeholder="Doe"
+                  v-model.trim="street_address"
+                  id="address"
+                  placeholder="23 West Ave"
+                  autocomplete="street-address"
                   required
                 />
               </div>
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label for="city" class="form-label">Town/City</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    v-model.trim="city"
+                    id="city"
+                    autocomplete="address-level2"
+                    required
+                  />
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="province" class="form-label">Province</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    v-model.trim="province"
+                    id="province"
+                    autocomplete="address-level1"
+                    required
+                  />
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="postcode" class="form-label">Postcode/ZIP</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    v-model.trim="postcode"
+                    id="postcode"
+                    autocomplete="postal-code"
+                    required
+                  />
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="country" class="form-label">Country/Region</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    v-model.trim="country"
+                    id="country"
+                    autocomplete="country-name"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="notes" class="form-label">Additional Notes</label>
+                <textarea
+                  class="form-control"
+                  id="notes"
+                  rows="3"
+                  maxlength="1000"
+                  v-model="notes"
+                ></textarea>
+              </div>
             </div>
-            <div class="mb-3">
-              <label for="last" class="form-label">Country/Region</label>
-              <input
-                type="text"
-                class="form-control"
-                v-model="country"
-                id="last"
-                placeholder="West Pangia"
-                required
-              />
-            </div>
-            <div class="mb-3">
-              <label for="address" class="form-label">Street Address</label>
-              <input
-                type="text"
-                class="form-control"
-                v-model="street_address"
-                id="address"
-                placeholder="23 West Ave"
-                required
-              />
-            </div>
-            <div class="mb-3">
-              <label for="city" class="form-label">Town/City</label>
-              <input
-                type="text"
-                class="form-control"
-                v-model="city"
-                id="city"
-                placeholder="West City"
-                required
-              />
-            </div>
-            <div class="mb-3">
-              <label for="province" class="form-label">Province</label>
-              <input
-                type="text"
-                class="form-control"
-                v-model="province"
-                id="province"
-                placeholder="Western Province"
-                required
-              />
-            </div>
-            <div class="mb-3">
-              <label for="postcode" class="form-label">Postcode/ZIP</label>
-              <input
-                type="text"
-                class="form-control"
-                v-model="postcode"
-                id="postcode"
-                placeholder="4427"
-                required
-              />
-            </div>
-            <div class="mb-3">
-              <label for="no" class="form-label">Phone Number</label>
-              <input
-                type="tel"
-                class="form-control"
-                v-model="phone_number"
-                id="no"
-                placeholder="0123456789"
-                required
-              />
-            </div>
-            <div class="mb-3">
-              <label for="email" class="form-label">Email Address</label>
-              <input
-                type="email"
-                class="form-control"
-                v-model="email"
-                id="email"
-                placeholder="example@gmail.com"
-                required
-              />
-            </div>
-            <div class="mb-3">
-              <label for="exampleFormControlTextarea1" class="form-label"
-                >Additional Notes</label
-              >
-              <textarea
-                class="form-control"
-                id="exampleFormControlTextarea1"
-                rows="3"
-                style="height: 262px"
-              ></textarea>
-              <button class="btn" type="submit">Place Order</button>
+
+            <!-- RIGHT: what you're buying -->
+            <div class="col-lg-5">
+              <div class="summary-card">
+                <h4>Order summary</h4>
+                <div v-for="item in cart" :key="item.id" class="summary-row">
+                  <span>{{ item.quantity }} × {{ item.title }}</span>
+                  <span>R {{ formatMoney(item.price * item.quantity) }}</span>
+                </div>
+                <div class="summary-row summary-total">
+                  <span>Total</span>
+                  <span>R {{ formatMoney(cartTotal) }}</span>
+                </div>
+                <button class="btn" type="submit" :disabled="submitting">
+                  {{ submitting ? "Placing order..." : "Place Order" }}
+                </button>
+              </div>
             </div>
           </div>
         </form>
       </div>
     </div>
+
     <div v-else>
       <h1 class="text-center text-light">
         Please sign up/log in to continue with your purchase
       </h1>
+      <div class="d-flex justify-content-center gap-3 mt-4">
+        <router-link to="/Login" class="btn" style="max-width: 200px">Log in</router-link>
+        <router-link to="/SignUp" class="btn" style="max-width: 200px">Sign Up</router-link>
+      </div>
     </div>
   </section>
 </template>
 <script>
 export default {
-  mounted() {
-    window.scrollTo(0, 0);
-  },
   data() {
     return {
-      orders: null,
-      first_name: "",
-      last_name: "",
-      country: "",
       street_address: "",
       city: "",
       province: "",
       postcode: "",
+      country: "",
       phone_number: "",
-      email: "",
+      notes: "",
+      submitting: false,
     };
   },
   computed: {
-    order() {
-      return this.$store.state.order;
+    // The logged-in user's details (name, email, phone) come from the account.
+    account() {
+      return this.$store.state.user?.user || null;
     },
-    user() {
-      // console.log(this.$store.state.user)
-      return this.$store.state.user;
+    cart() {
+      return this.$store.state.cart;
+    },
+    cartTotal() {
+      return this.$store.getters.cartTotal;
     },
   },
+  async mounted() {
+    window.scrollTo(0, 0);
+    if (!this.account) return;
+    // Pre-fill the address from the customer's previous order, if any.
+    await this.$store.dispatch("getMyOrders");
+    const last = this.$store.state.myOrders[0];
+    if (last && !this.street_address) {
+      this.street_address = last.street_address;
+      this.city = last.city;
+      this.province = last.province;
+      this.postcode = last.postcode;
+      this.country = last.country;
+    }
+  },
   methods: {
-    addOrder() {
-      this.$store.dispatch("addOrder", {
-        first_name: this.first_name,
-        last_name: this.last_name,
-        country: this.country,
+    formatMoney(n) {
+      return Number(n).toFixed(2);
+    },
+    async placeOrder() {
+      if (this.submitting) return;
+      this.submitting = true;
+      await this.$store.dispatch("addOrder", {
         street_address: this.street_address,
         city: this.city,
         province: this.province,
         postcode: this.postcode,
-        phone_number: this.phone_number,
-        email: this.email,
+        country: this.country,
+        phone_number: this.account.phone_number ? undefined : this.phone_number,
+        notes: this.notes,
       });
-      this.$router.push("/Download");
+      this.submitting = false;
     },
   },
 };
@@ -206,7 +232,7 @@ export default {
   filter: drop-shadow(0px 0px 0.2rem white);
   color: white;
 }
-button {
+.btn {
   width: 100%;
   margin-top: 10px;
   height: 50px;
@@ -214,7 +240,44 @@ button {
   border: 3px solid red;
   color: white;
   border-radius: 5px;
-  text-shadow: 0 0 4px white, 0 0 4px white, 0 0 4px white,
-    10px 0px 10px rgb(36, 36, 36);
+}
+.btn:hover {
+  box-shadow: 0 0 1rem red;
+}
+
+.details-card {
+  background: rgba(0, 0, 0, 0.75);
+  border: 1px solid red;
+  border-radius: 8px;
+  color: white;
+  padding: 16px;
+}
+.details-card small {
+  color: #bbb;
+}
+.summary-card {
+  background: rgba(0, 0, 0, 0.8);
+  border: 2px solid red;
+  border-radius: 12px;
+  color: white;
+  padding: 20px;
+  box-shadow: 0 0 15px rgba(255, 0, 0, 0.35);
+}
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 6px 0;
+}
+.summary-total {
+  border-top: 1px solid red;
+  margin-top: 8px;
+  padding-top: 12px;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 </style>
