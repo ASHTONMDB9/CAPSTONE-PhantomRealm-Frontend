@@ -193,14 +193,14 @@ export default {
   align-items: center;
 }
 .profile-avatar {
-  width: 110px;
-  height: 110px;
+  width: 200px;
+  height: 200px;
   border-radius: 50%;
   background-color: red;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 50px;
+  font-size: 90px;
   font-family: phantom;
   color: white;
   border: 3px solid white;
@@ -213,8 +213,10 @@ export default {
 }
 .avatar-actions {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 8px;
-  margin-top: 10px;
+  margin-top: 14px;
 }
 .avatar-btn {
   background-color: transparent;
@@ -235,9 +237,9 @@ export default {
 
 @media (max-width: 768px) {
   .profile-avatar {
-    width: 80px;
-    height: 80px;
-    font-size: 35px;
+    width: 150px;
+    height: 150px;
+    font-size: 65px;
   }
 }
 </style>

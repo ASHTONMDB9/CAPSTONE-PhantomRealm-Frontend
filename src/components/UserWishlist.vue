@@ -9,6 +9,7 @@
       <router-link to="/Store">store</router-link> to save it here.
     </div>
 
+    <div v-if="items.length" class="wish-list">
     <div v-for="item in items" :key="item.id" class="wish-item">
       <router-link
         :to="{ name: 'ProductView', params: { id: item.id } }"
@@ -40,6 +41,7 @@
           <i class="fa-solid fa-trash"></i>
         </button>
       </div>
+    </div>
     </div>
   </div>
 </template>
@@ -113,29 +115,57 @@ export default {
   cursor: not-allowed;
 }
 
-/* Same card look as the cart items */
+/* Compact cards in a grid; the list scrolls once there are many items */
+.wish-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  gap: 14px;
+  max-height: 440px;
+  overflow-y: auto;
+  padding: 8px;
+}
 .wish-item {
   display: grid;
-  grid-template-columns: 120px 1fr auto;
-  gap: 20px;
+  grid-template-columns: 72px 1fr;
+  grid-template-areas:
+    "image details"
+    "actions actions";
+  gap: 10px 14px;
   align-items: center;
-  padding: 20px;
+  padding: 12px;
   background: black;
-  border: 3px solid red;
-  border-radius: 16px;
-  box-shadow: 0 0 20px red;
-  margin-bottom: 25px;
+  border: 2px solid red;
+  border-radius: 12px;
+  box-shadow: 0 0 10px red;
+}
+.wish-image-link {
+  grid-area: image;
+}
+.wish-details {
+  grid-area: details;
+  min-width: 0;
+}
+.wish-actions {
+  grid-area: actions;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
 }
 .wish-image {
-  width: 120px;
-  height: 120px;
+  width: 72px;
+  height: 72px;
   object-fit: cover;
-  border-radius: 10px;
+  border-radius: 8px;
   display: block;
 }
 .wish-title {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
   font-family: detail;
-  font-size: 40px;
+  font-size: 26px;
   color: black;
   text-shadow: 0 0 4px red, 0 0 6px red;
   text-decoration: none;
@@ -148,26 +178,26 @@ export default {
 .wish-category {
   font-family: game;
   color: white;
-  font-size: 22px;
-  margin-top: 6px;
+  font-size: 17px;
+  margin-top: 2px;
 }
 .wish-price {
   font-family: detail;
-  font-size: 36px;
+  font-size: 24px;
   color: white;
   text-shadow: 0 0 4px red;
-  margin-top: 4px;
 }
-.wish-actions {
-  display: flex;
-  align-items: center;
-  gap: 18px;
+.wish-actions .site-btn {
+  min-width: 0;
+  flex: 1;
+  padding: 4px 14px;
+  font-size: 18px;
 }
 .wish-remove-btn {
   background: transparent;
   border: none;
   color: red;
-  font-size: 28px;
+  font-size: 22px;
 }
 .wish-remove-btn:hover:not(:disabled) {
   text-shadow: 0 0 10px red;
@@ -180,16 +210,9 @@ export default {
   .section-heading {
     font-size: 38px;
   }
-  .wish-item {
+  .wish-list {
     grid-template-columns: 1fr;
-    text-align: center;
-    justify-items: center;
-  }
-  .wish-title {
-    font-size: 32px;
-  }
-  .wish-actions {
-    justify-content: center;
+    max-height: 380px;
   }
 }
 </style>

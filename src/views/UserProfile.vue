@@ -8,37 +8,29 @@
       <div class="row justify-content-center">
         <div class="col-lg-10">
           <div class="bg-dark text-light rounded p-4 profile-card">
-            <!-- TOP PROFILE SECTION -->
-            <div
-              class="d-flex flex-column flex-md-row align-items-center justify-content-between mb-5"
-            >
-              <div class="d-flex align-items-center flex-column flex-md-row">
-                <!-- PROFILE ICON -->
+            <!-- TOP PROFILE SECTION: picture centred on top, details below, logout on the right -->
+            <div class="profile-top mb-4">
+              <button @click="Logout" class="btn btn-outline-danger logout-btn">
+                Logout
+              </button>
+
+              <div class="d-flex flex-column align-items-center text-center">
+                <!-- PROFILE PICTURE -->
                 <ProfileAvatar :name="currentUser.full_name" />
 
                 <!-- USER DETAILS -->
-                <div class="ms-md-4 mt-3 mt-md-0 text-center text-md-start">
-                  <h2 class="mb-1">
-                    {{ currentUser.full_name }}
-                  </h2>
+                <h2 class="profile-name">
+                  {{ currentUser.full_name }}
+                </h2>
 
-                  <p class="text-secondary mb-2">
-                    {{ currentUser.email }}
-                  </p>
-
-                  <span class="badge bg-danger">
+                <p class="profile-email">
+                  {{ currentUser.email }}
+                  <span class="badge bg-danger profile-badge">
                     {{ currentUser.user_type }}
                   </span>
-                </div>
-              </div>
+                </p>
 
-              <!-- LOGOUT BUTTON -->
-              <button
-                @click="Logout"
-                class="btn btn-outline-danger mt-4 mt-md-0"
-              >
-                Logout
-              </button>
+              </div>
             </div>
 
             <div v-if="isEditing" class="mt-4">
@@ -220,6 +212,34 @@ export default {
   border: 3px solid white;
 }
 
+/* TOP SECTION */
+.profile-top {
+  position: relative;
+}
+.logout-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.profile-name {
+  font-family: phantom;
+  font-size: 50px;
+  color: white;
+  text-shadow: 0 0 8px red;
+  margin: 20px 0 5px;
+}
+.profile-email {
+  color: white;
+  font-size: 22px;
+  margin-bottom: 12px;
+}
+.profile-badge {
+  font-family: detail;
+  font-size: 20px;
+  font-weight: normal;
+  padding: 6px 18px;
+}
+
 /* BUTTON */
 .btn-outline-danger {
   border: 2px solid red;
@@ -258,6 +278,19 @@ export default {
 
   .profile-card {
     padding: 20px !important;
+  }
+
+  /* logout sits above the picture on small screens instead of overlapping it */
+  .logout-btn {
+    position: static;
+    display: block;
+    margin: 0 0 15px auto;
+  }
+  .profile-name {
+    font-size: 38px;
+  }
+  .profile-email {
+    font-size: 18px;
   }
 }
 </style>
