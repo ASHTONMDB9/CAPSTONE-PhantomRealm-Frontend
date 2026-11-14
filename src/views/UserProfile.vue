@@ -43,8 +43,6 @@
               </button>
             </div>
 
-            <!-- ADDED BUTTONS (BOTTOM OF CARD) -->
-            <!-- EDIT FORM -->
             <div v-if="isEditing" class="mt-4">
               <input
                 v-model="editForm.email"
@@ -84,7 +82,7 @@
               </div>
             </div>
 
-            <!-- ACTION BUTTONS (BOTTOM OF CARD) -->
+ 
             <div class="d-flex justify-content-center gap-3 mt-4">
               <button class="btn btn-outline-danger" @click="editProfile">
                 Edit Profile
@@ -94,6 +92,9 @@
                 Delete Account
               </button>
             </div>
+
+            <hr class="my-5" />
+            <UserOrders />
           </div>
         </div>
       </div>
@@ -107,7 +108,10 @@
 </template>
 
 <script>
+import UserOrders from "../components/UserOrders.vue";
+
 export default {
+  components: { UserOrders },
   data() {
     return {
       isEditing: false,

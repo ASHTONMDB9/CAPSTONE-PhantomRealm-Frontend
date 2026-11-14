@@ -268,7 +268,7 @@
                     <select
                       class="form-select form-select-sm"
                       :value="order.status"
-                      @change="setOrderStatus(order.id, $event.target.value)"
+                      @change="setOrderStatus(order, $event.target.value)"
                     >
                       <option v-for="s in orderStatuses" :key="s" :value="s">
                         {{ s }}
@@ -540,13 +540,14 @@ export default {
       password: "",
       phone_number: "",
       user_type: "User",
+      orderStatuses: ["pending", "processing", "shipped", "delivered", "cancelled"],
       products: null,
       title: "",
       description: "",
       category: "",
       image: "",
       price: "",
-      orderStatuses: ["pending", "processing", "shipped", "delivered", "cancelled"],
+      orders: null,
       full_name: "",
       email: "",
       country: "",
@@ -567,6 +568,9 @@ export default {
       .then((res) => res.json())
       .then((data) => (this.users = data), console.log(this.users));
 
+    this.declareAdmin();
+    this.$store.dispatch("getOrders").then((orders) => (this.orders = orders));
+
     this.$store.dispatch("getProduct");
     this.$store.dispatch("getOrders");
   },
@@ -574,7 +578,7 @@ export default {
     product() {
       return this.$store.state.product;
     },
-    orders() {
+    order() {
       return this.$store.state.orders;
     },
     user() {
@@ -588,8 +592,10 @@ export default {
     },
   },
   methods: {
-    setOrderStatus(id, status) {
-      this.$store.dispatch("updateOrderStatus", { id, status });
+    async setOrderStatus(order, status) {
+      if (await this.$store.dispatch("updateOrderStatus", { id: order.id, status })) {
+        order.status = status;
+      }
     },
     addProduct() {
       this.$store

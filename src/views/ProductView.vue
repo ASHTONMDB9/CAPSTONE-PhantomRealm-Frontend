@@ -2,11 +2,13 @@
   <div v-if="product" id="container-fluid">
     <div v-for="product in product" :key="product.id" class="item">
       <div class="card game-shelf-card mb-3 ms-4 me-4">
+        <!-- Plain product photo: small screens (any product) and non-game items on desktop -->
         <img
-          v-if="isSmallScreen"
+          v-if="isSmallScreen || !isGame(product)"
           :src="product.image"
-          alt="Game Cover"
+          :alt="isGame(product) ? 'Game Cover' : product.title"
           class="standard-product-image mb-3"
+          :class="{ 'standard-product-image--wide': !isSmallScreen }"
         />
 
         <div v-else class="cover-disc-wrapper">
@@ -92,6 +94,11 @@
 </template>
 
 <script>
+// Categories whose products get the game box + disc display. Everything else
+// (T-shirts, merch, accessories...) shows its normal product image.
+// Matched case-insensitively as "category contains one of these words".
+const GAME_CATEGORIES = ["game"];
+
 export default {
   props: ["id"],
   data() {
@@ -102,6 +109,11 @@ export default {
     };
   },
   methods: {
+    isGame(product) {
+      const category = String(product.category || "").toLowerCase();
+      return GAME_CATEGORIES.some((word) => category.includes(word));
+    },
+
     addToCart(product) {
       this.$store.dispatch("addToCart", product);
     },
@@ -230,6 +242,16 @@ export default {
   100% {
     transform: rotate(360deg);
   }
+}
+/* Non-game product photo on desktop: sits in the same left column the box/disc would use */
+.standard-product-image--wide {
+  flex: 0 0 38%;
+  width: 38%;
+  max-width: 38%;
+  max-height: 560px;
+  align-self: center;
+  object-fit: contain;
+  margin: 10px;
 }
 .game-shelf-card {
   display: flex;
@@ -473,6 +495,12 @@ export default {
 }
 
 @media (max-width: 1584px) {
+  .standard-product-image--wide {
+    flex: 0 0 auto;
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto 20px;
+  }
   .game-shelf-card {
     flex-direction: column;
     align-items: center;

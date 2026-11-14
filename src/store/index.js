@@ -146,7 +146,9 @@ export default createStore({
     },
 
     // ---------- ORDERS ----------
-
+    // Place an order from the cart. `shipping` is just the delivery address
+    // (+ optional notes / phone); name, email and phone come from the account
+    // on the server, and prices come from the products table.
     addOrder: async ({ state, commit }, { notes, ...shipping }) => {
       const items = state.cart.map((i) => ({
         product_id: i.id,
@@ -170,50 +172,52 @@ export default createStore({
           return false;
         }
         if (!res.ok) {
-          swal("Could not place order", data.msg || "Please try again");
+          swal("Could not place order", data.msg || "Please try again", "error");
           return false;
         }
 
         commit("setOrder", data.order);
         commit("ClearCart");
-        swal("Order placed!", `Your order #${data.order.id} has been received`);
-        router.push("/orders");
+        swal("Order placed!", `Your order #${data.order.id} has been received`, "success");
+        router.push(`/user/${state.user.user.id}`); // their account page shows their orders
         return true;
       } catch (error) {
         console.error(error);
-        swal("Error", "Something went wrong while placing your order");
+        swal("Error", "Something went wrong while placing your order", "error");
         return false;
       }
     },
 
-    // The logged-in user's own orders (newest first)
-    getMyOrders: async ({ state, commit }) => {
-      if (!state.Token) return;
+    // The logged-in user's own orders, newest first (returned, not stored)
+    getMyOrders: async ({ state }) => {
+      if (!state.Token) return [];
       try {
         const res = await fetch(`${API}/orders/mine`, {
           headers: { "x-auth-token": state.Token },
         });
-        if (res.ok) commit("setMyOrders", await res.json());
+        return res.ok ? await res.json() : [];
       } catch (error) {
         console.error("Failed to fetch your orders:", error);
+        return [];
       }
     },
 
-    // Admin: every order
-    getOrders: async ({ state, commit }) => {
-      if (!state.Token) return;
+    // Admin: every order (returned, not stored)
+    getOrders: async ({ state }) => {
+      if (!state.Token) return [];
       try {
         const res = await fetch(`${API}/orders`, {
           headers: { "x-auth-token": state.Token },
         });
-        if (res.ok) commit("setOrders", await res.json());
+        return res.ok ? await res.json() : [];
       } catch (error) {
         console.error("Failed to fetch orders:", error);
+        return [];
       }
     },
 
-    // Admin: change an order's status
-    updateOrderStatus: async ({ state, commit }, { id, status }) => {
+    // Admin: change an order's status. Returns true on success.
+    updateOrderStatus: async ({ state }, { id, status }) => {
       try {
         const res = await fetch(`${API}/orders/${id}/status`, {
           method: "PUT",
@@ -224,26 +228,24 @@ export default createStore({
           body: JSON.stringify({ status }),
         });
         const data = await res.json();
-        if (res.ok) {
-          commit("setOrderStatus", { id, status });
-        } else {
-          swal("Error", data.msg || "Failed to update order");
-        }
+        if (!res.ok) swal("Error", data.msg || "Failed to update order", "error");
+        return res.ok;
       } catch (error) {
         console.error(error);
-        swal("Error", "Failed to update order");
+        swal("Error", "Failed to update order", "error");
+        return false;
       }
     },
 
-    // Customer: cancel their own pending order
-    cancelOrder: async ({ state, commit }, id) => {
+    // Customer: cancel their own pending order. Returns true if cancelled.
+    cancelOrder: async ({ state }, id) => {
       const ok = await swal({
         title: "Cancel this order?",
         icon: "warning",
         buttons: true,
         dangerMode: true,
       });
-      if (!ok) return;
+      if (!ok) return false;
       try {
         const res = await fetch(`${API}/orders/${id}/cancel`, {
           method: "PUT",
@@ -251,14 +253,15 @@ export default createStore({
         });
         const data = await res.json();
         if (res.ok) {
-          commit("setOrderStatus", { id, status: "cancelled" });
           swal("Cancelled", "Your order has been cancelled");
         } else {
-          swal("Error", data.msg || "Could not cancel order");
+          swal("Error", data.msg || "Could not cancel order", "error");
         }
+        return res.ok;
       } catch (error) {
         console.error(error);
-        swal("Error", "Could not cancel order");
+        swal("Error", "Could not cancel order", "error");
+        return false;
       }
     },
 

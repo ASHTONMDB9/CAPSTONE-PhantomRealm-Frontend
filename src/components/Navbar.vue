@@ -55,9 +55,7 @@
             </li>
 
             <li v-for="user in user" :key="user.id" class="nav-item-user">
-              <router-link
-                :to="`/user/${user.id}`"
-              >
+              <router-link :to="`/user/${user.id}`">
                 {{ user.full_name }}
               </router-link>
             </li>
@@ -157,9 +155,10 @@ export default {
   margin: 0 6px;
   font-family: detail;
 }
-.nav-item-user a{
+.nav-item-user a {
   color: white;
   font-family: phantom;
+  text-decoration: none;
   font-size: 16px;
   margin: 0 5px;
   text-decoration: none;
@@ -169,6 +168,12 @@ export default {
 }
 .nav-item-user a.router-link-exact-active {
   text-decoration: none;
+}
+.nav-item-user a:hover {
+  color: red;
+}
+.nav-item-user a.router-link-exact-active {
+  color: red;
 }
 .nav-link {
   transition: color 0.2s ease;

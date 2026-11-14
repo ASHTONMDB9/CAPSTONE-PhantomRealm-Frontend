@@ -174,8 +174,7 @@ export default {
     window.scrollTo(0, 0);
     if (!this.account) return;
     // Pre-fill the address from the customer's previous order, if any.
-    await this.$store.dispatch("getMyOrders");
-    const last = this.$store.state.myOrders[0];
+    const [last] = await this.$store.dispatch("getMyOrders");
     if (last && !this.street_address) {
       this.street_address = last.street_address;
       this.city = last.city;
