@@ -290,19 +290,20 @@ export default {
   top: 10px;
   right: 10px;
   z-index: 5;
-  width: 38px;
-  height: 38px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
-  border: 2px solid red;
-  background: rgba(0, 0, 0, 0.7);
+  border: 3px solid red;
+  background: black;
   color: white;
+  font-size: 22px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
 }
 .wish-btn:hover {
-  box-shadow: 0 0 0.8rem red;
+  box-shadow: 0 0 1rem red;
 }
 .wish-btn.active {
   color: red;

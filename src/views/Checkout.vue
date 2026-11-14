@@ -15,7 +15,7 @@
           <div class="row g-4">
             <!-- LEFT: who + where -->
             <div class="col-lg-7">
-              <h4 class="text-white">Your details</h4>
+              <h4 class="section-heading">Your details</h4>
               <div class="details-card mb-4">
                 <div><strong>{{ account.full_name }}</strong></div>
                 <div>{{ account.email }}</div>
@@ -40,7 +40,7 @@
                 />
               </div>
 
-              <h4 class="text-white">Delivery address</h4>
+              <h4 class="section-heading">Delivery address</h4>
               <div class="mb-3">
                 <label for="address" class="form-label">Street Address</label>
                 <input
@@ -114,14 +114,14 @@
             <!-- RIGHT: what you're buying -->
             <div class="col-lg-5">
               <div class="summary-card">
-                <h4>Order summary</h4>
+                <h4 class="section-heading">Order Summary</h4>
                 <div v-for="item in cart" :key="item.id" class="summary-row">
                   <span>{{ item.quantity }} × {{ item.title }}</span>
-                  <span>R {{ formatMoney(item.price * item.quantity) }}</span>
+                  <span class="summary-amount">R {{ formatMoney(item.price * item.quantity) }}</span>
                 </div>
                 <div class="summary-row summary-total">
                   <span>Total</span>
-                  <span>R {{ formatMoney(cartTotal) }}</span>
+                  <span class="summary-amount">R {{ formatMoney(cartTotal) }}</span>
                 </div>
                 <button class="btn" type="submit" :disabled="submitting">
                   {{ submitting ? "Placing order..." : "Place Order" }}
@@ -244,36 +244,72 @@ export default {
   box-shadow: 0 0 1rem red;
 }
 
+.section-heading {
+  font-family: detail;
+  font-size: 40px;
+  color: black;
+  text-shadow: 0 0 6px red, 0 0 10px red;
+  margin-bottom: 20px;
+}
+/* Same look as the cart's Order Summary card */
 .details-card {
-  background: rgba(0, 0, 0, 0.75);
-  border: 1px solid red;
-  border-radius: 8px;
+  background: black;
+  border: 3px solid red;
+  border-radius: 16px;
+  box-shadow: 0 0 20px red;
   color: white;
-  padding: 16px;
+  font-size: 20px;
+  padding: 25px;
+}
+.details-card strong {
+  font-family: detail;
+  font-size: 28px;
+  font-weight: normal;
+  text-shadow: 0 0 4px red;
 }
 .details-card small {
-  color: #bbb;
+  display: block;
+  margin-top: 8px;
+  color: #ddd;
+  font-size: 17px;
+}
+.details-card a {
+  color: red;
+  text-decoration: none;
+}
+.details-card a:hover {
+  text-shadow: 0 0 8px red;
 }
 .summary-card {
-  background: rgba(0, 0, 0, 0.8);
-  border: 2px solid red;
-  border-radius: 12px;
+  background: black;
+  border: 3px solid red;
+  border-radius: 16px;
+  box-shadow: 0 0 25px red;
   color: white;
-  padding: 20px;
-  box-shadow: 0 0 15px rgba(255, 0, 0, 0.35);
+  padding: 30px;
+  height: fit-content;
 }
 .summary-row {
   display: flex;
   justify-content: space-between;
   gap: 12px;
-  padding: 6px 0;
+  margin-bottom: 15px;
+  font-size: 20px;
+}
+.summary-amount {
+  white-space: nowrap;
 }
 .summary-total {
   border-top: 1px solid red;
-  margin-top: 8px;
-  padding-top: 12px;
-  font-weight: bold;
-  font-size: 1.2rem;
+  padding-top: 15px;
+  font-family: detail;
+  font-size: 26px;
+}
+.summary-card .btn {
+  height: 60px;
+  margin-top: 20px;
+  font-family: detail;
+  font-size: 24px;
 }
 .btn:disabled {
   opacity: 0.5;
