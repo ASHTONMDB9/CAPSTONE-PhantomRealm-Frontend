@@ -16,8 +16,6 @@ export default createStore({
     product: [],
     cart: [],
     order: null,
-    orders: [], // admin: every order
-    myOrders: [], // the logged-in user's orders
   },
   getters: {
     cartCount(state) {
@@ -54,24 +52,8 @@ export default createStore({
     setOrder: (state, order) => {
       state.order = order;
     },
-    setOrders: (state, orders) => {
-      state.orders = orders;
-    },
-    setMyOrders: (state, orders) => {
-      state.myOrders = orders;
-    },
-    setOrderStatus: (state, { id, status }) => {
-      [state.orders, state.myOrders].forEach((list) => {
-        const o = list.find((x) => x.id === id);
-        if (o) o.status = status;
-      });
-    },
     Logout(state) {
-      (state.user = ""),
-        (state.Token = ""),
-        (state.cart = []),
-        (state.orders = []),
-        (state.myOrders = []);
+      (state.user = ""), (state.Token = ""), (state.cart = []);
     },
     AddtoCart(state, product) {
       const item = state.cart.find((p) => p.id === product.id);
@@ -146,9 +128,6 @@ export default createStore({
     },
 
     // ---------- ORDERS ----------
-    // Place an order from the cart. `shipping` is just the delivery address
-    // (+ optional notes / phone); name, email and phone come from the account
-    // on the server, and prices come from the products table.
     addOrder: async ({ state, commit }, { notes, ...shipping }) => {
       const items = state.cart.map((i) => ({
         product_id: i.id,
@@ -178,7 +157,7 @@ export default createStore({
 
         commit("setOrder", data.order);
         commit("ClearCart");
-        swal("Order placed!", `Your order #${data.order.id} has been received`, "success");
+        swal("Order placed!", `Your order #${data.order.id} has been received`);
         router.push(`/user/${state.user.user.id}`); // their account page shows their orders
         return true;
       } catch (error) {

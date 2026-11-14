@@ -656,6 +656,24 @@ export default {
   margin-top: 5px;
   background-color: black;
 }
+.form-select {
+  background-color: rgba(var(--bs-dark-rgb),var(--bs-bg-opacity))!important;
+  color: white;
+  border: 2px solid red;
+  padding: 10px 16px;
+  font-family: detail;
+  font-size: 20px;
+  border-radius: 8px;
+  width: 220px;
+  transition: all 0.3s ease;
+}
+.form-select:focus {
+  outline: none;
+  box-shadow: none;
+}
+.form-select:hover {
+  box-shadow: 0 0 10px red;
+}
 .video-container {
   position: relative;
   overflow: hidden;
