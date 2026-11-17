@@ -25,11 +25,11 @@
 
                 <p class="profile-email">
                   {{ currentUser.email }}
+                  <span class="badge bg-danger profile-badge">
+                    {{ currentUser.user_type }}
+                  </span>
                 </p>
 
-                <span class="badge bg-danger profile-badge">
-                  {{ currentUser.user_type }}
-                </span>
               </div>
             </div>
 
