@@ -123,7 +123,8 @@
                   <span>Total</span>
                   <span class="summary-amount">R {{ formatMoney(cartTotal) }}</span>
                 </div>
-                <button class="btn" type="submit" :disabled="submitting">
+                <WalletPreview :total="cartTotal" />
+                <button class="btn" type="submit" :disabled="submitting || !canAfford">
                   {{ submitting ? "Placing order..." : "Place Order" }}
                 </button>
               </div>
@@ -145,7 +146,10 @@
   </section>
 </template>
 <script>
+import WalletPreview from "../components/WalletPreview.vue";
+
 export default {
+  components: { WalletPreview },
   data() {
     return {
       street_address: "",
@@ -168,6 +172,9 @@ export default {
     },
     cartTotal() {
       return this.$store.getters.cartTotal;
+    },
+    canAfford() {
+      return this.$store.getters.canAfford(this.cartTotal);
     },
   },
   async mounted() {

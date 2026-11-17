@@ -25,11 +25,11 @@
 
                 <p class="profile-email">
                   {{ currentUser.email }}
-                  <span class="badge bg-danger profile-badge">
-                    {{ currentUser.user_type }}
-                  </span>
                 </p>
 
+                <span class="badge bg-danger profile-badge">
+                  {{ currentUser.user_type }}
+                </span>
               </div>
             </div>
 
@@ -84,6 +84,9 @@
             </div>
 
             <hr class="my-5" />
+            <UserWallet />
+
+            <hr class="my-5" />
             <UserWishlist />
 
             <hr class="my-5" />
@@ -103,10 +106,11 @@
 <script>
 import UserOrders from "../components/UserOrders.vue";
 import UserWishlist from "../components/UserWishlist.vue";
+import UserWallet from "../components/UserWallet.vue";
 import ProfileAvatar from "../components/ProfileAvatar.vue";
 
 export default {
-  components: { UserOrders, UserWishlist, ProfileAvatar },
+  components: { UserOrders, UserWishlist, UserWallet, ProfileAvatar },
   data() {
     return {
       isEditing: false,
@@ -222,7 +226,7 @@ export default {
   right: 0;
 }
 .profile-name {
-  font-family: phantom;
+  font-family: detail;
   font-size: 50px;
   color: white;
   text-shadow: 0 0 8px red;

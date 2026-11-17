@@ -16,12 +16,15 @@ export default createStore({
     product: [],
     cart: [],
     order: null,
+    wallet: null, // in-store credits balance (null until loaded)
   },
   getters: {
     cartCount(state) {
       return state.cart.reduce((total, item) => total + item.quantity, 0);
     },
 
+    // true when the wallet can cover `total` (or when the balance isn't known yet; the server checks too)
+    canAfford: (state) => (total) => state.wallet === null || state.wallet >= total,
     cartTotal(state) {
       return state.cart.reduce((total, item) => {
         const price = Number(item.price) || 0;
@@ -52,8 +55,11 @@ export default createStore({
     setOrder: (state, order) => {
       state.order = order;
     },
+    setWallet: (state, balance) => {
+      state.wallet = balance;
+    },
     Logout(state) {
-      (state.user = ""), (state.Token = ""), (state.cart = []);
+      (state.user = ""), (state.Token = ""), (state.cart = []), (state.wallet = null);
     },
     AddtoCart(state, product) {
       const item = state.cart.find((p) => p.id === product.id);
@@ -128,6 +134,9 @@ export default createStore({
     },
 
     // ---------- ORDERS ----------
+    // Place an order from the cart. `shipping` is just the delivery address
+    // (+ optional notes / phone); name, email and phone come from the account
+    // on the server, and prices come from the products table.
     addOrder: async ({ state, commit }, { notes, ...shipping }) => {
       const items = state.cart.map((i) => ({
         product_id: i.id,
@@ -151,13 +160,15 @@ export default createStore({
           return false;
         }
         if (!res.ok) {
+          if (typeof data.balance === "number") commit("setWallet", data.balance);
           swal("Could not place order", data.msg || "Please try again", "error");
           return false;
         }
 
         commit("setOrder", data.order);
+        if (data.wallet) commit("setWallet", data.wallet.balance);
         commit("ClearCart");
-        swal("Order placed!", `Your order #${data.order.id} has been received`);
+        swal("Order placed!", `Your order #${data.order.id} has been received`, "success");
         router.push(`/user/${state.user.user.id}`); // their account page shows their orders
         return true;
       } catch (error) {
@@ -217,7 +228,7 @@ export default createStore({
     },
 
     // Customer: cancel their own pending order. Returns true if cancelled.
-    cancelOrder: async ({ state }, id) => {
+    cancelOrder: async ({ state, commit }, id) => {
       const ok = await swal({
         title: "Cancel this order?",
         icon: "warning",
@@ -232,7 +243,10 @@ export default createStore({
         });
         const data = await res.json();
         if (res.ok) {
-          swal("Cancelled", "Your order has been cancelled");
+          if (data.wallet && typeof data.wallet.balance === "number") {
+            commit("setWallet", data.wallet.balance);
+          }
+          swal("Cancelled", "Your order has been cancelled and your credits were refunded");
         } else {
           swal("Error", data.msg || "Could not cancel order", "error");
         }
@@ -241,6 +255,25 @@ export default createStore({
         console.error(error);
         swal("Error", "Could not cancel order", "error");
         return false;
+      }
+    },
+
+    // ---------- WALLET ----------
+    // Loads the balance (kept in the store so the cart, checkout and profile agree)
+    // and returns { balance, transactions }.
+    getWallet: async ({ state, commit }) => {
+      if (!state.Token) return { balance: null, transactions: [] };
+      try {
+        const res = await fetch(`${API}/wallet`, {
+          headers: { "x-auth-token": state.Token },
+        });
+        if (!res.ok) return { balance: state.wallet, transactions: [] };
+        const data = await res.json();
+        commit("setWallet", data.balance);
+        return data;
+      } catch (error) {
+        console.error("Failed to fetch wallet:", error);
+        return { balance: state.wallet, transactions: [] };
       }
     },
 

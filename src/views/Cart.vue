@@ -44,16 +44,22 @@
           <span>R {{ cartTotal }}</span>
         </div>
 
-        <router-link to="/Checkout" class="checkout-btn">
+        <WalletPreview :total="cartTotal" />
+
+        <router-link v-if="canAfford" to="/Checkout" class="checkout-btn">
           Proceed to Checkout
         </router-link>
+        <div v-else class="checkout-btn disabled">Not enough credits</div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import WalletPreview from "../components/WalletPreview.vue";
+
 export default {
+  components: { WalletPreview },
   mounted() {
     window.scrollTo(0, 0);
   },
@@ -63,6 +69,10 @@ export default {
     },
     cartTotal() {
       return this.$store.getters.cartTotal;
+    },
+    // false only when we know the wallet can't cover the cart
+    canAfford() {
+      return this.$store.getters.canAfford(this.cartTotal);
     },
   },
   methods: {
@@ -227,6 +237,14 @@ export default {
 .checkout-btn:hover {
   background: red;
   color: black;
+}
+
+.checkout-btn.disabled,
+.checkout-btn.disabled:hover {
+  border-color: #555;
+  color: #888;
+  background: transparent;
+  cursor: not-allowed;
 }
 
 /* Media queries */
