@@ -129,7 +129,7 @@
           </p>
           <p>
             Join our community today and become part of the Phantom Forces.
-            <br />Recieve 1,000,000 in-store credits for if you are a first time
+            <br />Recieve 10,000 in-store credits for if you are a first time
             member,<br />
             which can be used to get discounts and deals on products.
           </p>
